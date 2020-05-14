@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/showTournament.css">
+</head>
+<body class="hm-gradient">
+
+    <center><p style = "color: #fff; font-size: bolder">Players Participated in <%= game.name %></p></center> 
+    <section class="wrapper">
+        <!-- Row title -->
+        <main class="row title">
+          <ul>
+            <li>Sport</li>
+            <li>Entry $</li>
+            <li><span class="title-hide">#</span> Entries</li>
+            <li>Email</li>
+            <li>Time</li>
+          </ul>
+        </main>
+        <% _.forEach(players, (player) => { %> 
+        <article class="row nfl">
+          <ul>
+            <li><a href="#"><%= player.user.name %></a></li>
+            <li>$50</li>
+            <li>12</li>
+            <li><%= moment(player.joined).startOf('second').fromNow() %></li>
+            <li><%= player.user.email %></li>
+          </ul>
+          <ul class="more-content">
+            <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+          </ul>
+        </article>
+        <% }) %>
+      </section>
+ 
+</body>
+
+</html>
