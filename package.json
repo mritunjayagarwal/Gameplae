@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "A Gaming Network",
   "main": "server.js",
+  "engines": {
+    "node": "7.10.1",
+    "npm": "6.4.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +26,7 @@
     "async": "^3.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
@@ -29,6 +36,7 @@
     "express-promise-router": "^3.0.3",
     "express-session": "^1.17.1",
     "express-validator": "^6.4.0",
+    "helmet": "^3.22.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "mongoose": "^5.9.9",
