@@ -12,44 +12,50 @@ module.exports = function(_, Tournament, async, Game, User, moment){
             res.render('createtournament');
         },
         createTournament: function(req, res){
-            async.waterfall([
-                function(callback){
-                    Game.findOne({'name': req.body.game}, (err, user) => {
-                        if(err){
-                            // console.log(err);
-                            res.redirect('/getTournament');
-                        }else{
-                            console.log(user._id)
-                            global.gameId = user._id;
-                            callback(err, gameId)
-                        }
-                    })
-                },
-                function(gameId, callback){
-                    const newTournament = new Tournament();
-                    newTournament.game = gameId;
-                    newTournament.name = req.body.name;
-                    newTournament.participants = req.body.participants;
-                    newTournament.starts = req.body.starts;
-                    newTournament.ends = req.body.ends;
-                    newTournament.save(function(err){
-                        // if(err) console.log(err);
-                        console.log("Success");
-                        callback(err, newTournament);
-                    })
-                }, function(newTournament, callback){
-                    Game.update({
-                        '_id': gameId
-                    }, {
-                        $push: {
-                            tournaments: newTournament._id
-                        }
-                    }, (err, count) => {
-                        callback(err, count);
-                        res.redirect('/');
-                    })
-                }
-            ])
+            if(req.user){
+                async.waterfall([
+                    function(callback){
+                        Game.findOne({'name': req.body.game}, (err, user) => {
+                            if(err){
+                                // console.log(err);
+                                res.redirect('/getTournament');
+                            }else{
+                                console.log(user._id)
+                                global.gameId = user._id;
+                                callback(err, gameId)
+                            }
+                        })
+                    },
+                    function(gameId, callback){
+                        const newTournament = new Tournament();
+                        newTournament.game = gameId;
+                        newTournament.name = req.body.name;
+                        newTournament.owner = req.user._id;
+                        newTournament.participants = req.body.participants;
+                        newTournament.starts = req.body.starts;
+                        newTournament.ends = req.body.ends;
+                        newTournament.save(function(err){
+                            // if(err) console.log(err);
+                            console.log("Success");
+                            callback(err, newTournament);
+                        })
+                    }, function(newTournament, callback){
+                        Game.update({
+                            '_id': gameId
+                        }, {
+                            $push: {
+                                tournaments: newTournament._id
+                            }
+                        }, (err, count) => {
+                            callback(err, count);
+                            res.redirect('/');
+                        })
+                    }
+                ])
+            }else{
+                console.log('User login is required to create a tournament!');
+                res.render('login');
+            }
         },
         test: function(req, res){
             async function Hey(callback){

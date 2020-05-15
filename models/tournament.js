@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const TournamentSchema = new Schema({
     game: { type: Schema.Types.ObjectId, ref: 'Game'},
+    owner: { type: Schema.Types.ObjectId, ref: 'User'},
     name: String,
     participants: { type: Number, defualt: 0},
     players: [

@@ -15,7 +15,8 @@ const container = require('./container');
 container.resolve(function(users, tournament, _){
 
     mongoose.Promise = global.Promise;
-    mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+    // mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+    mongoose.connect('mongodb://bigmoney:Zoniackk3@ds251618.mlab.com:51618/slingshot', { useNewUrlParser: true, useUnifiedTopology: true})
 
     const app = ShowExpress();
 
@@ -58,7 +59,8 @@ container.resolve(function(users, tournament, _){
         app.use(session({
             resave: true,
             saveUninitialized: true,
-            secret: process.env.SECRET_KEY,
+            // secret: process.env.SECRET_KEY,
+            secret: 'mommy',
             store: new MongoStore({ mongooseConnection: mongoose.connection})
         }));
         app.use(flash());        
