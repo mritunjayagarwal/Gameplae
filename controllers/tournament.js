@@ -9,7 +9,11 @@ module.exports = function(_, Tournament, async, Game, User, moment){
             router.post('/create/tournament', this.createTournament)
         },
         getTournament: function(req, res){
-            res.render('createtournament');
+            if(req.user){
+                res.render('createtournament');
+            }else{
+                res.render('login');
+            }
         },
         createTournament: function(req, res){
             if(req.user){
@@ -31,6 +35,7 @@ module.exports = function(_, Tournament, async, Game, User, moment){
                         newTournament.game = gameId;
                         newTournament.name = req.body.name;
                         newTournament.owner = req.user._id;
+                        newTournament.desc = req.body.desc;
                         newTournament.participants = req.body.participants;
                         newTournament.starts = req.body.starts;
                         newTournament.ends = req.body.ends;

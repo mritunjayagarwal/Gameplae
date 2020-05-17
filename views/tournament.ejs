@@ -124,13 +124,14 @@
 
             <div class="col-md-8">
                 <h2 class="page-header">Tournament Description</h2>
-                <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                <p style="white-space: pre-line;white-space: pre-wrap;font-family: Impact"><%= tournament.desc %></p>
             </div>
 
             <div class="col-md-4">
-                <h2 class="page-header">Starts on <%= moment(tournament.starts).format('LLLL'); %> || Ends<%= moment(tournament.ends).format('LLLL'); %></h2>
+                <h2 class="page-header">Join this Tournament</h2>
                 <p>Click the button below to join <%= tournament.name %></p>
-                <a class="btn btn-primary" href="/join/tournament/<%= tournament._id %>">Join</a>
+                <!-- <a class="btn btn-primary" href="/join/tournament/<%= tournament._id %>">Join</a> -->
+                <a class="btn btn-primary" method = "POST" href="/payment/<%= tournament._id %>">Join</a>
             </div>
 
         </div>
@@ -141,7 +142,7 @@
         <div class="row">
 
             <div class="col-lg-12">
-                <h2 class="page-header">Tabbed Services</h2>
+                <h2 class="page-header">Starts on <%= moment(tournament.starts).format('LLLL'); %> Ends <%= moment(tournament.ends).format('LLLL'); %></h2>
                 <ul id="myTab" class="nav nav-tabs">
                     <li class="active"><a href="#service-one" data-toggle="tab">Service One</a>
                     </li>
