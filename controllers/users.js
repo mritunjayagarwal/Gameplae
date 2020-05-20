@@ -150,7 +150,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
                     throw error;
                 } else {
                     console.log(JSON.stringify(payment));
-                    res.send('You have Successfully Joined The Tournament');
+                    res.render('success');
                 }
             });
         },
