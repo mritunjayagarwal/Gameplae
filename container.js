@@ -8,7 +8,8 @@ const myModules = [
     ['Tournament', './models/tournament'],
     ['async', 'async'],
     ['passport', 'passport'],
-    ['moment', 'moment']
+    ['moment', 'moment'],
+    ['paypal', 'paypal-rest-sdk']
 ];
 
 myModules.forEach(function(val){

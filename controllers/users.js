@@ -1,5 +1,5 @@
 
-module.exports = function(_, Game, User, passport, Tournament){
+module.exports = function(_, Game, User, passport, Tournament, paypal){
     return {
         SetRouting: function(router){
             router.get('/', this.indexPage);
@@ -10,7 +10,8 @@ module.exports = function(_, Game, User, passport, Tournament){
             router.get('/home', this.home);
             router.get('/login', this.login);
             router.get('/join/tournament/:id', this.joinTournament);
-            router.get('/payment/:tid', this.payment);
+            router.get('/payment', this.payment);
+            router.get('/success', this.success);
 
             router.post('/add', this.add);
             router.post('/signup', this.createAccount);
@@ -81,38 +82,77 @@ module.exports = function(_, Game, User, passport, Tournament){
             failureFlash: true
         }),
         payment: function(req, res){
-            const checksum_lib = require('../paytm/checksum/checksum')
-            const port = 8000
-    
-                    let params ={}
-                    params['MID'] = 'MHYDxP43737074877761',
-                    params['WEBSITE'] = 'WEBSTAGING',
-                    params['CHANNEL_ID'] = 'WEB',
-                    params['INDUSTRY_TYPE_ID'] = 'Retail',
-                    params['ORDER_ID'] = 'ORD0001',
-                    params['CUST_ID'] = 'CUST0011',
-                    params['TXN_AMOUNT'] = '100',
-                    params['CALLBACK_URL'] = 'http://localhost:'+port+'/callback',
-                    params['EMAIL'] = 'xyz@gmail.com',
-                    params['MOBILE_NO'] = '9876543210'
+
+            paypal.configure({
+                'mode': 'sandbox', //sandbox or live
+                'client_id': 'AS0y8Yz2qudO__ynIy-z55FmdxnOE41wFIlSPZuptK2Zcn2qwRpliuTzwAGCoR0RSYqWh3GKft_mP7Vq',
+                'client_secret': 'EDOBfxNiWwkj2YQZRl0SG8wm1gv9Q-R-QlJFMP8aAd9Lxrz5kSlRxPCMvglew8i_qHoNM_vjwZHezwFg'
+              });
+
+            var create_payment_json = {
+                "intent": "sale",
+                "payer": {
+                    "payment_method": "paypal"
+                },
+                "redirect_urls": {
+                    "return_url": "http://localhost:8000/success",
+                    "cancel_url": "http://localhost:8080/cancel"
+                },
+                "transactions": [{
+                    "item_list": {
+                        "items": [{
+                            "name": "Kill em",
+                            "sku": "My item",
+                            "price": "25.00",
+                            "currency": "INR",
+                            "quantity": 1
+                        }]
+                    },
+                    "amount": {
+                        "currency": "INR",
+                        "total": "25.00"
+                    },
+                    "description": "My Tournament Payment"
+                }]
+            };
             
-                    checksum_lib.genchecksum(params,'1rIpYOzw@MqN!AUb',function(err,checksum){
-                        let txn_url = "https://securegw-stage.paytm.in/order/process"
             
-                        let form_fields = ""
-                        for(x in params)
-                        {
-                            form_fields += "<input type='hidden' name='"+x+"' value='"+params[x]+"'/>"
-            
+            paypal.payment.create(create_payment_json, function (error, payment) {
+                if (error) {
+                    throw error;
+                } else {
+                    for(let i = 0; i < payment.links.length; i++){
+                        if(payment.links[i].rel == 'approval_url'){
+                            res.redirect(payment.links[i].href);
                         }
-            
-                        form_fields+="<input type='hidden' name='CHECKSUMHASH' value='"+checksum+"' />"
-            
-                        var html = '<html><body><center><h1>Please wait! Do not refresh the page</h1></center><form method="post" action="'+txn_url+'" name="f1">'+form_fields +'</form><script type="text/javascript">document.f1.submit()</script></body></html>'
-                        res.writeHead(200,{'Content-Type' : 'text/html'})
-                        res.write(html)
-                        res.end()
-                    });
+                    }
+                    console.log(payment);
+                }
+            });
+        },
+        success: function(req, res){
+            const payerId = req.query.PayerID;
+            const paymentId = req.query.paymentId;
+
+            const execute_payment_json = {
+                "payer_id": payerId,
+                "transactions": [{
+                    "amount": {
+                        "currency": "INR",
+                        "total": "25.00"
+                    }
+                }]
+              };
+
+              paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+                if (error) {
+                    console.log(error.response);
+                    throw error;
+                } else {
+                    console.log(JSON.stringify(payment));
+                    res.send('You have Successfully Joined The Tournament');
+                }
+            });
         },
         joinTournament: function(req, res){
             console.log(req.params.id);
