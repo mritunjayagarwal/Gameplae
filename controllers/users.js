@@ -95,8 +95,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    "return_url": "http://localhost:8000/success",
-                    "cancel_url": "http://localhost:8080/cancel"
+                    "return_url": "http://slingshott.herokuapp.com/success",
+                    "cancel_url": "http://slingshott.herokuapp.com/cancel"
                 },
                 "transactions": [{
                     "item_list": {
