@@ -36,6 +36,7 @@ module.exports = function(_, Tournament, async, Game, User, moment){
                         newTournament.name = req.body.name;
                         newTournament.owner = req.user._id;
                         newTournament.desc = req.body.desc;
+                        newTournament.price = req.body.price;
                         newTournament.participants = req.body.participants;
                         newTournament.starts = req.body.starts;
                         newTournament.ends = req.body.ends;

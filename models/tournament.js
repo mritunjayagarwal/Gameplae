@@ -6,6 +6,7 @@ const TournamentSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User'},
     name: String,
     participants: { type: Number, defualt: 0},
+    price: Number,
     desc: String,
     players: [
         {
