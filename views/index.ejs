@@ -30,12 +30,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#myPage">SlingShot</a>
+      <a class="navbar-brand" href="#myPage">Sling<span style = "font-size: 30px;color: green">$</span>hot</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#services">SERVICES</a></li>
         <li><a href="#portfolio">PORTFOLIO</a></li>
         <li><a href="#pricing">PRICING</a></li>
         <li><a href="#contact">CONTACT</a></li>
@@ -44,45 +43,20 @@
   </div>
 </nav>
 
-<div id="services" class="container-fluid text-center" style = "background: #010101">
-  <h2 style = "color: #00C6FF">WE OFFER GAMES LIKE</h2>
+<div id="services" class="container-fluid text-center" style = "background: #020001">
+  <h2 style = "color: goldenrod">WE OFFER GAMES LIKE</h2>
   <!-- <h4 style = "color: #005ea1; font-weight: bold">That we offer</h4> -->
   <br>
   <div class="row">
-    <div class="col-sm-4">
-      <span class="logo-small"><a href = "/tournaments/clash%20royale"><img src = "img/clashRoyale.png" style = "height: 200px;width: 200px;"></a></span>
-      <h4 style = "color: #FFD700">CLASH ROYALE</h4>
-      <p>Join Awesome Clan Wars</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="logo-small"><a href = "/tournaments/pubg"><img src = "img/pubg.png" style = "height: 200px;width: 200px;"></a></span>
-      <h4 style = "color: #FFD700">PUBG</h4>
-      <p>Go into the world of unknown players</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="logo-small"><a href = "/tournaments/fifa%2020"><img src = "img/fifa.png" style = "height: 200px;width: 200px;"></a></span>
-      <h4 style = "color: #FFD700">FIFA 20</h4>
-      <p>Enter The world of Awesome Leg tricks</p>
-    </div>
+    <% _.forEach(games, (game) => { %>
+      <div class="col-sm-4" style = "margin-bottom: 50px;">
+          <span class="logo-small"><a href = "/tournaments/<%= game.name %>"><img src = "img/<%= game.face %>" style = "height: 200px;width: 200px;"></a></span>
+          <h4 style = "color: #FFD700" id = "dispText" ><%= game.name %></h4>
+          <p><%= game.coverdesc %></p>
+        </div>
+    <% }) %>
   </div>
   <br><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <span class="logo-small"><a href = "/tournaments/god%20of%20war"><img src = "img/godofwar.png" style = "height: 200px;width: 200px;"></a></span>
-      <h4 style = "color: #FFD700">GOD OF WAR</h4>
-      <p>Join Kratos in the his empire of deaths</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="logo-small"><a href = "/tournaments/fortnite"><img src = "img/fortnite.png" style = "height: 200px;width: 300px;"></a></span>
-      <h4 style = "color: #FFD700">FORTNITE</h4>
-      <p>Have fun in a fantasy battle royale</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="logo-small"><a href = "/tournaments/call%20of%20duty"><img src = "img/callofduty.png" style = "height: 200px;width: 200px;"></a></span>
-      <h4 style = "color: #FFD700">CALL OF DUTY: WARZONE</h4>
-      <p>Support your country to conquer the world</p>
-    </div>
-  </div>
 </div>
 
 <div class="footer-dark">
@@ -146,6 +120,9 @@ $(document).ready(function(){
     });
   });
 })
+</script>
+<script>
+  document.getElementById('dispText').innerText.toUpperCase(); 
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

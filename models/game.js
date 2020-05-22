@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const GameSchema = new Schema({
-    name: { type: String, unique: true},
-    pname: { type: String, unique: true},
+    name: { type: String, unique: true, uppercase: true},
+    coverdesc: String,
     description: String,
     cover: { type: String, default: 'cover.jpg'},
     face: { type: String, default: 'face.png'},

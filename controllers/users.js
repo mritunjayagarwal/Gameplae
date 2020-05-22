@@ -18,7 +18,12 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
             router.post('/login', this.getInside);
         },
         indexPage: function(req, res){
-                res.render('index');
+
+            Game.find({})
+            .sort('-name')
+            .exec((err, game) => {
+                res.render('index', { games: game});
+            });
         },
         new: function(req, res){
             // var something = req.params.id;
@@ -48,7 +53,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
             console.log('New Game Insertion in Progres...');
             const newGame = new Game();
             newGame.name = req.body.name;
-            newGame.pname = req.body.pname;
+            newGame.coverdesc = req.body.moto;
             newGame.description = req.body.desc;
             newGame.cover = req.body.cover;
             newGame.face = req.body.face;
