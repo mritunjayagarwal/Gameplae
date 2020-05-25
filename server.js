@@ -11,8 +11,15 @@ const compression = require('compression');
 const helmet = require('helmet');
 const http = require('http');
 const container = require('./container');
+const paypal = require('paypal-rest-sdk')
 
 container.resolve(function(users, tournament, _){
+
+    paypal.configure({
+        'mode': 'sandbox', //sandbox or live
+        'client_id': 'Aaeq-bLvikR2XR3ApZJxUZaztzhaz9uPeOqrPt6PEeOtB5V6baiDyD6Y15lXPb1JrGKk61Y3llX30Wbv',
+        'client_secret': 'EBbiock5dGv_1y0k7MpgaQ2g6ocGOBHATSskzTZjv3zOU2bTznMxJyX0ltxlhOD4Y48h6fjMxeFOUDdO'
+      });
 
     mongoose.Promise = global.Promise;
     // mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})

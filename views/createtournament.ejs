@@ -8,7 +8,11 @@
 <body>
     <center><h1>Enter New Tournament Detailss</h1></center>
     <form action="/create/tournament" method = "POST">
-    <input type="text" name="game" placeholder="Enter Tournament For Game">
+    <select name="game">
+        <% _.forEach(games, (game) => { %>
+            <option value="<%= game.name %>"><%= game.name %></option>
+        <% }) %>
+    </select>
     <input type="text" name = "name" placeholder = "Enter Tournament Name">
     <input type="number" name = "participants" placeholder = "Enter No. Of Players"> 
     <textarea name="desc" cols="50" rows="20" placeholder = "Enter Tournament Description"></textarea>

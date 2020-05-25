@@ -10,7 +10,11 @@ module.exports = function(_, Tournament, async, Game, User, moment){
         },
         getTournament: function(req, res){
             if(req.user){
-                res.render('createtournament');
+                Game.find({})
+                .sort('-name')
+                .exec((err, game) => {
+                    res.render('createtournament', { games: game});
+                });
             }else{
                 res.render('login');
             }
@@ -64,13 +68,13 @@ module.exports = function(_, Tournament, async, Game, User, moment){
             }
         },
         test: function(req, res){
-            async function Hey(callback){
+            async function Extract(callback){
                 const game = await Game.findOne({ name: 'god of war'}).populate({ path: 'tournaments', model: 'Tournament'}).exec();
                 console.log(game);
                 res.redirect('/');
             }
 
-            Hey();
+            Extract();
         },
         tournamentInfo: function(req, res){
             id = req.params.id;
@@ -83,25 +87,27 @@ module.exports = function(_, Tournament, async, Game, User, moment){
             //         res.render('tournament', {tournament: user});
             //     }
             // })
-            async function Hey(callback){
+            async function Extract(callback){
                 const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'game', model: 'Game'}).exec();
+                const game = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
+                const player = game.players;
                 console.log(tournament);
-                res.render('tournament', {tournament: tournament, moment: moment});
+                res.render('tournament', {tournament: tournament, moment: moment, game: game, players: player});
             }
 
-            Hey();
+            Extract();
         },
         showTournament: function(req, res){
             console.log(req.params.id);
 
-            async function Hey(callback){
+            async function Extract(callback){
                 const game = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
                 const player = game.players;
                 console.log(player);
                 res.render('showTournament', { game: game, players: player, moment: moment});
             }
 
-            Hey();
+            Extract();
         }
     }
 }

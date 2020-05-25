@@ -1,5 +1,4 @@
-
-module.exports = function(_, Game, User, passport, Tournament, paypal){
+module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
     return {
         SetRouting: function(router){
             router.get('/', this.indexPage);
@@ -10,8 +9,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
             router.get('/home', this.home);
             router.get('/login', this.login);
             router.get('/join/tournament/:id', this.joinTournament);
-            router.get('/payment', this.payment);
-            router.get('/success', this.success);
+            router.get('/payment/:id', this.payment);
+            router.get('/success/:id', this.success);
 
             router.post('/add', this.add);
             router.post('/signup', this.createAccount);
@@ -37,14 +36,14 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
             //     }
             // })
 
-            async function Hey(callback){
+            async function Extract(callback){
                 const game = await Game.findOne({ name: req.params.id}).populate({ path: 'tournaments', model: 'Tournament'}).exec();
                 console.log(game);
                 tournaments = game.tournaments;
-                res.render('new', { game: game, tournaments: tournaments});
+                res.render('new', { game: game, tournaments: tournaments, moment: moment});
             }
 
-            Hey();
+            Extract();
         },
         admin: function(req, res){
             res.render('admin');
@@ -87,57 +86,61 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
             failureFlash: true
         }),
         payment: function(req, res){
-
-            paypal.configure({
-                'mode': 'sandbox', //sandbox or live
-                'client_id': 'AS0y8Yz2qudO__ynIy-z55FmdxnOE41wFIlSPZuptK2Zcn2qwRpliuTzwAGCoR0RSYqWh3GKft_mP7Vq',
-                'client_secret': 'EDOBfxNiWwkj2YQZRl0SG8wm1gv9Q-R-QlJFMP8aAd9Lxrz5kSlRxPCMvglew8i_qHoNM_vjwZHezwFg'
-              });
-
-            var create_payment_json = {
-                "intent": "sale",
-                "payer": {
-                    "payment_method": "paypal"
-                },
-                "redirect_urls": {
-                    "return_url": "http://slingshott.herokuapp.com/success",
-                    "cancel_url": "http://slingshott.herokuapp.com/cancel"
-                },
-                "transactions": [{
-                    "item_list": {
-                        "items": [{
-                            "name": "Kill em",
-                            "sku": "My item",
-                            "price": "25.00",
+            if(req.user){
+                paypal.configure({
+                    'mode': 'sandbox', //sandbox or live
+                    'client_id': 'AS0y8Yz2qudO__ynIy-z55FmdxnOE41wFIlSPZuptK2Zcn2qwRpliuTzwAGCoR0RSYqWh3GKft_mP7Vq',
+                    'client_secret': 'EDOBfxNiWwkj2YQZRl0SG8wm1gv9Q-R-QlJFMP8aAd9Lxrz5kSlRxPCMvglew8i_qHoNM_vjwZHezwFg'
+                  });
+    
+                var create_payment_json = {
+                    "intent": "sale",
+                    "payer": {
+                        "payment_method": "paypal"
+                    },
+                    "redirect_urls": {
+                        "return_url": "http://localhost:8000/join/tournament/" + req.params.id,
+                        "cancel_url": "http://localhost:8000/cancel"
+                    },
+                    "transactions": [{
+                        "item_list": {
+                            "items": [{
+                                "name": "Kill em",
+                                "sku": "My item",
+                                "price": "25.00",
+                                "currency": "INR",
+                                "quantity": 1
+                            }]
+                        },
+                        "amount": {
                             "currency": "INR",
-                            "quantity": 1
-                        }]
-                    },
-                    "amount": {
-                        "currency": "INR",
-                        "total": "25.00"
-                    },
-                    "description": "My Tournament Payment"
-                }]
-            };
-            
-            
-            paypal.payment.create(create_payment_json, function (error, payment) {
-                if (error) {
-                    throw error;
-                } else {
-                    for(let i = 0; i < payment.links.length; i++){
-                        if(payment.links[i].rel == 'approval_url'){
-                            res.redirect(payment.links[i].href);
+                            "total": "25.00"
+                        },
+                        "description": "My Tournament Payment"
+                    }]
+                };
+                
+                
+                paypal.payment.create(create_payment_json, function (error, payment) {
+                    if (error) {
+                        throw error;
+                    } else {
+                        for(let i = 0; i < payment.links.length; i++){
+                            if(payment.links[i].rel == 'approval_url'){
+                                res.redirect(payment.links[i].href);
+                            }
                         }
+                        console.log(payment);
                     }
-                    console.log(payment);
-                }
-            });
+                });
+            }else{
+                res.render('login');
+            }
         },
         success: function(req, res){
             const payerId = req.query.PayerID;
             const paymentId = req.query.paymentId;
+            const tourId = req.params.id;
 
             const execute_payment_json = {
                 "payer_id": payerId,
@@ -155,7 +158,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal){
                     throw error;
                 } else {
                     console.log(JSON.stringify(payment));
-                    res.render('success');
+                    res.render('success', { tournament: tourId});
                 }
             });
         },
