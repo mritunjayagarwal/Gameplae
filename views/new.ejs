@@ -83,26 +83,28 @@
             <h1 class="my-4" style = "text-align: center;color: goldenrod">Join <%= game.name %> Tournaments</h1>
           <div class = "row">
       <% _.forEach(tournaments, (tournament) => { %>
+        <a href = "/tournament/<%= tournament._id %>" id = "link">
         <div class="col-lg-4 mb-4" >
-            <div class="card h-100" style="background: linear-gradient(rgba(5, 5, 5, 0.6), rgba(5, 5, 5, 0.9)), url('/img/<%= game.cover %>') no-repeat 50%;color: #fff;">
+            <div class="card h-100" style="background: linear-gradient(rgba(5, 5, 5, 0.6), rgba(5, 5, 5, 0.9)), url('/img/<%= game.cover %>') no-repeat 50%;color: #fff;border:2px solid #101010">
               <h4 class="card-header" style = "opacity:1;border-bottom:0.1px solid #d3d3d3"><%= tournament.name %></h4>
               <div class="card-body">
                 <!-- <p class="card-text"><i class="fa fa-calendar" style = "color:green;font-size:20px;"></i> <%= moment(tournament.starts).format('LLLL'); %></p>
                 <p class="card-text"><i class="fa fa-trophy" style = "color:green;font-size:20px;"></i> ₹‎1000 </p>
                 <p class="card-text"><i class="	fa fa-money" style = "color:green;font-size:20px;"></i> ₹‎<%= tournament.price %>/kill</p> -->
                 <div class="row">
-                    <div class="col"><p class="card-text MB-4"><i class="fa fa-calendar" style = "color:green;font-size:20px;"></i> <%= moment(tournament.starts).format('DDDD'); %></p></div>
+                    <div class="col"><p class="card-text MB-4"><i class="fa fa-calendar" style = "color:green;font-size:20px;margin-bottom: 10px;"></i> <%= moment(tournament.starts).format('ll'); %></p></div>
                     <div class="col"><p class="card-text"><i class="fa fa-trophy" style = "color:green;font-size:20px;"></i> ₹‎1000 </p></div>
                     <div class="w-100"></div>
                     <div class="col"><p class="card-text"><i class="	fa fa-money" style = "color:green;font-size:20px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
                     <div class="col"><p class="card-text"><i class="	fa fa-money" style = "color:green;font-size:20px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
                   </div>
-              </div>
-              <div class="card-footer">
-                <a href="/tournament/<%= tournament._id %>" class="btn btn-primary btn-block">Learn More</a>
+              </div><br>
+              <div class="card-box-footer">
+                <a href="/tournament/<%= tournament._id %>">Learn More</a>
               </div>
             </div>
           </div>
+          </a>
       <% }) %>
       <!-- <section class="pt-5 pb-5">
           <div class="container">

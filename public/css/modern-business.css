@@ -20,5 +20,29 @@ body {
 .portfolio-item {
   margin-bottom: 30px;
 }
+.card-box-footer {
+  position: absolute;
+  left:0px;
+  bottom: 0px;
+  text-align: center;
+  padding: 3px 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  text-decoration: none;
+  color:#Fff;
+}
 
+.card-box-footer:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transition:1s;
+}
 
+.card-box-footer a{
+  color:#Fff;
+  text-decoration: none;
+}
+
+#link{
+  color:#fff;
+  text-decoration: none;
+}
