@@ -91,7 +91,6 @@ module.exports = function(_, Tournament, async, Game, User, moment){
                 const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'game', model: 'Game'}).exec();
                 const game = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
                 const player = game.players;
-                console.log(tournament);
                 res.render('tournament', {tournament: tournament, moment: moment, game: game, players: player});
             }
 
