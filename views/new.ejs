@@ -41,7 +41,7 @@
             <a class="nav-link" href="/login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
+            <a class="nav-link" href="/">Contact</a>
           </li>
         </ul>
       </div>
@@ -77,18 +77,26 @@
 
   <!-- Page Content -->
   <div class="jumbotron" style = "background: #151515">
-
-    <h1 class="my-4" style = "text-align: center;color: goldenrod">Join <%= game.name %> Tournaments</h1>
     <!-- Marketing Icons Section -->
     <div class="row">
+        <div class = "col-lg-9 mb-4">
+            <h1 class="my-4" style = "text-align: center;color: goldenrod">Join <%= game.name %> Tournaments</h1>
+          <div class = "row">
       <% _.forEach(tournaments, (tournament) => { %>
         <div class="col-lg-4 mb-4" >
             <div class="card h-100" style="background: linear-gradient(rgba(5, 5, 5, 0.6), rgba(5, 5, 5, 0.9)), url('/img/<%= game.cover %>') no-repeat 50%;color: #fff;">
               <h4 class="card-header" style = "opacity:1;border-bottom:0.1px solid #d3d3d3"><%= tournament.name %></h4>
               <div class="card-body">
-                <p class="card-text"><i class="fa fa-calendar" style = "color:green;font-size:20px;"></i> <%= moment(tournament.starts).format('LLLL'); %></p>
+                <!-- <p class="card-text"><i class="fa fa-calendar" style = "color:green;font-size:20px;"></i> <%= moment(tournament.starts).format('LLLL'); %></p>
                 <p class="card-text"><i class="fa fa-trophy" style = "color:green;font-size:20px;"></i> ₹‎1000 </p>
-                <p class="card-text"><i class="	fa fa-money" style = "color:green;font-size:20px;"></i> ₹‎<%= tournament.price %>/kill</p>
+                <p class="card-text"><i class="	fa fa-money" style = "color:green;font-size:20px;"></i> ₹‎<%= tournament.price %>/kill</p> -->
+                <div class="row">
+                    <div class="col"><p class="card-text MB-4"><i class="fa fa-calendar" style = "color:green;font-size:20px;"></i> <%= moment(tournament.starts).format('DDDD'); %></p></div>
+                    <div class="col"><p class="card-text"><i class="fa fa-trophy" style = "color:green;font-size:20px;"></i> ₹‎1000 </p></div>
+                    <div class="w-100"></div>
+                    <div class="col"><p class="card-text"><i class="	fa fa-money" style = "color:green;font-size:20px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
+                    <div class="col"><p class="card-text"><i class="	fa fa-money" style = "color:green;font-size:20px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
+                  </div>
               </div>
               <div class="card-footer">
                 <a href="/tournament/<%= tournament._id %>" class="btn btn-primary btn-block">Learn More</a>
@@ -96,6 +104,171 @@
             </div>
           </div>
       <% }) %>
+      <!-- <section class="pt-5 pb-5">
+          <div class="container">
+              <div class="row justify-content-between">
+                  <div class="col col-md-12 pr-md-5 pl-md-5">
+                      <div class="bd-example bd-example-tabs">
+                          <ul class="nav nav-pills  flex-column justify-content-center flex-sm-row mb-3" id="pills-tab" role="tablist">
+                              <li class="  border border-light  rounded text-sm-center nav-item mr-md-1">
+                                  <a class="nav-link pt-md-3 pb-md-3 pr-md-5 pl-md-5" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false"><i class="fa fa-laptop fa-lg " aria-hidden="true"></i> Home</a>
+                              </li>
+                              <li class="  border border-light  rounded text-sm-center mr-md-1 nav-item ">
+                                  <a class="nav-link pt-md-3 pb-md-3 pr-md-5 pl-md-5" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="far fa-gem fa-lg mr-2" aria-hidden="true"></i> Profile</a>
+                              </li>
+                              <li class="  border border-light  rounded text-sm-center  nav-item mr-md-1">
+                                  <a class="nav-link pt-md-3 pb-md-3 pr-md-5 pl-md-5" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa fa-comments fa-lg " aria-hidden="true"></i> Contact</a>
+                              </li>
+                              <li class="  border border-light  rounded text-sm-center mr-md-1 nav-item">
+                                  <a class="nav-link pt-md-3 pb-md-3 pr-md-5 pl-md-5 active show" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="true"><i class="fa fa-code fa-lg " aria-hidden="true"></i> Info</a>
+                              </li>
+                          </ul>
+                          <div class="tab-content pt-5 pb-5" id="pills-tabContent">
+                              <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                  <div class="container-fluid">
+                                      <div class="row align-items-center justify-content-between">
+                                          <div class="col-12 col-md-5  text-left">
+                                              <h2>Tab 1 Lorem ipsum efficitur </h2>
+                                              <p class=" mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. </p>
+                                              <blockquote class="card  text-left  py-3 px-4 mb-3 mt-4  ">
+                                                  <div class="row align-items-center justify-content-between">
+                                                      <div class="col-3  p-md-1 text-center rounded">
+                                                          <img src="https://via.placeholder.com/80/5fa9f8/efefef" class="img-fluid py-0 rounded" alt="features">
+                                                          <footer class="blockquote-footer small p-1"><span class="small">John Doe <cite class="font-weight-bold">COMPANY NAME</cite></span></footer>
+                                                      </div>
+                                                      <div class="col-9">
+      
+                                                          <p class=" m-0 text-muted small">
+                                                              Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Etiam sed iaculis libero, at euismod massain venenatis ligula. </p>
+                                                          <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3" aria-hidden="true"></i>
+      
+                                                      </div>
+                                                  </div>
+                                              </blockquote>
+                                              <a href="#" class="btn btn-primary  btn-rounded shadow py-3 px-5 mt-md-3 mt-2">See all features</a>
+                                          </div>
+                                          <div class="col-12 col-md-5 mb-4 ml-md-auto">
+                                              <img alt="image" class="img-fluid img-center mr-auto ml-auto d-none d-md-block" src="https://via.placeholder.com/600/5fa9f8/efefef">
+                                          </div>
+      
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                  <div class="container-fluid">
+                                      <div class="row align-items-center justify-content-between">
+                                          <div class="col-12 col-md-5  text-left">
+                                              <h2>Tab 2 Lorem ipsum efficitur</h2>
+                                              <p class=" mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. </p>
+                                              <blockquote class="card  text-left  py-3 px-4 mb-3 mt-4  ">
+                                                  <div class="row align-items-center justify-content-between">
+                                                      <div class="col-3  p-md-1 text-center rounded">
+                                                          <img src="https://via.placeholder.com/80/5fa9f8/efefef" class="img-fluid py-0 rounded" alt="features">
+                                                          <footer class="blockquote-footer small p-1"><span class="small">John Doe <cite class="font-weight-bold">COMPANY NAME</cite></span></footer>
+                                                      </div>
+                                                      <div class="col-9">
+      
+                                                          <p class=" m-0 text-muted small">
+                                                              Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi.
+                                                          </p>
+                                                          <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3" aria-hidden="true"></i>
+                                                      </div>
+                                                  </div>
+                                              </blockquote>
+                                              <a href="#" class="btn btn-primary  btn-rounded shadow py-3 px-5 mt-md-3 mt-2">See all features</a>
+                                          </div>
+                                          <div class="col-12 col-md-5 mb-4 ml-md-auto">
+                                              <img alt="image" class="img-fluid img-center mr-auto ml-auto d-none d-md-block" src="https://via.placeholder.com/600/5fa9f8/efefef">
+                                          </div>
+      
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                  <div class="container-fluid">
+                                      <div class="row align-items-center justify-content-between">
+                                          <div class="col-12 col-md-5  text-left">
+                                              <h2>Tab 3 Lorem ipsum sed erat</h2>
+                                              <p class=" mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. </p>
+                                              <blockquote class="card  text-left  py-3 px-4 mb-3 mt-4  ">
+                                                  <div class="row align-items-center justify-content-between">
+                                                      <div class="col-3  p-md-1 text-center rounded">
+                                                          <img src="https://via.placeholder.com/80/5fa9f8/efefef" class="img-fluid py-0 rounded" alt="features">
+                                                          <footer class="blockquote-footer small p-1"><span class="small">John Doe <cite class="font-weight-bold">COMPANY NAME</cite></span></footer>
+                                                      </div>
+                                                      <div class="col-9">
+      
+                                                          <p class=" m-0 text-muted small">
+                                                              Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Etiam sed iaculis libero, at euismod massain venenatis ligula.
+                                                          </p>
+                                                          <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3" aria-hidden="true"></i>
+                                                      </div>
+                                                  </div>
+                                              </blockquote>
+                                              <a href="#" class="btn btn-primary  btn-rounded shadow py-3 px-5 mt-md-3 mt-2">See all features</a>
+                                          </div>
+                                          <div class="col-12 col-md-5 mb-4 ml-md-auto">
+                                              <img alt="image" class="img-fluid img-center mr-auto ml-auto d-none d-md-block" src="https://via.placeholder.com/600/5fa9f8/efefef">
+                                          </div>
+      
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="tab-pane fade active show" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                                  <div class="container-fluid">
+                                      <div class="row align-items-center justify-content-between">
+                                          <div class="col-12 col-md-5  text-left">
+                                              <h2>Tab 4 Lorem ipsum efficitur </h2>
+                                              <p class=" mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. </p>
+                                              <blockquote class="card  text-left  py-3 px-4 mb-3 mt-4  ">
+                                                  <div class="row align-items-center justify-content-between">
+                                                      <div class="col-3  p-md-1 text-center rounded">
+                                                          <img src="https://via.placeholder.com/80/5fa9f8/efefef" class="img-fluid py-0 rounded" alt="features">
+                                                          <footer class="blockquote-footer small p-1"><span class="small">John Doe <cite class="font-weight-bold">COMPANY NAME</cite></span></footer>
+                                                      </div>
+                                                      <div class="col-9 position-relative">
+      
+                                                          <p class=" m-0 text-muted small">
+                                                              Aenean sit amet felis dolor, in sagittis nisi. Etiam sed iaculis libero, at euismod massain venenatis ligula.
+                                                          </p>
+                                                          <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3" aria-hidden="true"></i></div>
+      
+                                                  </div>
+                                              </blockquote>
+                                              <a href="#" class="btn btn-primary  btn-rounded shadow py-3 px-5 mt-md-3 mt-2">See all features</a>
+                                          </div>
+                                          <div class="col-12 col-md-5 mb-4 ml-md-auto">
+                                              <img alt="image" class="img-fluid img-center mr-auto ml-auto d-none d-md-block" src="https://via.placeholder.com/600/5fa9f8/efefef">
+                                          </div>
+      
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section> -->
+          </div>
+        </div>
+        <div class="col-lg-3 mb-4">
+            <h1 class="my-4" style = "text-align: center;color: goldenrod">Join</h1>
+            <div class="list-group">
+              <a href="index.html" class="list-group-item bg-dark" style = "color:#fff">Home</a>
+              <a href="about.html" class="list-group-item bg-dark" style = "color:#fff">About</a>
+              <a href="services.html" class="list-group-item bg-dark" style = "color:#fff">Services</a>
+              <a href="contact.html" class="list-group-item bg-dark" style = "color:#fff">Contact</a>
+              <a href="portfolio-1-col.html" class="list-group-item bg-dark" style = "color:#fff">1 Column Portfolio</a>
+              <a href="portfolio-2-col.html" class="list-group-item bg-dark" style = "color:#fff">2 Column Portfolio</a>
+              <a href="portfolio-3-col.html" class="list-group-item bg-dark" style = "color:#fff">3 Column Portfolio</a>
+              <a href="portfolio-4-col.html" class="list-group-item bg-dark" style = "color:#fff">4 Column Portfolio</a>
+              <a href="portfolio-item.html" class="list-group-item bg-dark" style = "color:#fff">Single Portfolio Item</a>
+              <a href="blog-home-1.html" class="list-group-item bg-dark" style = "color:#fff">Blog Home 1</a>
+              <a href="blog-home-2.html" class="list-group-item bg-dark" style = "color:#fff">Blog Home 2</a>
+              <a href="blog-post.html" class="list-group-item bg-dark" style = "color:#fff">Blog Post</a>
+            </div>
+          </div>
     </div>
     <!-- /.row -->
 
