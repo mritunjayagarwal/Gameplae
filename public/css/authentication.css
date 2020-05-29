@@ -1,0 +1,58 @@
+body{
+    background-image: url('/img/godofwar.jpg');
+    background-position: center;
+    height: 100vh;
+    background-size: cover;
+    font-family: 'Baloo Chettan 2', cursive;
+    }
+    .col-md-4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+    form{
+    background-color:rgba(0,0,0,0.7);
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    padding: 30px;
+    }
+    label{
+    color: #fff;
+    }
+    .form-control{
+    height: 50px;
+    border: none;
+    border-bottom: 2px solid #313131;
+    background: none;
+    font-size: 20px;
+    border-radius: 0px;
+    }
+    .form-control:active{
+    outline: none;
+    border: none;
+    }
+    .form-control:focus{
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border:none;
+    color: #fff;
+    border-bottom: 2px solid #000;
+    outline: 0;
+    }
+    .form-control:hover{
+    border-bottom: 2px solid #000;
+    outline: none;
+    border-color: none;
+    }
+    .btn-custom{
+    background-color: #121212;
+    border-color: #1a1a1a;
+    color: #fff;
+    }
+    .btn-custom{
+    color: #fff !important;
+    }
+    .btn.focus, .btn:focus {
+    box-shadow: none !important;
+    }

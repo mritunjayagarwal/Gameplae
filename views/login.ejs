@@ -1,17 +1,39 @@
+<!-- W3hubs.com - Download Free Responsive Website Layout Templates designed on HTML5 CSS3,Bootstrap which are 100% Mobile friendly. w3Hubs all Layouts are responsive cross browser supported, best quality world class designs. -->
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Signup</title>
-</head>
-<body>
-    <p>Login For the League of legends</p>
-    <form action="/login" method = "POST">
-    <input type="email" name = "email" Placeholder = "Email">
-    <input type="password" name = "password" Placeholder = "Password">
-    <input type="submit" Value = "Get in">
-    </form>
-    
-</body>
+  <head>
+    <title>Bootstrap Login Form With Background Image</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/authentication.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+          <form action="/login" class="pt-5" method = "POST">
+            <h1 style = "text-align: right;color:#Fff;">Login</h1>
+            <div class="form-group">
+              <label for="email">Username</label>
+              <input type="email" name = "email" class="form-control" placeholder="Enter email" id="email" autofocus required>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password</label>
+              <input type="password" name = "password" class="form-control" placeholder="Enter password" id="pwd" required>
+            </div>
+            <div class="form-group form-check">
+              <label class="form-check-label">
+              <input class="form-check-input" type="checkbox"> Remember me
+              </label>
+            </div>
+            <button type="submit" class="btn btn-custom">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

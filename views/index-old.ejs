@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com -->
+  <title>Slingshot Home</title>
+  <meta charset="utf-8">
+  <meta property="og:title" content="Slingshot">
+  <meta property="og:image" content="img/clashcover.jpg">
+  <meta property="og:description" content="Beat Challengers to show your skills and Earn Money">
+  <meta name="keywords" content="HTML, CSS, JavaScript, Game, Tournament, Slingshot, Pubg, Clash, Clashroyale, war, gaming, earn, money, dollars, inr, thrill, play, gameplay, hold, tournament, clan, group">
+  <meta name="author" content="Slingshot LLC">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top" style = "background: #010101">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Sling<span style = "font-size: 30px;color: green">$</span>hot</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#portfolio">PORTFOLIO</a></li>
+        <li><a href="#pricing">PRICING</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="services" class="container-fluid text-center" style = "background: #020001">
+  <h2 style = "color: goldenrod">WE OFFER GAMES LIKE</h2>
+  <!-- <h4 style = "color: #005ea1; font-weight: bold">That we offer</h4> -->
+  <br>
+  <div class="row">
+    <% _.forEach(games, (game) => { %>
+      <div class="col-sm-4" style = "margin-bottom: 50px;">
+          <span class="logo-small"><a href = "/tournaments/<%= game.name %>"><img src = "img/<%= game.face %>" style = "height: 200px;width: 200px;"></a></span>
+          <h4 style = "color: #FFD700" id = "dispText" ><%= game.name %></h4>
+          <p><%= game.coverdesc %></p>
+        </div>
+    <% }) %>
+  </div>
+  <br><br>
+</div>
+
+<div class="footer-dark">
+  <footer>
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-6 col-md-3 item">
+                  <h3>Services</h3>
+                  <ul>
+                      <li><a href="/getTournament">Create Tournament</a></li>
+                      <li><a href="/signup">Signup</a></li>
+                      <li><a href="/login">Login</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-6 col-md-3 item">
+                  <h3>What You Should Do Here?</h3>
+                  <ul>
+                      <li><a>Play Classy</a></li>
+                      <li><a>Win like a champion</a></li>
+                      <li><a>Stay on the top</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-6 item text">
+                  <h3>SlingShot</h3>
+                  <p>Showoff your skills, beat Challengers, earn money and Kick their asses!</p>
+              </div>
+              <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+          </div>
+          <p class="copyright">Slingshot © 2020</p>
+      </div>
+  </footer>
+</div>
+
+<script>
+$(document).ready(function(){
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+     if (this.hash !== "") {
+     
+        event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+
+        window.location.hash = hash;
+      });
+    }
+  });
+  
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>
+<script>
+  document.getElementById('dispText').innerText.toUpperCase(); 
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
