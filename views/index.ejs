@@ -124,18 +124,6 @@ body{
 }
   </style>
 
-<script type='text/javascript'>
-  // When your page loads, populate your div / iframe elements
-  $(function(){
-       $('#iframe1').load('/tournaments/pubg');
-       var f=$('#iframe1')
-			f.load(function(){ 
-				f.contents().find('#navinder').hide(); 
-			})
-  });
-</script>
-
-
 </head>
 <body>
     
@@ -172,8 +160,8 @@ body{
                         </a>
                     </li>
                   <% _.forEach(games, (game) => { %>
-                    <li>
-                        <a href="/tournaments/<%= game.name %>"><%= game.name %></a>
+                    <li onclick="myfunction('<%= game.name %>')">
+                        <a><%= game.name %></a>
                     </li>
                   <% }) %>
                 </ul>
@@ -181,8 +169,8 @@ body{
             <!-- /#sidebar-wrapper -->
     
             <!-- Page Content -->
-                    <div class = "col-lg-13"  id = "iframe1"  style = "overflow:hidden" > 
-                      <!-- <iframe id = "iframe1" width = "100%" height = "100%" frameborder="0"></iframe> -->
+                    <div class = "col-lg-13" style = "overflow:hidden" > 
+                      <iframe src = "/login" id = "iframe1" width = "100%" height = "100%" frameborder="0"></iframe>
                     </div>
             <!-- /#page-content-wrapper -->
     
@@ -194,6 +182,10 @@ body{
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+
+        function myfunction(game){
+          document.getElementById('iframe1').src = '/tournaments/' + game; 
+        }
         </script>
   
 </body>
