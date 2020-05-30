@@ -75,7 +75,12 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
             res.redirect('/');
         },
         home: function(req, res){
-            res.render('home', {user: req.user});
+            async function Extract(callback){
+                const games = await Game.find({}).populate({ path: 'tournaments', model: 'Tournament'}).exec();
+                res.render('home', { games: games, moment: moment});
+            }
+
+            Extract();
         },
         login: function(req, res){
             res.render('login');
