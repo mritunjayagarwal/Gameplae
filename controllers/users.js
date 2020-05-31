@@ -21,7 +21,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
             Game.find({})
             .sort('-name')
             .exec((err, game) => {
-                res.render('index', { games: game});
+                res.render('index', { games: game, user: req.user});
             });
         },
         new: function(req, res){
@@ -66,7 +66,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
             res.render('signup');
         },
         createAccount: passport.authenticate('local.signup', {
-            successRedirect: '/home',
+            successRedirect: '/',
             failureRedirect: '/',
             failureFlash: true
         }),
@@ -86,7 +86,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
             res.render('login');
         },
         getInside: passport.authenticate('local.login', {
-            successRedirect: '/home',
+            successRedirect: '/',
             failureRedirect: '/',
             failureFlash: true
         }),
