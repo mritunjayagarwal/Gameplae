@@ -3,215 +3,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Welcome To SlingShot</title>
-
+  <title>Welcome to Slingshot</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<style>
-
-body{
-  padding-top:54px;
-  background: #0E0E10;
-}
-
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-#wrapper.toggled {
-    padding-left: 250px;
-}
-
-#sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-    width: 0;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: #18181B;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-}
-
-#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-}
-
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-}
-
-/* Sidebar Styles */
-
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
-}
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 260px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-}
-  </style>
-
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/styleindex.css">
 </head>
 <body>
-    
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style = "background: #18181B;box-shadow: 0 0 10px 0 #07abed;">
-        <a class="navbar-brand" href="/">SlingShot</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Slingshot</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse  justify-content-md-center" id="navbarNav">
-          <ul class="navbar-nav">
+  
+        <div class="collapse navbar-collapse" id="navbarsExample05">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link"> <i class = "fa fa-home" style = "color:#fff"></i> Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" onclick = "host('gettournament')"> <i class="fa fa-gamepad"></i> Host</a>
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Signup</a>
-                <div class="dropdown-menu" style = "background: #18181B;color:#fff;width:350px;">
-                  <h4 class = "dropdown-header text-center">Signup</h4>
-                  <form action="/signup" method = "POST" class = "form-group dropdown-header" >
-                    <input type="text" name = "name" class = "form-control input-lg mb-3" placeholder = "Full Name">
-                    <input type="email" name = "email" class = "form-control mb-3" placeholder = "Email">
-                    <input type="password" name = "password" class = "form-control input-lg mb-3" placeholder = "Password">
-                    <input type="tel" name = "phone" class = "form-control mb-3" placeholder = "Phone Number">
-                    <input type="submit" class = "btn btn-success btn-block mb-2">
-                  </form>
-                    <div class="dropdown-divider"></div>
-                    <div class = "mx-md-2">
-                        <a href="" class = "btn btn-primary btn-block">Sign Up with facebook</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
-              <div class="dropdown-menu" style = "background: #18181B;color:#fff;width:350px;">
-                <h4 class = "dropdown-header text-center">Login</h4>
-                <form action="/login" method = "POST" class = "form-group dropdown-header" >
-                  <input type="email" name = "email" class = "form-control mb-3" placeholder = "email">
-                  <input type="password" name = "password" class = "form-control input-lg mb-3" placeholder = "password">
-                  <input type="submit" class = "btn btn-success btn-block mb-2">
-                </form>
-                  <div class="dropdown-divider"></div>
-                  <div class = "mx-md-2">
-                      <a href="" class = "btn btn-primary btn-block">Sign in with facebook</a>
-                  </div>
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown05">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
               </div>
-          </li>
-          </ul> 
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-md-0">
+            <input class="form-control" type="text" placeholder="Search">
+          </form>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-          <% if(user){ %>
-            <li class="nav-item">
-              <a class="nav-link"><i class="fa fa-user-circle"></i> <%= user.name %></a>
-            </li>  
-          <% } %> 
-        </ul>
       </nav>
-       <div id="wrapper">
-    
-            <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <h3 style = "padding-top:20px;color:#fff;">Games WE offer</h3>
-                    </li>
-                  <% _.forEach(games, (game) => { %>
-                    <li onclick="tournaments('<%= game.name %>')">
-                        <a><%= game.name %></a>
-                    </li>
-                  <% }) %>
-                </ul>
+<section id = "wrapper">
+    <h3>Hey I am division header</h3>
+</section>
+<div class = "row">
+  <div class = "col-lg-2"></div>
+  <div class = "col-lg-10">
+    <div class = "jumbotron m-2 p-2">
+        <h1 class = "h1" id = "mainHead">Games</h1>
+        <% _.forEach(games, (game) => { %>
+          <div class = "jumbotron">
+            <h3 class = "h3" id = "#gameHead"><%= game.name %></h3>
+            <div class = "row">
+              <div class="glide">
+                  <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                      <% _.forEach(game.tournaments, (tournament) => { %>
+                        <li class="glide__slide"><img src="/img/codcover.jpg" style = "width:100%;height:auto"></li>
+                      <% }) %>
+                    </ul>
+                  </div>
+                  <div data-glide-el="controls">
+                      <button data-glide-dir="<">Previous</button>
+                      <button data-glide-dir=">">Next</button>
+                  </div>
+                </div>
             </div>
-            <!-- /#sidebar-wrapper -->
-    
-            <!-- Page Content -->
-                    <div class = "col-lg-13" id = "idiv" style = "overflow:hidden;"> 
-                      <iframe src = "/home" id = "iframe1" width = "100%" height = "100%" frameborder="0"></iframe>
-                    </div>
-            <!-- /#page-content-wrapper -->
-    
-        </div>
-        <!-- /#wrapper -->
-         <!-- Menu Toggle Script -->
-        <script src = "/js/homepage.js"></script>
+          </div>
+        <% }) %>
+    </div>
+  </div>
+</div>
   
 </body>
 </html>

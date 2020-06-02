@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/mritunjayagarwal/SlingShot#readme",
   "dependencies": {
+    "@glidejs/glide": "^3.4.1",
     "async": "^3.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
