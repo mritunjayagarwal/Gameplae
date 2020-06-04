@@ -12,37 +12,34 @@
   <link rel="stylesheet" href="/css/styleindex.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Slingshot</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-  
-        <div class="collapse navbar-collapse" id="navbarsExample05">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown05">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search">
-          </form>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">SlingShot</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><i class = "fa fa-home"></i> Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class = "fa fa-gamepad"></i> Host</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown08">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <section id = "wrapper">
     <h3>Hey I am division header</h3>
 </section>
@@ -53,7 +50,7 @@
         <h1 class = "h1" id = "mainHead">Games</h1>
         <% _.forEach(games, (game) => { %>
           <div class = "jumbotron py-3 my-3" >
-            <h3 class = "h3" id = "#gameHead"><%= game.name %></h3>
+            <h3 class = "h3" id = "gameHead"><%= game.name %></h3>
             <div class = "row">
               <div class="glide">
                   <div class="glide__track" data-glide-el="track">
@@ -64,17 +61,16 @@
                                 <div class="row no-gutters">
                                   <div class="col-md-4">
                                     <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
-                                    <img src="/img/<%= game.cover %>" class="card-img" id = "cover" style = "width:100%;height:auto;display:none;">
                                   </div>
                                   <div class="col-md-8">
                                     <div class="card-body" style = "margin-top: -10px;">
                                       <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
                                       <div class="row">
-                                        <div class="col"><p class="card-text mb-2" style = "color: #fff; font-size: 12px;"><i class="fa fa-calendar" style = "color:green;font-size:15px;margin-bottom: 10px;"></i> <%= moment(tournament.starts).format('ll'); %></p></div>
-                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="fa fa-trophy" style = "color:green;font-size:15px;"></i> ₹‎1000 </p></div>
+                                        <div class="col"><p class="card-text mb-2" style = "color: #fff; font-size: 12px;"><i class="fa fa-calendar" style = "color:gold;font-size:15px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('ll'); %></p></div>
+                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
                                         <div class="w-100"></div>
-                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="	fa fa-money" style = "color:green;font-size:15px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
-                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="	fa fa-money" style = "color:green;font-size:15px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
+                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
+                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
                                       </div>
                                     </div>
                                   </div>

@@ -1,6 +1,8 @@
 body{
+    max-width: 100%;
+    overflow-x: hidden;
     background:#0E0E10;
-    padding-top:54px;
+    padding-top:48px;
 }
 
 #wrapper{
@@ -25,13 +27,6 @@ body{
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
     }
-    #cover{
-        display: "block"
-    }
-
-    /* #face{
-        display: "none";
-    } */
 }
 
 .jumbotron{
@@ -40,5 +35,8 @@ body{
 
 #mainHead{
     color: #fff;
+}
+#gameHead{
+    color: #d3d3d3;
 }
 
