@@ -20,8 +20,9 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
 
             Game.find({})
             .sort('-name')
+            .populate('tournaments')
             .exec((err, game) => {
-                res.render('index', { games: game, user: req.user});
+                res.render('index', { games: game, user: req.user, moment: moment});
             });
         },
         new: function(req, res){

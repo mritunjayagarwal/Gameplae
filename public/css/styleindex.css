@@ -25,6 +25,13 @@ body{
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
     }
+    #cover{
+        display: "block"
+    }
+
+    /* #face{
+        display: "none";
+    } */
 }
 
 .jumbotron{
@@ -34,3 +41,4 @@ body{
 #mainHead{
     color: #fff;
 }
+

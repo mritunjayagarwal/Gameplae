@@ -5,9 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Welcome to Slingshot</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/glide.core.css">
-  <link rel="stylesheet" href="/css/glide.theme.css">
+  <link rel="stylesheet" href="/css/glide.theme.min.css">
   <link rel="stylesheet" href="/css/styleindex.css">
 </head>
 <body>
@@ -51,20 +52,37 @@
     <div class = "jumbotron m-2 p-2">
         <h1 class = "h1" id = "mainHead">Games</h1>
         <% _.forEach(games, (game) => { %>
-          <div class = "jumbotron py-0 my-1" >
+          <div class = "jumbotron py-3 my-3" >
             <h3 class = "h3" id = "#gameHead"><%= game.name %></h3>
             <div class = "row">
               <div class="glide">
                   <div class="glide__track" data-glide-el="track">
                     <ul class="glide__slides">
                       <% _.forEach(game.tournaments, (tournament) => { %>
-                        <li class="glide__slide"><img src="/img/<%= game.cover %>" style = "width:100%;height:auto"></li>
+                        <li class="glide__slide">
+                            <div class="card" style="max-width: 540px;background:#252525">
+                                <div class="row no-gutters">
+                                  <div class="col-md-4">
+                                    <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
+                                    <img src="/img/<%= game.cover %>" class="card-img" id = "cover" style = "width:100%;height:auto;display:none;">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body" style = "margin-top: -10px;">
+                                      <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
+                                      <div class="row">
+                                        <div class="col"><p class="card-text mb-2" style = "color: #fff; font-size: 12px;"><i class="fa fa-calendar" style = "color:green;font-size:15px;margin-bottom: 10px;"></i> <%= moment(tournament.starts).format('ll'); %></p></div>
+                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="fa fa-trophy" style = "color:green;font-size:15px;"></i> ₹‎1000 </p></div>
+                                        <div class="w-100"></div>
+                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="	fa fa-money" style = "color:green;font-size:15px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
+                                        <div class="col"><p class="card-text" style = "color: #fff; font-size: 12px;"><i class="	fa fa-money" style = "color:green;font-size:15px;"></i> ₹‎<%= tournament.price %>/kill</p></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                      </li>
                       <% }) %>
                     </ul>
-                  </div>
-                  <div data-glide-el="controls">
-                      <button data-glide-dir="<">Previous</button>
-                      <button data-glide-dir=">">Next</button>
                   </div>
                 </div>
             </div>
@@ -79,7 +97,18 @@
 var sliders = document.querySelectorAll('.glide');
 var config = {
   type: 'carousel',
-  perView: 2
+  perView: 3,
+  breakpoints: {
+    1200: {
+      perView: 3
+    },
+    1000: {
+      perView: 2
+    },
+    769: {
+      perView: 2
+    }
+  }
 }
 for (var i = 0; i < sliders.length; i++) {
   var glide = new Glide(sliders[i],config);
