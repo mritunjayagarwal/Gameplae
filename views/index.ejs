@@ -46,6 +46,18 @@
 <div class = "row">
   <div class = "col-lg-2"></div>
   <div class = "col-lg-10">
+
+      <div class="gliderr">
+          <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+              <li class="glide__slide"><img src = "/img/adv2.jpg" style = "width: 100%;height: auto;"></li>
+              <li class="glide__slide"><img src = "/img/adv1.jpg" style = "width: 100%;height: auto;"></li>
+              <li class="glide__slide"><img src = "/img/pubgadv.jpg" style = "width: 100%;height: auto;"></li>
+              <li class="glide__slide"><img src = "/img/pubgadv2.jpg" style = "width: 100%;height: auto;"></li>
+            </ul>
+          </div>
+        </div>
+
     <div class = "jumbotron m-2 p-2">
         <h1 class = "h1" id = "mainHead">Games</h1>
         <% _.forEach(games, (game) => { %>
@@ -56,6 +68,7 @@
                   <div class="glide__track" data-glide-el="track">
                     <ul class="glide__slides">
                       <% _.forEach(game.tournaments, (tournament) => { %>
+                       <a href = "/tournament/<%= tournament._id %>" style = "text-decoration: none;">
                         <li class="glide__slide">
                             <div class="card" style="max-width: 540px;background:#252525">
                                 <div class="row no-gutters">
@@ -76,7 +89,8 @@
                                   </div>
                                 </div>
                               </div>
-                      </li>
+                          </li>
+                         </a> 
                       <% }) %>
                     </ul>
                   </div>
@@ -111,6 +125,27 @@ for (var i = 0; i < sliders.length; i++) {
   
   glide.mount();
 }
+</script>
+<script>
+  var newConfig = {
+    type: 'carousel',
+    perView: 1,
+    gap: 15,
+    focusAt: 'center',
+    peek: 260,
+    breakpoints: {
+      1200: {
+        peek: 100
+      },
+      1000: {
+        peek: 100
+      },
+      600: {
+        peek: 70
+      }
+    }
+  }
+  new Glide(".gliderr", newConfig).mount();
 </script>
 </body>
 </html>
