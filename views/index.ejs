@@ -14,7 +14,7 @@
 <body>
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <a class="navbar-brand" href="/">SlingShot</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -41,7 +41,24 @@
     </div>
   </nav>
 <section id = "wrapper">
-    <h3>Hey I am division header</h3>
+    <h3 class = "h3" id = "tournamentHead">Tournaments</h3>
+    <ul class="list-group" id = "wrapGame">
+     <% _.forEach(games, (game) => { %>
+      <li class = "m-2">
+        <a href="/tournaments/<%= game.name %>">
+          <div class = "row">
+              <div class = "col-lg-10">
+                <h5 classc = "h5"><%= game.name %></h5>
+              </div>
+              <div class = "col-lg-2">
+                  <span class="badge badge-primary"><%= game.tournaments.length %></span>
+              </div>
+            </div>
+        </a> 
+      </li>
+     <% }) %>
+
+    </ul>
 </section>
 <div class = "row">
   <div class = "col-lg-2"></div>

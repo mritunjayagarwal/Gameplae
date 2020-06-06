@@ -18,7 +18,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
         },
         indexPage: function(req, res){
 
-            Game.find({})
+            var game = Game.find({})
             .sort('-name')
             .populate('tournaments')
             .exec((err, game) => {
@@ -60,7 +60,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
             newGame.save(function(err){
                 if(err) console.log(err);
                 console.log("New Game Insertion Success!");
-                res.redirect('/admin')
+                res.redirect('/gettournament')
             })
         },
         signup: function(req, res){

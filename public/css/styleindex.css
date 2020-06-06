@@ -36,7 +36,20 @@ body{
 #mainHead{
     color: #fff;
 }
-#gameHead{
+#gameHead, #tournamentHead{
     color: #d3d3d3;
 }
 
+#wrapGame{
+    list-style-type: none;
+}
+
+#wrapGame a{
+    color: #d3d3d3;
+    text-decoration: none;
+}
+
+#wrapGame a:hover{
+    font-size:18px;
+    transition:0.3s;
+}
