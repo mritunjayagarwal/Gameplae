@@ -18,7 +18,7 @@ body{
     background: #18181B;
 }
 
-@media(max-width:1000px){
+@media(max-width:1340px){
     #wrapper{
         width:0px;
         padding:0px;
@@ -26,6 +26,20 @@ body{
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
+    }
+    /* .col-lg-2{
+        display: none;
+    } */
+}
+
+#con{
+    color: #fff;
+    font-size: 12px;
+}
+
+@media(max-width: 500){
+    #caCon{
+        font-size: 0px;
     }
 }
 
