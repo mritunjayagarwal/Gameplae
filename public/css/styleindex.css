@@ -10,7 +10,7 @@ body, html {
   background: #151515;
 }
   
-@media screen and (max-width: 1222px) {
+@media screen and (max-width: 1000px) {
 
     .row-offcanvas {
       position: relative;
