@@ -97,7 +97,7 @@
                                         <div class="card-body" style = "margin-top: -10px;">
                                           <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
                                           <div class="row">
-                                            <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts, "YYYYMMDD").fromNow(); %></p></div>
+                                            <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
                                             <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
                                             <div class="w-100"></div>
                                             <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
