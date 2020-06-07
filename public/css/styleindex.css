@@ -2,8 +2,14 @@ body, html {
     height:100%;
     background: #0E0E10;
   }
+
+#sidebar{
+  z-index: 1;
+  top: 0;
+  overflow-y: hidden;
+}
   
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1222px) {
 
     .row-offcanvas {
       position: relative;
@@ -47,7 +53,11 @@ body, html {
     }
     
     .sidebar-offcanvas {
+      position: absolute;
+      top: 0;
       width: 45%;
+      height: 100%;
+      overflow: auto;
     }
   }
 
@@ -82,13 +92,6 @@ body, html {
     color: #fff;
     font-size: 12px;
 }
-
-@media(max-width: 500){
-    #caCon{
-        font-size: 0px;
-    }
-}
-
 .jumbotron{
     background: #0E0E10;
 }
