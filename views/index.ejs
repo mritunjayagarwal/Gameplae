@@ -54,23 +54,19 @@
 </nav>
 <div class="container-fluid" id="main">
   <div class="row row-offcanvas row-offcanvas-left" id = "fixl">
-      <div class="col-md-3 col-lg-2 sidebar-offcanvas bg-light pl-0" id="sidebar" role="navigation">
+      <div class="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation">
           <ul class="nav flex-column pl-0 pt-5 mt-3">
-              <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#submenu1" data-toggle="collapse" data-target="#submenu1">Reports▾</a>
-                  <ul class="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
-                     <li class="nav-item"><a class="nav-link" href="">Report 1</a></li>
-                     <li class="nav-item"><a class="nav-link" href="">Report 2</a></li>
-                  </ul>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Export</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Snippets</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Flexbox</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Layouts</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Templates</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Themes</a></li>
+              <h3 class = "text-center h3 mb-3" id = "gameHead">Games</h3>
+              <% _.forEach(games, (game) => { %>
+                <li class="nav-item"><a class="nav-link" id = "gameLink" href="/tournaments/<%= game.name %>">
+                    <div class = "row mb-0" id = "gameList">
+                      <div class = "col-lg-10"><%= game.name %></div>
+                      <div class = "col-lg-2">
+                        <span class = "badge badge-primary"><%= game.tournaments.length %></span>
+                      </div>
+                    </div>
+                  </a></li>
+              <% }) %>
           </ul>
       </div>
       <div class="col main pt-5 mt-3">
@@ -85,7 +81,7 @@
           </div>
         </div>
 
-    <div class = "jumbotron m-2 p-2">
+    <div class = "jumbotron">
         <h1 class = "h1" id = "mainHead">Upcoming</h1>
         <% _.forEach(games, (game) => { %>
           <div class = "jumbotron py-3 my-3" >
