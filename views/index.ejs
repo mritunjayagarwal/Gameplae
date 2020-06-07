@@ -42,7 +42,7 @@
     </div>
   </nav>
 <section id = "wrapper">
-    <h3 class = "h3" id = "tournamentHead">Tournaments</h3>
+    <h3 class = "h3" id = "tournamentHead">Games</h3>
     <ul class="list-group" id = "wrapGame">
      <% _.forEach(games, (game) => { %>
       <li class = "m-2">
@@ -76,7 +76,7 @@
         </div>
 
     <div class = "jumbotron m-2 p-2">
-        <h1 class = "h1" id = "mainHead">Games</h1>
+        <h1 class = "h1" id = "mainHead">Upcoming</h1>
         <% _.forEach(games, (game) => { %>
           <div class = "jumbotron py-3 my-3" >
             <h3 class = "h3" id = "gameHead"><%= game.name %></h3>
@@ -125,6 +125,7 @@
 
 var sliders = document.querySelectorAll('.glide');
 var config = {
+  type: 'carousel',
   perView: 3,
   breakpoints: {
     1200: {
