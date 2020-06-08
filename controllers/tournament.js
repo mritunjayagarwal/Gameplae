@@ -78,20 +78,13 @@ module.exports = function(_, Tournament, async, Game, User, moment){
         },
         tournamentInfo: function(req, res){
             id = req.params.id;
-            // Tournament.findOne({ _id: id}, (err, user) => {
-            //     if(err){
-            //         res.redirect('/');
-            //     }
-            //     if(user){
-            //         console.log(user);
-            //         res.render('tournament', {tournament: user});
-            //     }
-            // })
+
             async function Extract(callback){
                 const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'game', model: 'Game'}).exec();
-                const game = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
-                const player = game.players;
-                res.render('tournament', {tournament: tournament, moment: moment, game: game, players: player});
+                // const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
+                const games = await Game.find({}).exec();
+                // const player = tournament.players;
+                res.render('tournament', { tournament: tournament, games: games, user: req.user});
             }
 
             Extract();

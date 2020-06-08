@@ -62,7 +62,15 @@ body, html {
     }
   }
 
-#gameHead, #gameLink{
+.jumbotron{
+  background: #0E0E10
+}
+
+#gameHead{
+  color: #fff;
+}
+
+#gameLink{
     color: #d3d3d3;
     font-weight: bold;
 }
