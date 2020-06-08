@@ -42,14 +42,22 @@
                 <a class="nav-link" href="/gettournament"><i class = "fa fa-gamepad"></i> Host</a>
             </li>
         </ul>
-        <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/signup"><i class = "fa fa-user"></i> Signup</a>
-          </li>
-          <li class="nav-item active">
-              <a class="nav-link" href="/login">Login</a>
-          </li>
-        </ul>
+        <% if(user){ %>
+          <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/"><i class = "fa fa-user-circle"></i> <%= user.name %></a>
+              </li>
+            </ul>
+        <% }else{ %>
+              <ul class="nav navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/signup"><i class = "fa fa-user"></i> Signup</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/login">Login</a>
+                  </li>
+                </ul>
+            <% } %>
     </div>
 </nav>
 <div class="container-fluid" id="main">
@@ -108,7 +116,7 @@
                                             <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
                                             <div class="w-100"></div>
                                             <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
-                                            <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
+                                            <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
                                           </div>
                                         </div>
                                       </div>
@@ -160,7 +168,7 @@ var config = {
       perView: 1,
       peek: {
         before: 0,
-        after: 50
+        after: 30
       },
     }
   }

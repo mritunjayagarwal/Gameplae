@@ -18,12 +18,16 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
         },
         indexPage: function(req, res){
 
-            var game = Game.find({})
-            .sort('-name')
-            .populate('tournaments')
-            .exec((err, game) => {
-                res.render('index', { games: game, user: req.user, moment: moment});
-            });
+            if(req.user){
+                var game = Game.find({})
+                .sort('-name')
+                .populate('tournaments')
+                .exec((err, game) => {
+                    res.render('index', { games: game, user: req.user, moment: moment, user: req.user});
+                });
+            }else{
+                res.redirect('/login');
+            }
         },
         new: function(req, res){
             // var something = req.params.id;
@@ -68,7 +72,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
         },
         createAccount: passport.authenticate('local.signup', {
             successRedirect: '/',
-            failureRedirect: '/',
+            failureRedirect: '/signup',
             failureFlash: true
         }),
         logout: function(req, res){
@@ -88,7 +92,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
         },
         getInside: passport.authenticate('local.login', {
             successRedirect: '/',
-            failureRedirect: '/',
+            failureRedirect: '/login',
             failureFlash: true
         }),
         payment: function(req, res){

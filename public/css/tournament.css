@@ -37,11 +37,7 @@ body, html {
       overflow: auto;
     }
   }
-  
-  /*
-   * Off Canvas wider at sm breakpoint
-   * --------------------------------------------------
-   */
+
   @media screen and (max-width: 34em) {
     .row-offcanvas-left
     .sidebar-offcanvas {
@@ -66,37 +62,7 @@ body, html {
     }
   }
 
-
-#con{
-    color: #fff;
-    font-size: 12px;
-}
-.jumbotron{
-    background: #0E0E10;
-}
-
-#mainHead{
-    color: #fff;
-}
 #gameHead, #gameLink{
     color: #d3d3d3;
     font-weight: bold;
-}
-
-#wrapGame{
-    list-style-type: none;
-}
-
-#gameList{
-  margin-bottom: 55px;
-}
-
-#wrapGame a{
-    color: #d3d3d3;
-    text-decoration: none;
-}
-
-#wrapGame a:hover{
-    font-size:18px;
-    transition:0.3s;
 }
