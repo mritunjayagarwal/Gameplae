@@ -79,3 +79,9 @@ body, html {
   color:#d3d3d3;
   font-weight: bolder;
 }
+
+#ticon{
+  color:gold;
+  font-size:25px;
+  margin-bottom: 10px;
+}
