@@ -123,7 +123,11 @@
                                     </div>
                                 </div>
                                 <div id="messages1" class="tab-pane fade">
-                                    <div class="list-group"><a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">44</span> Message 1</a> <a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">8</span> Message 2</a> <a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">23</span> Message 3</a> <a href="" class="list-group-item d-inline-block text-muted">Message n..</a></div>
+                                    <div class="list-group">
+                                      <% _.forEach(players, (player) => { %>
+                                        <a href="" style = "color: #000" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark"><%= player.user.tournament.length %></span><%= player.user.name %></a>
+                                      <% }) %>
+                                    </div>    
                                 </div>
                             </div>
                         </div>

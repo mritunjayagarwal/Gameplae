@@ -77,14 +77,13 @@ module.exports = function(_, Tournament, async, Game, User, moment){
             Extract();
         },
         tournamentInfo: function(req, res){
-            id = req.params.id;
-
             async function Extract(callback){
                 const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'game', model: 'Game'}).exec();
-                // const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
+                const trt = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
                 const games = await Game.find({}).exec();
-                // const player = tournament.players;
-                res.render('tournament', { tournament: tournament, games: games, user: req.user, moment: moment});
+                const players = trt.players;
+                console.log(players);
+                res.render('tournament', { tournament: tournament, games: games, user: req.user, moment: moment, players: players});
             }
 
             Extract();
