@@ -67,10 +67,15 @@ body, html {
 }
 
 #gameHead{
-  color: #fff;
+  color: #d3d3d3;
 }
 
 #gameLink{
     color: #d3d3d3;
     font-weight: bold;
+}
+
+#con{
+  color:#d3d3d3;
+  font-weight: bolder;
 }

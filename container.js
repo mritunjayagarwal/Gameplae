@@ -8,7 +8,7 @@ const myModules = [
     ['Tournament', './models/tournament'],
     ['async', 'async'],
     ['passport', 'passport'],
-    ['moment', 'moment'],
+    ['moment', 'moment-timezone'],
     ['paypal', 'paypal-rest-sdk']
 ];
 
