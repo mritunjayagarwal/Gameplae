@@ -89,14 +89,17 @@
                         <div class = "row">
                                 <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar-o mb-3" style = "color:gold;font-size:25px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).tz('Asia/Calcutta').format('ll'); %> <span class = "badge badge-primary badge-pill"><%= moment(tournament.starts, "YYYYMMDD").fromNow(); %></span></p></div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-4">
                                 <div class="col-7"><p class="card-text mb-2" id = "con"><i class="fa fa-clock-o" style = "color:gold;font-size:25px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).tz('Asia/Calcutta').format('LT z'); %></p></div>
                                 <div class="col-5"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:25px;"></i> &nbsp;  ₹‎1000 </p></div>
                                 <div class="w-100"></div>
                                 <div class="col-7"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:25px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
                                 <div class="col-5"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:25px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
-                        </div>
+                            </div>
                         <a href="/payment/<%= tournament._id %>" class = "btn btn-primary btn-block">Join</a>
+                        <div class = "row py-4">
+                            <p style = "color: #fff;font-weight: bolder; font-size: 40px;"><span class = "badge badge-success badge-pill ml-3" style = "font-size: 30px;letter-spacing: 2px;">₹<%= tournament.price %></span>/entry</p>
+                        </div>
                     </div>
               <section class="container py-4">
                     <div class="row">
