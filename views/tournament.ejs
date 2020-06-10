@@ -96,7 +96,7 @@
                                 <div class="col-7"><p class="card-text" id = "con"><i class="fa fa-money" id = "ticon"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
                                 <div class="col-5"><p class="card-text" id = "con"><i class="fa fa-users" id = "ticon"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
                             </div>
-                        <a href="/payment/<%= tournament._id %>" class = "btn btn-primary btn-block">Join</a>
+                        <button class = "btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Join</button>
                         <div class = "row py-2">
                             <p style = "color: #fff;font-weight: bolder; font-size: 20px;"><span class = "badge badge-success badge-pill ml-3" style = "font-size: 30px;letter-spacing: 2px;">₹<%= tournament.price %></span>/entry</p>
                         </div>
@@ -123,15 +123,50 @@
                                     </div>
                                 </div>
                                 <div id="messages1" class="tab-pane fade">
-                                    <div class="list-group">
-                                      <% _.forEach(players, (player) => { %>
-                                        <a href="" style = "color: #000" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark"><%= player.user.tournament.length %></span><%= player.user.name %></a>
-                                      <% }) %>
-                                    </div>    
+                                    <table class="table table-dark">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                          <% _.forEach(players, (player) => { %>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td><%= player.user.name %></td>
+                                                <td><%= player.username %></td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                          <% }) %>  
+                                        </tbody>
+                                    </table>   
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content" style = "background: #151515">
+                                <div class="modal-header py-1" style = "border: 0;">
+                                <h4 class = "h3 mt-3" style = "color: #d3d3d3;"><i class = "fa fa-sign-in"></i> Enter Username%></h4><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                </div>
+                                <div class="modal-body py-2" style = "border: 0;">
+                                  <!-- <p><a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a> <a title="Twitter" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a> <a title="Google+" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a> <a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a> <a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a> <a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a> <a title="Digg" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-digg fa-stack-1x"></i></span></a>  <a title="Stumbleupon" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-stumbleupon fa-stack-1x"></i></span></a><a title="E-mail" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x"></i></span></a>  <a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a></p> -->
+                                          <form action="/payment/<%= tournament._id %>" method="post">
+                                              <div class="input-group">
+                                                <input type="text" name = "username" class="form-control" placeholder="<%= tournament.game.name %> username" required>
+                                              </div>
+                                              <div class="input-group mt-3 mb-2">
+                                                    <button type = "submit" class = "btn btn-primary btn-block">Proceed to pay</button>
+                                              </div>
+                                        </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                 </section>
           </div>
       </div>

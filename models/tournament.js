@@ -11,7 +11,8 @@ const TournamentSchema = new Schema({
     players: [
         {
             user: { type: Schema.Types.ObjectId, ref: 'User'},
-            joined: { type: Date, default: Date.now}
+            joined: { type: Date, default: Date.now},
+            username: { type: String, required: true}
         }
     ],
     created: { type: Date, default: Date.now},

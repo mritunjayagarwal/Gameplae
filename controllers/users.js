@@ -8,11 +8,11 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
             router.get('/logout', this.logout);
             router.get('/home', this.home);
             router.get('/login', this.login);
-            router.get('/join/tournament/:id', this.joinTournament);
-            router.get('/payment/:id', this.payment);
+            router.get('/join/tournament/:id/:uname', this.joinTournament);
             router.get('/success/:id', this.success);
 
             router.post('/add', this.add);
+            router.post('/payment/:id', this.payment);
             router.post('/signup', this.createAccount);
             router.post('/login', this.getInside);
         },
@@ -109,7 +109,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
                         "payment_method": "paypal"
                     },
                     "redirect_urls": {
-                        "return_url": "http://localhost:8000/join/tournament/" + req.params.id,
+                        "return_url": "http://localhost:8000/join/tournament/" + req.params.id + "/" + req.body.username,
                         "cancel_url": "http://localhost:8000/cancel"
                     },
                     "transactions": [{
@@ -174,8 +174,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
         },
         joinTournament: function(req, res){
             console.log(req.params.id);
+            console.log(req.params.uname);
             if(req.user){
-                console.log("User Session is Working Okay!!");
                 tourId = req.params.id;
 
                 User.update({
@@ -192,10 +192,10 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
                     _id: tourId
                 }, {
                     $push: {
-                        players: { user: req.user._id}
+                        players: { user: req.user._id, username: req.params.uname}
                     }
                 }, (err) => {
-                    console.log("Tournament Set To fuck GamingMong");
+                    console.log("Tournament Set To fuck GamingMonK");
                 });
 
                 res.redirect('/show/tournament/' + tourId);
