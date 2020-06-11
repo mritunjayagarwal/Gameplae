@@ -189,9 +189,10 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
                 });
 
                 Tournament.update({
-                    _id: tourId
+                    _id: tourId,
+                    'players.username': { '$ne': req.params.uname}
                 }, {
-                    $push: {
+                    '$addToSet': {
                         players: { user: req.user._id, username: req.params.uname}
                     }
                 }, (err) => {
