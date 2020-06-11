@@ -1,4 +1,4 @@
-module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
+module.exports = function(_, Game, User, passport, Tournament, paypal, moment, rug){
     return {
         SetRouting: function(router){
             router.get('/', this.indexPage);
@@ -97,52 +97,59 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment){
         }),
         payment: function(req, res){
             if(req.user){
-                paypal.configure({
-                    'mode': 'sandbox', //sandbox or live
-                    'client_id': 'AS0y8Yz2qudO__ynIy-z55FmdxnOE41wFIlSPZuptK2Zcn2qwRpliuTzwAGCoR0RSYqWh3GKft_mP7Vq',
-                    'client_secret': 'EDOBfxNiWwkj2YQZRl0SG8wm1gv9Q-R-QlJFMP8aAd9Lxrz5kSlRxPCMvglew8i_qHoNM_vjwZHezwFg'
-                  });
-    
-                var create_payment_json = {
-                    "intent": "sale",
-                    "payer": {
-                        "payment_method": "paypal"
-                    },
-                    "redirect_urls": {
-                        "return_url": "http://localhost:8000/join/tournament/" + req.params.id + "/" + req.body.username,
-                        "cancel_url": "http://localhost:8000/cancel"
-                    },
-                    "transactions": [{
-                        "item_list": {
-                            "items": [{
-                                "name": "Kill em",
-                                "sku": "My item",
-                                "price": "25.00",
-                                "currency": "INR",
-                                "quantity": 1
+                Tournament.findOne({  _id: req.params.id, 'players.username': { '$ne': req.body.username}}, (err, tour) => {
+                    if(tour){
+                        paypal.configure({
+                            'mode': 'sandbox', //sandbox or live
+                            'client_id': 'AS0y8Yz2qudO__ynIy-z55FmdxnOE41wFIlSPZuptK2Zcn2qwRpliuTzwAGCoR0RSYqWh3GKft_mP7Vq',
+                            'client_secret': 'EDOBfxNiWwkj2YQZRl0SG8wm1gv9Q-R-QlJFMP8aAd9Lxrz5kSlRxPCMvglew8i_qHoNM_vjwZHezwFg'
+                          });
+            
+                        var create_payment_json = {
+                            "intent": "sale",
+                            "payer": {
+                                "payment_method": "paypal"
+                            },
+                            "redirect_urls": {
+                                "return_url": "http://localhost:8000/join/tournament/" + req.params.id + "/" + req.body.username,
+                                "cancel_url": "http://localhost:8000/cancel"
+                            },
+                            "transactions": [{
+                                "item_list": {
+                                    "items": [{
+                                        "name": "Kill em",
+                                        "sku": "My item",
+                                        "price": "25.00",
+                                        "currency": "INR",
+                                        "quantity": 1
+                                    }]
+                                },
+                                "amount": {
+                                    "currency": "INR",
+                                    "total": "25.00"
+                                },
+                                "description": "My Tournament Payment"
                             }]
-                        },
-                        "amount": {
-                            "currency": "INR",
-                            "total": "25.00"
-                        },
-                        "description": "My Tournament Payment"
-                    }]
-                };
-                
-                
-                paypal.payment.create(create_payment_json, function (error, payment) {
-                    if (error) {
-                        throw error;
-                    } else {
-                        for(let i = 0; i < payment.links.length; i++){
-                            if(payment.links[i].rel == 'approval_url'){
-                                res.redirect(payment.links[i].href);
+                        };
+                        
+                        
+                        paypal.payment.create(create_payment_json, function (error, payment) {
+                            if (error) {
+                                throw error;
+                            } else {
+                                for(let i = 0; i < payment.links.length; i++){
+                                    if(payment.links[i].rel == 'approval_url'){
+                                        res.redirect(payment.links[i].href);
+                                    }
+                                }
+                                console.log(payment);
                             }
-                        }
-                        console.log(payment);
+                        });
+                    }else{
+                        console.log("Fuck! Jhute pagal sale");
+                        res.redirect('/tournament/' + req.params.id)
                     }
-                });
+                })
             }else{
                 res.render('login');
             }

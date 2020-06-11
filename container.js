@@ -8,6 +8,7 @@ const myModules = [
     ['Tournament', './models/tournament'],
     ['async', 'async'],
     ['passport', 'passport'],
+    ['rug', 'random-username-generator'],
     ['moment', 'moment-timezone'],
     ['paypal', 'paypal-rest-sdk']
 ];
