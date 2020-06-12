@@ -1,10 +1,10 @@
-module.exports = function(_, Game, User, passport, Tournament, paypal, moment, rug){
+module.exports = function(_, Game, User, passport, Tournament, paypal, moment, rug, Validate){
     return {
         SetRouting: function(router){
             router.get('/', this.indexPage);
             router.get('/tournaments/:id', this.new);
             router.get('/admin', this.admin);
-            router.get('/signup' ,this.signup);
+            router.get('/signup' , Validate.SignUpValidation, this.signup);
             router.get('/logout', this.logout);
             router.get('/home', this.home);
             router.get('/login', this.login);
@@ -18,16 +18,12 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         },
         indexPage: function(req, res){
 
-            if(req.user){
                 var game = Game.find({})
                 .sort('-name')
                 .populate('tournaments')
                 .exec((err, game) => {
                     res.render('index', { games: game, user: req.user, moment: moment, user: req.user});
                 });
-            }else{
-                res.redirect('/login');
-            }
         },
         new: function(req, res){
             // var something = req.params.id;
@@ -68,7 +64,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             })
         },
         signup: function(req, res){
-            res.render('signup');
+            const errors = req.flash('error');
+            res.render('signup', { messages: errors, hasErrors: errors.length > 0});
         },
         createAccount: passport.authenticate('local.signup', {
             successRedirect: '/',
@@ -146,7 +143,6 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                             }
                         });
                     }else{
-                        console.log("Fuck! Jhute pagal sale");
                         res.redirect('/tournament/' + req.params.id)
                     }
                 })
