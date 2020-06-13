@@ -59,7 +59,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         },
         signup: function(req, res){
             var errors = req.flash('error')
-            res.render('signup', { messages: errors, hasErrors: errors.length > 0, errors: false});
+            res.render('signup', { messages: errors, hasErrors: errors.length > 0});
         },
         createAccount: passport.authenticate('local.signup', {
             successRedirect: '/',
@@ -138,11 +138,14 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                             }
                         });
                     }else{
+                        const messages = ['This username is already registered'];
+                        req.flash('userInvalid', messages);
                         res.redirect('/tournament/' + req.params.id)
                     }
                 })
             }else{
-                res.render('login');
+                req.flash('error', 'U\'ll have to login first');
+                res.redirect('/login');
             }
         },
         success: function(req, res){

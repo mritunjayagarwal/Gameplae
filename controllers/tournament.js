@@ -82,7 +82,8 @@ module.exports = function(_, Tournament, async, Game, User, moment){
                 const trt = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
                 const games = await Game.find({}).exec();
                 const players = trt.players;
-                res.render('tournament', { tournament: tournament, games: games, user: req.user, moment: moment, players: players});
+                const uInvalid = req.flash('userInvalid');
+                res.render('tournament', { tournament: tournament, games: games, user: req.user, moment: moment, players: players, messages: uInvalid, isPre: uInvalid.length > 0});
             }
 
             Extract();
