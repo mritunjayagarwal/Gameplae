@@ -24,17 +24,17 @@ passport.use('local.signup', new LocalStrategy({
         }
 
         if(user){
-                return done(null, false, req.flash('error', 'Password is Incorrect'));
+            return done(null, false, req.flash('error', 'Password is Incorrect'));
         }
            
         const newUser = new User();
         newUser.name = req.body.name;
         newUser.email = req.body.email;
-        newUser.phone = req.body.phone;
+        newUser.phone = req.body.tel;
         newUser.password = newUser.encryptPassword(req.body.password);
         newUser.save(function(err){
             if(err) console.log(err);
-            return done(null, newUser);
+            done(null, newUser);
         })
     })
 }));

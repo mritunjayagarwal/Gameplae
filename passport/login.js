@@ -19,11 +19,13 @@ passport.use('local.login', new LocalStrategy({
 }, (req, email, password, done) => {
     User.findOne({'email': email}, (err, user) => {
         if(err){
-            return done(null, false, req.flash('error', 'Weak Connectivity'));
+            return done(err);
         }
 
+        const messages = []
         if(!user || !user.compare(password)){
-                return done(null, false, req.flash('error', 'Password is Incorrect'));
+            messages.push('Email Does not exist or password does not match');
+            return done(null, false, req.flash('error', messages));
         }
             return done(null, user);
     })

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const cookieParser = require('cookie-parser');
-const validator = require('express-validator');
+const expressValidator = require('express-validator');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
@@ -60,23 +60,24 @@ container.resolve(function(users, tournament, _){
         require('./passport/signup');
         require('./passport/login');
 
-        app.use(cookieParser());
         app.use(express.static('public'));
+        app.use(cookieParser());
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true}));
+        app.use(expressValidator());
         app.use(session({
-            resave: true,
-            saveUninitialized: true,
             // secret: process.env.SECRET_KEY,
             secret: 'mommy',
+            resave: true,
+            saveUninitialized: true,
             store: new MongoStore({ mongooseConnection: mongoose.connection})
         }));
-        app.use(flash());        
+
+        app.use(flash());       
         app.use(passport.initialize());
         app.use(passport.session());
 
         app.set('view engine', 'ejs');
-
         app.locals._ = _;
     }
 })

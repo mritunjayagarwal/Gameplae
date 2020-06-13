@@ -4,7 +4,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.get('/', this.indexPage);
             router.get('/tournaments/:id', this.new);
             router.get('/admin', this.admin);
-            router.get('/signup' , Validate.SignUpValidation, this.signup);
+            router.all('/signup' , this.signup);
             router.get('/logout', this.logout);
             router.get('/home', this.home);
             router.get('/login', this.login);
@@ -13,29 +13,23 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
 
             router.post('/add', this.add);
             router.post('/payment/:id', this.payment);
-            router.post('/signup', this.createAccount);
-            router.post('/login', this.getInside);
+            router.post('/create', Validate.SignupValidation, this.createAccount);
+            router.post('/login', Validate.LogInValidation, this.getInside);
         },
         indexPage: function(req, res){
 
+            if(req.user){
                 var game = Game.find({})
                 .sort('-name')
                 .populate('tournaments')
                 .exec((err, game) => {
                     res.render('index', { games: game, user: req.user, moment: moment, user: req.user});
                 });
+            }else{
+                res.redirect('/login');
+            }
         },
         new: function(req, res){
-            // var something = req.params.id;
-            // Game.findOne({ 'name': something}, function(err, user){
-            //     if(err){
-            //         console.log(err);
-            //         res.redirect('/');
-            //     }else{
-            //         console.log(user.name);
-            //         res.render('new', { game: user});
-            //     }
-            // })
 
             async function Extract(callback){
                 const game = await Game.findOne({ name: req.params.id}).populate({ path: 'tournaments', model: 'Tournament'}).exec();
@@ -64,8 +58,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             })
         },
         signup: function(req, res){
-            const errors = req.flash('error');
-            res.render('signup', { messages: errors, hasErrors: errors.length > 0});
+            var errors = req.flash('error')
+            res.render('signup', { messages: errors, hasErrors: errors.length > 0, errors: false});
         },
         createAccount: passport.authenticate('local.signup', {
             successRedirect: '/',
@@ -85,7 +79,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             Extract();
         },
         login: function(req, res){
-            res.render('login');
+            var errors = req.flash('error')
+            return res.render('login', { messages: errors, hasErrors: errors.length > 0});
         },
         getInside: passport.authenticate('local.login', {
             successRedirect: '/',
