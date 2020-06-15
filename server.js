@@ -7,7 +7,6 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-var Razorpay=require("razorpay");
 const passport = require('passport');
 const compression = require('compression');
 const helmet = require('helmet');
