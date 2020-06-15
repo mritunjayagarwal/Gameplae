@@ -23,8 +23,8 @@ container.resolve(function(users, tournament, _){
       });
 
     mongoose.Promise = global.Promise;
-    mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
-    // mongoose.connect('mongodb://bigmoney:Zoniackk3@ds251618.mlab.com:51618/slingshot', { useNewUrlParser: true, useUnifiedTopology: true})
+    // mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+    mongoose.connect('mongodb://bigmoney:Zoniackk3@ds251618.mlab.com:51618/slingshot', { useNewUrlParser: true, useUnifiedTopology: true})
 
     const app = ShowExpress();
 
@@ -66,8 +66,8 @@ container.resolve(function(users, tournament, _){
         app.use(bodyParser.urlencoded({ extended: true}));
         app.use(expressValidator());
         app.use(session({
-            secret: process.env.SECRET_KEY,
-            // secret: 'mommy',
+            // secret: process.env.SECRET_KEY,
+            secret: 'mommy',
             resave: true,
             saveUninitialized: true,
             store: new MongoStore({ mongooseConnection: mongoose.connection})
