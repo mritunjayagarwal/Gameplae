@@ -126,13 +126,13 @@
                                 <div id="profile1" class="tab-pane fade active show">
                                     <div class="row pb-2">
                                         <div class = "col-md-12">
-                                            <input type=text id=order-id >
+                                            <input type=text id=order-id hidden>
                                             <br/>
-                                            <input type=text id=order-pay-id>
+                                            <input type=text id=order-pay-id hidden>
                                             <br/>
-                                            <input type=text id=order-sig>
+                                            <input type=text id=order-sig hidden> 
                                             <br/>
-                                            <button id="verify-button1"></button>
+                                            <button id="verify-button1" hidden></button>
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                             "currency": "INR",
                             "name": "SlingShot",
                             "description": "Your Gaming Partner",
-                            "image": "/img/clashCover.jpg",
+                            "image": "/img/clash.png",
                             "order_id": res.sub.id,
                             "handler": function (response){
                                 document.getElementById('order-pay-id').value= response.razorpay_payment_id;
