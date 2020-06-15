@@ -48,7 +48,6 @@
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.8.1",
-    "random-username-generator": "^1.0.4",
-    "razorpay": "^2.0.6"
+    "random-username-generator": "^1.0.4"
   }
 }
