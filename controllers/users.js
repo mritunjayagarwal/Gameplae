@@ -1,4 +1,4 @@
-module.exports = function(_, Game, User, passport, Tournament, paypal, moment, rug, Validate){
+module.exports = function(_, Game, User, passport, Tournament, paypal, moment, rug, Validate, Razorpay){
     return {
         SetRouting: function(router){
             router.get('/', this.indexPage);
@@ -12,9 +12,11 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.get('/success/:id', this.success);
 
             router.post('/add', this.add);
+            router.post('/api/payment/order/:id', this.razorPay);
             router.post('/payment/:id', this.payment);
             router.post('/create', Validate.SignupValidation, this.createAccount);
             router.post('/login', Validate.LogInValidation, this.getInside);
+            router.post('/api/payment/verify', this.verify);
         },
         indexPage: function(req, res){
 
@@ -205,6 +207,45 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             }else{
                 res.render('signup');
             }
+        },
+        razorPay: function(req, res, next){
+            Tournament.findOne({  _id: req.params.id}, (err, tour) => {
+                if(tour){
+                    let instance = new Razorpay({
+                        key_id: 'rzp_test_O1PrDYl7c0Fbi2', // your `KEY_ID`
+                        key_secret: '7K2asMBdUb5RktmDCJ8WRxX3' // your `KEY_SECRET`
+                    });
+        
+                    var params = {
+                        amount: (tour.price) * 100,  
+                        currency: "INR",
+                        receipt: "su001",
+                        payment_capture: '1'
+                    };
+        
+                    instance.orders.create(params).then((data) => {
+                           res.send({"sub":data,"status":"success"});
+                           console.log(data.id)
+                    }).catch((error) => {
+                           res.send({"sub":error,"status":"failed"});
+                    })
+                }else{
+                    console.log('Not found');
+                }
+            })
+        },
+        verify: function(req, res){
+            body=req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
+            var crypto = require("crypto");
+            var expectedSignature = crypto.createHmac('sha256', '7K2asMBdUb5RktmDCJ8WRxX3')
+                                        .update(body.toString())
+                                        .digest('hex');
+                                        console.log("sig"+req.body.razorpay_signature);
+                                        console.log("sig"+expectedSignature);
+            var response = {"status":"failure"}
+            if(expectedSignature === req.body.razorpay_signature)
+            response={"status":"success"}
+            res.send(response)
         }
     }    
 }
