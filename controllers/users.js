@@ -14,6 +14,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.post('/add', this.add);
             router.post('/payment/:id', this.payment);
             router.post('/pay/:id/:uname', this.razorPay);
+            router.post('/api/payment/verify', this.razorVerify);
             router.post('/create', Validate.SignupValidation, this.createAccount);
             router.post('/login', Validate.LogInValidation, this.getInside);
         },
@@ -233,6 +234,17 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                        }
                 });
             }
+        },
+        razorVerify: function(req, res){
+            body=req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
+            var crypto = require("crypto");
+            var expectedSignature = crypto.createHmac('sha256', '7K2asMBdUb5RktmDCJ8WRxX3')
+                                        .update(body.toString())
+                                        .digest('hex');
+            var response = {"status":"failure"}
+            if(expectedSignature === req.body.razorpay_signature)
+            response={"status":"success"}
+            res.send(response);
         }
     }    
 }
