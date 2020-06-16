@@ -10,7 +10,8 @@ const myModules = [
     ['passport', 'passport'],
     ['rug', 'random-username-generator'],
     ['moment', 'moment-timezone'],
-    ['paypal', 'paypal-rest-sdk']
+    ['paypal', 'paypal-rest-sdk'],
+    ['Razorpay', 'razorpay']
 ];
 
 myModules.forEach(function(val){

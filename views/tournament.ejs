@@ -161,14 +161,12 @@
                                 <h4 class = "h3 mt-3" style = "color: #d3d3d3;"><i class = "fa fa-sign-in"></i> Enter Username%></h4><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 </div>
                                 <div class="modal-body py-2" style = "border: 0;">
-                                            <form action="/payment/<%= tournament._id %>" method = "POST">
                                               <div class="input-group">
                                                 <input type="text" name = "username" id = "username" class="form-control" placeholder="<%= tournament.game.name %> username" required>
                                               </div>
                                               <div class="input-group mt-3 mb-2">
-                                                    <button type ="submit" class = "btn btn-primary btn-block">Proceed to pay</button>
+                                                    <button id = "rzp-button" class = "btn btn-primary btn-block" data-dismiss = "modal">Proceed to pay</button>
                                               </div>
-                                            </form>  
                                 </div>
                               </div>
                             </div>
@@ -176,5 +174,23 @@
                 </section>
           </div>
       </div>
+    <script>
+    $( "#rzp-button" ).click(function() {
+    $.ajax({
+        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url: '/pay/<%= tournament._id %>/something', // the url where we want to POST
+        dataType: 'json', // what type of data do we expect back from the server
+        encode: true
+      }).done(function(data){ //any name you put in as an argument here will be the json response string.
+         var username = data.sub.id;
+         var taken = data.taken;
+
+         alert(username)
+
+    }).error(function(errorData){
+      alert("Fucked");
+    });;
+  });
+    </script>
 </body>
 </html>
