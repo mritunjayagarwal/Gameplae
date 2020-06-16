@@ -8,12 +8,12 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.get('/logout', this.logout);
             router.get('/home', this.home);
             router.get('/login', this.login);
-            router.get('/join/tournament/:id/:uname', this.joinTournament);
             router.get('/success/:id', this.success);
 
             router.post('/add', this.add);
             router.post('/payment/:id', this.payment);
             router.post('/pay/:id/:uname', this.razorPay);
+            router.post('/join/tournament', this.joinTournament);
             router.post('/api/payment/verify', this.razorVerify);
             router.post('/create', Validate.SignupValidation, this.createAccount);
             router.post('/login', Validate.LogInValidation, this.getInside);
@@ -176,10 +176,10 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             });
         },
         joinTournament: function(req, res){
-            console.log(req.params.id);
-            console.log(req.params.uname);
+            
+            console.log(req.body.username);
             if(req.user){
-                tourId = req.params.id;
+                tourId = req.body.tournament;
 
                 User.update({
                     _id: req.user._id
@@ -188,29 +188,29 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                         tournament: { tour: tourId}
                     }
                 }, (err) => {
-                console.log(req.user);
+                    console.log("User Update Success");
                 });
 
                 Tournament.update({
                     _id: tourId,
-                    'players.username': { '$ne': req.params.uname}
+                    'players.username': { '$ne': req.body.username}
                 }, {
                     '$addToSet': {
-                        players: { user: req.user._id, username: req.params.uname}
+                        players: { user: req.user._id, username: req.body.username}
                     }
                 }, (err) => {
                     console.log("Tournament Set To fuck GamingMonK");
                 });
 
-                res.redirect('/show/tournament/' + tourId);
+                res.send({"status": "successfully Joined The tournament"})
 
             }else{
-                res.render('signup');
+                res.send({"status": "Please Signup"})
             }
         },
         razorPay: function(req, res){
             if(req.user){
-                Tournament.findOne({  _id: req.params.id}, (err, tour) => {
+                Tournament.findOne({  _id: req.params.id, }, (err, tour) => {
                        if(tour){
 
                         let instance = new Razorpay({
@@ -219,7 +219,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                         })                     
 
                         var params = {
-                            amount: "4000",  
+                            amount: tour.price,  
                             currency: "INR",
                             receipt: "su001",
                             payment_capture: '1'
