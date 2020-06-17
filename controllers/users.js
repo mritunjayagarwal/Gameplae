@@ -177,7 +177,6 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         },
         joinTournament: function(req, res){
             
-            console.log(req.body.username);
             if(req.user){
                 tourId = req.body.tournament;
 
@@ -202,7 +201,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                     console.log("Tournament Set To fuck GamingMonK");
                 });
 
-                res.send({"status": "successfully Joined The tournament"})
+                res.send({"status": "success"})
 
             }else{
                 res.send({"status": "Please Signup"})
@@ -210,7 +209,10 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         },
         razorPay: function(req, res){
             if(req.user){
-                Tournament.findOne({  _id: req.params.id, }, (err, tour) => {
+
+                console.log(req.params.uname);
+
+                Tournament.findOne({  _id: req.params.id, 'players.username': { '$ne': req.params.uname} }, (err, tour) => {
                        if(tour){
 
                         let instance = new Razorpay({
@@ -219,7 +221,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                         })                     
 
                         var params = {
-                            amount: tour.price,  
+                            amount: (tour.price) * 100,  
                             currency: "INR",
                             receipt: "su001",
                             payment_capture: '1'
@@ -230,7 +232,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                                 res.send({"sub":error,"status":"failed"});
                         })
                        }else{
-                            res.send({"sub":error,"status":"failed"});
+                            res.send({"status":"failed"});
                        }
                 });
             }

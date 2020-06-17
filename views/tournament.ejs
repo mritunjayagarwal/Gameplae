@@ -115,21 +115,21 @@
                         <div class="col-md-12">
                             <ul id="tabsJustified" class="nav nav-tabs nav-fill">
                                 <li class="nav-item"><a href="" data-target="#home1" data-toggle="tab" class="nav-link small text-uppercase">Home</a></li>
-                                <li class="nav-item"><a href="" data-target="#profile1" data-toggle="tab" class="nav-link small text-uppercase active">Profile</a></li>
-                                <li class="nav-item"><a href="" data-target="#messages1" data-toggle="tab" class="nav-link small text-uppercase">Messages</a></li>
+                                <li class="nav-item"><a href="" data-target="#profile1" data-toggle="tab" class="nav-link small text-uppercase">Profile</a></li>
+                                <li class="nav-item"><a href="" data-target="#messages1" data-toggle="tab" class="nav-link small text-uppercase active">Messages</a></li>
                             </ul>
                             <br>
                             <div id="tabsJustifiedContent" class="tab-content">
                                 <div id="home1" class="tab-pane fade">
                                     <div class="list-group"><a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">51</span> Home Link</a> <a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">8</span> Link 2</a> <a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">23</span> Link 3</a> <a href="" class="list-group-item d-inline-block text-muted">Link n..</a></div>
                                 </div>
-                                <div id="profile1" class="tab-pane fade active show">
+                                <div id="profile1" class="tab-pane fade">
                                     <div class="row pb-2">
                                         <div class = "col-md-12">
                                         </div>
                                     </div>
                                 </div>
-                                <div id="messages1" class="tab-pane fade">
+                                <div id="messages1" class="tab-pane fade active show">
                                     <table class="table table-dark">
                                     <thead>
                                         <tr>
@@ -154,7 +154,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content" style = "background: #151515">
                                 <div class="modal-header py-1" style = "border: 0;">
@@ -165,8 +165,21 @@
                                                 <input type="text" name = "username" id = "username" class="form-control" placeholder="<%= tournament.game.name %> username" required>
                                               </div>
                                               <div class="input-group mt-3 mb-2">
-                                                    <button id = "rzp-button" class = "btn btn-primary btn-block" data-dismiss = "modal">Proceed to pay</button>
+                                                    <button id = "rzp-button" class = "btn btn-primary btn-block" data-dismiss = "modal" data-toggle="modal" data-target="#LModal">Proceed to pay</button>
                                               </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal fade" id="LModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content" style = "background: transparent">
+                                <div class="modal-body py-2 bg-primary" style = "border: 0;">
+                                  <div class="text-center">
+                                    <div class="spinner-border" role="status" style = "color: #fff">
+                                    </div>
+                                    <span style = "color: #fff; font-size: 30px;">Loading...</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -177,18 +190,20 @@
     <script>
     $( "#rzp-button" ).click(function() {
     $.ajax({
-        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/pay/<%= tournament._id %>/something', // the url where we want to POST
-        dataType: 'json', // what type of data do we expect back from the server
+        type: 'POST',
+        url: '/pay/<%= tournament._id %>/' + document.getElementById('username').value,
+        dataType: 'json',
         encode: true
-      }).done(function(data){ //any name you put in as an argument here will be the json response string.
-         var order_id = data.sub.id;
+      }).done(function(data){
+         if(data.status === "success"){
+          $('#LModal').modal('hide');
+          var order_id = data.sub.id;
 
-         var options = {
-            "key": "rzp_test_O1PrDYl7c0Fbi2",  //Enter your razorpay key
+          var options = {
+            "key": "rzp_test_O1PrDYl7c0Fbi2",
             "currency": "INR",
-            "name": "Razor Tutorial",
-            "description": "Razor Test Transaction",
+            "name": "Slingshot Gaming",
+            "description": "A network you will never forget",
             "image": "https://previews.123rf.com/images/subhanbaghirov/subhanbaghirov1605/subhanbaghirov160500087/56875269-vector-light-bulb-icon-with-concept-of-idea-brainstorming-idea-illustration-.jpg",
             "order_id": order_id,
             "handler": function (response){
@@ -208,6 +223,8 @@
                   }).done(function(data){
                     if(data.status === "success"){
 
+                      $('#LModal').modal('show');
+
                       var params = {
                       username: document.getElementById('username').value,
                       tournament: '<%= tournament._id %>',
@@ -221,23 +238,32 @@
                         dataType: 'json',
                         encode: true
                       }).done(function(data){
-                        alert(data.status);
+                        $('#LModal').modal('hide');
+                        if(data.status === "success"){
+                          location.reload(true);
+                        }
                       }).error(function(err){
+                        $('#LModal').modal('hide');
                         alert("Tournament Join Failed");
                       })
                     }
                   }).error(function(errorData){
+                    $('#LModal').modal('hide');
                     alert("Fuck");
                   });;
             },
             "theme": {
                 "color": "#227254"
             }
-        };
+          };
             var rzp1 = new Razorpay(options);
             rzp1.open();
-
+       }else{
+          $('#LModal').modal('hide');
+          alert("Surprise Motherfucker");
+       }
     }).error(function(errorData){
+      $('#LModal').modal('hide');
       alert("Fucked");
     });;
   });
