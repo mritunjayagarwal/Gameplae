@@ -70,6 +70,9 @@ container.resolve(function(users, tournament, _){
             secret: 'mommy',
             resave: true,
             saveUninitialized: true,
+            cookie : {
+                maxAge: 1000* 60 * 60 *24 * 365
+            },
             store: new MongoStore({ mongooseConnection: mongoose.connection})
         }));
 

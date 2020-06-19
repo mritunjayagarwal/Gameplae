@@ -121,7 +121,7 @@
                             <br>
                             <div id="tabsJustifiedContent" class="tab-content">
                                 <div id="home1" class="tab-pane fade">
-                                    <div class="list-group"><a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">51</span> Home Link</a> <a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">8</span> Link 2</a> <a href="" class="list-group-item d-inline-block"><span class="float-right badge badge-pill badge-dark">23</span> Link 3</a> <a href="" class="list-group-item d-inline-block text-muted">Link n..</a></div>
+                                    <p style="white-space: pre-line;white-space: pre-wrap;color: #d3d3d3"><%= tournament.desc %></p>
                                 </div>
                                 <div id="profile1" class="tab-pane fade">
                                     <div class="row pb-2">
@@ -260,7 +260,7 @@
             rzp1.open();
        }else{
           $('#LModal').modal('hide');
-          alert("Surprise Motherfucker");
+          alert("This username is already registered");
        }
     }).error(function(errorData){
       $('#LModal').modal('hide');
