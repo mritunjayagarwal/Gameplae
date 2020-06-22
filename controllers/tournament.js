@@ -2,7 +2,6 @@ module.exports = function(_, Tournament, async, Game, User, moment){
     return {
         SetRouting: function(router){
             router.get('/gettournament', this.getTournament);
-            router.get('/test', this.test);
             router.get('/tournament/:id', this.tournamentInfo);
             router.get('/show/tournament/:id', this.showTournament);
 
@@ -66,15 +65,6 @@ module.exports = function(_, Tournament, async, Game, User, moment){
                 console.log('User login is required to create a tournament!');
                 res.render('login');
             }
-        },
-        test: function(req, res){
-            async function Extract(callback){
-                const game = await Game.findOne({ name: 'god of war'}).populate({ path: 'tournaments', model: 'Tournament'}).exec();
-                console.log(game);
-                res.redirect('/');
-            }
-
-            Extract();
         },
         tournamentInfo: function(req, res){
             async function Extract(callback){

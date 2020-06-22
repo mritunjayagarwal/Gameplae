@@ -9,6 +9,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.get('/home', this.home);
             router.get('/login', this.login);
             router.get('/success/:id', this.success);
+            router.get('/profile/:id', this.user);
 
             router.post('/add', this.add);
             router.post('/payment/:id', this.payment);
@@ -247,6 +248,15 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             if(expectedSignature === req.body.razorpay_signature)
             response={"status":"success"}
             res.send(response);
+        },
+        user: function(req, res){
+            async function Extract(callback){
+                const games = await Game.find({}).exec();
+                const user = await User.findOne({ _id: req.params.id}).populate({path: 'tournament.tour', model: 'Tournament'}).exec();
+                res.render('user', {user: user, tournaments: user.tournament, games: games});
+            }
+
+            Extract();
         }
     }    
 }
