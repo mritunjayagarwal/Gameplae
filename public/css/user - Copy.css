@@ -67,6 +67,74 @@ body, html {
     font-weight: bold;
 }
 
+.profile-bar{
+  background-image: url(https://i.pinimg.com/originals/ae/84/18/ae8418bc8397210c37ba7fc802dbc020.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  max-height: 100%;
+  max-width: 100%;
+  color: #eee;
+}
+
+.profile-bar .contents{
+  background-color: rgba(0,0,0,0.65);
+}
+
+.profile-bar .contents img{
+  display: block;
+  width: 70px;
+  margin: auto;
+  padding-top: 25px;
+}
+
+.profile-bar .contents .profile-name{
+  text-align: center;
+  margin: 10px 0px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.profile-bar .contents .profile-description{
+  text-align: center;
+  margin: 10px 0px;
+  font-weight: 300;
+}
+
+.profile-bar .contents .buttons{
+  text-align: center;
+  background-color: rgba(31,45,61,.7);
+}
+
+.profile-bar .contents .buttons ul{
+  list-style: none;
+  -webkit-padding-start: 0;
+}
+
+.profile-bar .contents .buttons ul li{
+  display: inline-block;
+  margin: 15px 20px;
+}
+
+.profile-bar .contents .buttons ul li a{
+  color: #eee;
+  font-size: 32px;
+  display: block;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: 0.2s all linear;
+}
+
+.profile-bar .contents .buttons ul li a:hover{
+  opacity: 1;
+  transition: 0.2s all linear;
+}
+
+.profile-bar .contents .buttons ul li a span{
+  font-size: 14px;
+  display: block;
+}
+
 .card-counter{
   margin: 5px;
   padding: 20px 10px;
@@ -74,6 +142,11 @@ body, html {
   height: 100px;
   border-radius: 5px;
 }
+
+/* .card-counter:hover{
+  box-shadow: 4px 4px 20px #DADADA;
+  transition: .3s linear all;
+} */
 
 .card-counter.primary{
   background-color: #007bff;

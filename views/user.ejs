@@ -1,114 +1,189 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Welcome to Slingshot</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-  <link rel="stylesheet" href="/css/reset.css">
-  <link rel="stylesheet" href="/css/glide.core.css">
-  <link rel="stylesheet" href="/css/glide.theme.min.css">
-  <link rel="stylesheet" href="/css/user.css">
-</head>
-<script>
-  $(document).ready(function() {
-    
-    $('[data-toggle=offcanvas]').click(function() {
-      $('.row-offcanvas').toggleClass('active');
-    });
-    
-  });
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-black.css">
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.css">
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-blue.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+<script src = "https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
 
-    $(document).ready(function() {
-    $(".btn-pref .btn").click(function () {
-        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-        $(this).removeClass("btn-default").addClass("btn-primary");   
-    });
-  });
-</script>
-<body>
-<%- include("./partials/navbar.ejs") %>
-<div class="container-fluid" id="main">
-  <div class="row row-offcanvas row-offcanvas-left" id = "fixl">
-      <div class="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation">
-          <ul class="nav flex-column pl-0 pt-5 mt-3 mr-0">
-              <h3 class = "text-center h3 mb-4" id = "gameHead">Games</h3>
-              <% _.forEach(games, (game) => { %>
-                <li class="nav-item"><a class="nav-link" id = "gameLink" href="/tournaments/<%= game.name %>">
-                    <div class = "row mb-0" id = "gameList">
-                      <div style = "color: #151515">ff</div>
-                      <div class = "col-10" style = "margin-left: -5px;"><%= game.name %></div>
-                      <div>
-                          <span class = "badge badge-primary"><%= game.tournaments.length %></span>
-                      </div>
-                    </div>
-                  </a></li>
-              <% }) %>
-          </ul>
-      </div>
-      <div class="col main pt-5 mt-3">
-          <div class="row">
-              <div class="col-md-12">
-                <div class="profile-bar">
-                  <div class="contents">
-                    <img src="https://gravatar.com/avatar/cd62d88a83461e0b1daa8f2fa31c4dcb?s=512&d=https://codepen.io/assets/avatars/user-avatar-512x512-6e240cf350d2f1cc07c2bed234c3a3bb5f1b237023c204c782622e80d6b212ba.png" alt="UserAvatar">
-                  <p class="profile-name"><%= user.name %></p>
-                    <p class="profile-description">You haven't miss any task this week!</p>
-                    <div class="buttons">
-                      <ul>
-                        <li>
-                          <a href="#"><i class="ti-panel"></i><span> Settings</span></a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="ti-user"></i><span> Profile</span></a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="ti-power-off"></i><span> Logout</span></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+
+
+
+<script src = "https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+      <header class="main-header">
+          <!-- Logo -->
+          <a href="#" class="logo">
+              <!-- mini logo for sidebar mini 50x50 pixels -->
+              <span class="logo-mini"><b>HW</b></span>
+              <!-- logo for regular state and mobile devices -->
+              <span class="logo-lg">Hello World</span>
+          </a>
+          <!-- Header Navbar: style can be found in header.less -->
+          <nav class="navbar navbar-static-top">
+              <!-- Sidebar toggle button-->
+              <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </a>
+              <div class="navbar-custom-menu">
+                  <ul class="nav navbar-nav">
+                      <li class="dropdown messages-menu">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-envelope-o"></i>
+                              <span class="label label-success">42</span>
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li class="header">Not yet implemented</li>
+                              <li>
+                                  <!-- inner menu: contains the actual data -->
+                                  <ul class="menu">
+                                      <li>
+                                          <!-- start message -->
+                                          <a href="#">
+                                              <div class="pull-left">
+                                                  <i class="fa fa-file-code-o"></i>
+                                              </div>
+                                              <h4> Hello </h4>
+                                          </a>
+                                      </li>
+                                      <li>
+                                          <!-- start message -->
+                                          <a href="#">
+                                              <div class="pull-left">
+                                                  <i class="fa fa-file-text-o"></i>
+                                              </div>
+                                              <h4> World </h4>
+                                          </a>
+                                      </li>
+                                      <!-- end message -->
+                                  </ul>
+                              </li>
+                          </ul>
+                      </li>
+                      <!-- User Account: style can be found in dropdown.less -->
+                      <li class="dropdown user user-menu">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-user"></i>
+                              <span class="hidden-xs">Awesome User</span>
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li class="user-body">
+                                  <!-- Menu Footer-->
+                                  <div>
+                                      <i class="fa fa-ellipsis-v"></i> Words </div>
+                                  <div>
+                                      <i class="fa fa-ellipsis-v"></i> More Words </div>
+                              </li>
+                              <li class="user-footer">
+                                  <div class="pull-right">
+                                      <a href="setprefs.php" class="btn btn-default btn-flat">Preferences</a>
+                                  </div>
+                              </li>
+                          </ul>
+                      </li>
+                      <!-- Control Sidebar Toggle Button -->
+                  </ul>
               </div>
-            </div>        
-            <div class = "row mt-3">
-                <div class="col-md-3">
-                    <div class="card-counter primary">
-                      <i class="fa fa-user"></i>
-                      <span class="count-numbers">12</span>
-                      <span class="count-name">Flowz</span>
-                    </div>
+          </nav>
+      </header>
+      <!-- =============================================== -->
+      <!-- Left side column. contains the sidebar -->
+      <aside class="main-sidebar">
+          <!-- sidebar: style can be found in sidebar.less -->
+          <section class="sidebar">
+              <!-- search form -->
+              <form action="#" method="get" class="sidebar-form" target="_blank">
+                  <div class="input-group">
+                      <input type="text" name="id" class="form-control" placeholder="How may I help?">
+                      <span class="input-group-btn">
+                          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                          </button>
+                      </span>
                   </div>
-              
-                  <div class="col-md-3">
-                    <div class="card-counter danger">
-                      <i class="fa fa-ticket"></i>
-                      <span class="count-numbers">599</span>
-                      <span class="count-name">Instances</span>
-                    </div>
+              </form>
+              <!-- /.search form -->
+              <!-- sidebar menu: : style can be found in sidebar.less -->
+              <ul class="sidebar-menu">
+                  <li class="header">Main Pages</li>
+                  <li><a href="#"><i class="fa fa-user-circle"></i> <span>Foo</span></a></li>
+                  <li><a href="#"><i class="fa fa-users"></i> <span>Bar</span></a></li>
+                  <li><a href="#"><i class="fa fa-calendar"></i> <span>Baz</span></a></li>
+                  <li class="header">Everything Else</li>
+                  <li class="treeview">
+                      <a href="#"><i class="fa fa-file-text-o fa-fw"></i>
+                          <span>Individual Pages</span>
+                          <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                      </a>
+                      <ul class="treeview-menu">
+                          <li><a href="#"><i class="fa fa-user-circle"></i> <span>Foo</span></a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </section>
+          <!-- /.sidebar -->
+      </aside>
+      <!-- =============================================== -->
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+          <!-- Main content -->
+          <section class="content">
+              <div>
+                  <ul class="nav nav-tabs" role="tablist">
+                      <li class="active">
+                          <a href="#tab-table1" data-toggle="tab">Table 1</a>
+                      </li>
+                      <li>
+                          <a href="#tab-table2" data-toggle="tab">Table 2</a>
+                      </li>
+                  </ul>
+                  <div class="tab-content">
+                      <div class="tab-pane active" id="tab-table1">
+                          <table id="myTable1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                              <thead>
+                                  <tr>
+                                      <th>Name</th>
+                                      <th>Position</th>
+                                      <th>Office</th>
+                                      <th>Extn.</th>
+                                      <th>Start date</th>
+                                      <th>Salary</th>
+                                  </tr>
+                              </thead>
+                          </table>
+                      </div>
+                      <div class="tab-pane" id="tab-table2">
+                          <table id="myTable2" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                              <thead>
+                                  <tr>
+                                      <th>Name</th>
+                                      <th>Position</th>
+                                      <th>Office</th>
+                                      <th>Extn.</th>
+                                      <th>Start date</th>
+                                      <th>Salary</th>
+                                  </tr>
+                              </thead>
+                          </table>
+                      </div>
                   </div>
-              
-                  <div class="col-md-3">
-                    <div class="card-counter success">
-                      <i class="fa fa-database"></i>
-                      <span class="count-numbers">6875</span>
-                      <span class="count-name">Data</span>
-                    </div>
-                  </div>
-              
-                  <div class="col-md-3">
-                    <div class="card-counter info">
-                      <i class="fa fa-users"></i>
-                      <span class="count-numbers">35</span>
-                      <span class="count-name">Users</span>
-                    </div>
-                  </div>
-            </div>    
+              </div>
+          </section>
+          <!-- /.content -->
       </div>
-</body>
-</html>
+      <!-- /.content-wrapper -->
+      <footer class="main-footer"></footer>
+  </div>
