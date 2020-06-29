@@ -14,14 +14,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-black.css">
   <script src = "https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-blue.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-green.css">
 
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/glide.core.css">
   <link rel="stylesheet" href="/css/glide.theme.min.css">
   <link rel="stylesheet" href="/css/styleindex.css">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
   <!-- Site wrapper -->
   <div class="wrapper">
       <header class="main-header">
@@ -41,6 +41,33 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </a>
+              <% if(user){ %>
+                <ul class = "list-inline active">
+                    <li class="list-inline-item">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class = "fa fa-user-circle"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile</a>
+                              <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                          </div>
+                    </li>
+                    <li class = "list-inline-item">
+                       <i class = "fa fa-gamepad"></i>
+                    </li>
+                  </ul>
+              <% }else{ %>
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="/signup"><i class = "fa fa-user"></i> Signup</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                      </ul>
+                  <% } %>
           </nav>
       </header>
       <!-- =============================================== -->
@@ -51,7 +78,7 @@
               <!-- search form -->
               <form action="#" method="get" class="sidebar-form" target="_blank">
                   <div class="input-group">
-                      <input type="text" name="id" class="form-control" placeholder="How may I help?">
+                      <input type="text" name="id" class="form-control" placeholder="How may I help?" style = "border: 0;">
                       <span class="input-group-btn">
                           <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                           </button>
@@ -62,9 +89,9 @@
               <!-- sidebar menu: : style can be found in sidebar.less -->
               <ul class="sidebar-menu">
                   <li class="header">Main Pages</li>
-                  <li><a href="#"><i class="fa fa-user-circle"></i> <span>Foo</span></a></li>
-                  <li><a href="#"><i class="fa fa-users"></i> <span>Bar</span></a></li>
-                  <li><a href="#"><i class="fa fa-calendar"></i> <span>Baz</span></a></li>
+                  <% _.forEach(games, (game) => { %>
+                    <li><a href="/tournaments/<%= game.name %>"><i class="fa fa-gamepad"></i> <span><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
+                  <% }) %>
                   <li class="header">Everything Else</li>
                   <li class="treeview">
                       <a href="#"><i class="fa fa-file-text-o fa-fw"></i>
@@ -99,7 +126,7 @@
                 <div class = "jumbotron">
                     <h1 class = "h1" id = "mainHead">Upcoming</h1>
                     <% _.forEach(games, (game) => { %>
-                      <div class = "jumbotron py-3 my-3" >
+                      <div class = "py-3 my-3" >
                         <h3 class = "h3" id = "gameHead"><%= game.name %></h3>
                         <div class = "row">
                           <div class="glide">
@@ -197,7 +224,7 @@
       perView: 1,
       gap: 15,
       focusAt: 'center',
-      peek: 300,
+      peek: 290,
       breakpoints: {
         1200: {
           peek: 100
