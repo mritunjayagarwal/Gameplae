@@ -93,7 +93,7 @@
               <ul class="sidebar-menu">
                   <li class="header">Main Pages</li>
                   <% _.forEach(games, (game) => { %>
-                    <li><a href="/tournaments/<%= game.name %>"><i class="fa fa-gamepad"></i> <span><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
+                    <li id = "Gname"><a href="/tournaments/<%= game.name %>"><i class="fa fa-gamepad"></i> <span style = "color: #D3D3D3;font-weight: bolder;"><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
                   <% }) %>
                   <li class="header">Everything Else</li>
                   <li class="treeview">
@@ -252,8 +252,13 @@
     $( "#darkMode" ).click(function() {
       $("body").toggleClass( "skin-green" );
       $(".input-group").toggleClass("m-2 mt-3");
-      $("#search").toggleClass("bg-dark")
-      $(".input-btn").toggleClass("bg-primary")
+      $("#search").toggleClass("bg-dark");
+      $(".input-btn").toggleClass("bg-primary");
+      $(".input-group-btn").toggleClass("bg-dark");
+      $("#darkMode").toggleClass("bg-success")
+    });
+    $("#darkMode").click(function(){
+            $(this).text($(this).text() == 'Go Dark' ? 'Go Light' : 'Go Dark');
     });
   </script>
 </body>
