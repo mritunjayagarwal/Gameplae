@@ -1,102 +1,50 @@
 body, html {
-    height:100%;
-    background: #0E0E10;
-  }
-
-#sidebar{
-  z-index: 1;
-  top: 0;
-  overflow-y: hidden;
-  background: #151515;
+  height:100%;
+  background: #0E0E10;
 }
-  
-@media screen and (max-width: 1000px) {
 
-    .row-offcanvas {
-      position: relative;
-      -webkit-transition: all 0.25s ease-out;
-      -moz-transition: all 0.25s ease-out;
-      transition: all 0.25s ease-out;
-    }
-  
-    .row-offcanvas-left
-    .sidebar-offcanvas {
-      left: -33%;
-    }
-  
-    .row-offcanvas-left.active {
-      left: 33%;
-      margin-left: -6px;
-    }
-  
-    .sidebar-offcanvas {
-      position: absolute;
-      top: 0;
-      width: 33%;
-      height: 100%;
-      overflow: auto;
-    }
-  }
-  
-  /*
-   * Off Canvas wider at sm breakpoint
-   * --------------------------------------------------
-   */
-  @media screen and (max-width: 34em) {
-    .row-offcanvas-left
-    .sidebar-offcanvas {
-      left: -45%;
-    }
-  
-    .row-offcanvas-left.active {
-      left: 45%;
-      margin-left: -6px;
-    }
-    
-    .sidebar-offcanvas {
-      position: absolute;
-      top: 0;
-      width: 45%;
-      height: 100%;
-      overflow: auto;
-    }
+::-webkit-scrollbar{
+  width:10px;
+}
 
-    #gameLink{
-      font-size: 12px;
-    }
-  }
+::-webkit-scrollbar-thumb{
+  background-color:#005EA1;
+}
 
+::-webkit-scrollbar-track{
+  Background-color:transparent;
+}
 
 #con{
-    color: #fff;
-    font-size: 12px;
+  color: #fff;
+  font-size: 12px;
 }
 .jumbotron{
-    background: #0E0E10;
+  background: #0E0E10;
 }
 
 #mainHead{
-    color: #fff;
+  color: #fff;
 }
 #gameHead, #gameLink{
-    color: #d3d3d3;
-    font-weight: bold;
+  color: #d3d3d3;
+  font-weight: bold;
 }
 
 #wrapGame{
-    list-style-type: none;
+  list-style-type: none;
 }
 
 #gameList{
-  margin-bottom: 55px;
+margin-bottom: 55px;
 }
 
 #wrapGame a{
-    color: #d3d3d3;
-    text-decoration: none;
+  color: #d3d3d3;
+  text-decoration: none;
 }
 
 #wrapGame a:hover{
-    font-size:18px;
-    transition:0.3s;
+  font-size:18px;
+  transition:0.3s;
 }

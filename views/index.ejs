@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/css/glide.theme.min.css">
   <link rel="stylesheet" href="/css/styleindex.css">
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition sidebar-mini">
   <!-- Site wrapper -->
   <div class="wrapper">
       <header class="main-header">
@@ -33,7 +33,7 @@
               <span class="logo-lg">SlingShot</span>
           </a>
           <!-- Header Navbar: style can be found in header.less -->
-          <nav class="navbar navbar-static-top" style = "height: 49px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+          <nav class="navbar navbar-static-top" style = "height: 49px;background: #101010;">
               <!-- Sidebar toggle button-->
               <a href="#" class = "sidebar-toggle pt-2" data-toggle="offcanvas" role="button">
                   <span class="sr-only">Toggle navigation</span>
@@ -43,22 +43,17 @@
               </a>
               <% if(user){ %>
                 <ul class = "list-inline active">
-                    <!-- <li class="list-inline-item">
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i class = "fa fa-user-circle"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile</a>
-                              <a class="dropdown-item" href="/logout">Logout</a>
-                            </div>
+                    <li class="list-inline-item">
+                      <div class="dropdown">
+                                <img src="/img/avatar.png" class="rounded-circle" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 40px;height:auto;">
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                           </div>
-                    </li> -->
-                    <!-- <li class = "list-inline-item">
-                       <i class = "fa fa-gamepad"></i>
-                    </li> -->
+                        </div>
+                  </li>
                     <li class = "list-inline-item">
-                      <button id = "darkMode" class = "btn btn-dark">Go Dark</button>
+                      
                    </li>
                   </ul>
               <% }else{ %>
@@ -80,9 +75,9 @@
           <section class="sidebar">
               <!-- search form -->
               <form action="#" method="get" class="sidebar-form" target="_blank">
-                  <div class="input-group">
-                      <input type="text" name="id" id = "search" class="form-control" placeholder="How may I help?" style = "border: 0;">
-                      <span class="input-group-btn">
+                  <div class="input-group m-2 mt-3">
+                      <input type="text" name="id" id = "search" class="form-control bg-dark" placeholder="How may I help?" style = "border: 0;">
+                      <span class="input-group-btn bg-dark">
                           <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                           </button>
                       </span>
@@ -247,19 +242,6 @@
       }
     }
     new Glide(".gliderr", newConfig).mount();
-  </script>
-  <script>
-    $( "#darkMode" ).click(function() {
-      $("body").toggleClass( "skin-green" );
-      $(".input-group").toggleClass("m-2 mt-3");
-      $("#search").toggleClass("bg-dark");
-      $(".input-btn").toggleClass("bg-primary");
-      $(".input-group-btn").toggleClass("bg-dark");
-      $("#darkMode").toggleClass("bg-success")
-    });
-    $("#darkMode").click(function(){
-            $(this).text($(this).text() == 'Go Dark' ? 'Go Light' : 'Go Dark');
-    });
   </script>
 </body>
 </html>
