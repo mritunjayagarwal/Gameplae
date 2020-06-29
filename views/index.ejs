@@ -33,7 +33,7 @@
               <span class="logo-lg">SlingShot</span>
           </a>
           <!-- Header Navbar: style can be found in header.less -->
-          <nav class="navbar navbar-static-top" style = "height: 49px;">
+          <nav class="navbar navbar-static-top" style = "height: 49px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
               <!-- Sidebar toggle button-->
               <a href="#" class = "sidebar-toggle pt-2" data-toggle="offcanvas" role="button">
                   <span class="sr-only">Toggle navigation</span>
@@ -81,7 +81,7 @@
               <!-- search form -->
               <form action="#" method="get" class="sidebar-form" target="_blank">
                   <div class="input-group">
-                      <input type="text" name="id" class="form-control" placeholder="How may I help?" style = "border: 0;">
+                      <input type="text" name="id" id = "search" class="form-control" placeholder="How may I help?" style = "border: 0;">
                       <span class="input-group-btn">
                           <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                           </button>
@@ -251,6 +251,9 @@
   <script>
     $( "#darkMode" ).click(function() {
       $("body").toggleClass( "skin-green" );
+      $(".input-group").toggleClass("m-2 mt-3");
+      $("#search").toggleClass("bg-dark")
+      $(".input-btn").toggleClass("bg-primary")
     });
   </script>
 </body>
