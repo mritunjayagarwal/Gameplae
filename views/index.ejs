@@ -29,7 +29,7 @@
           <!-- Logo -->
           <a href="#" class="logo">
               <!-- mini logo for sidebar mini 50x50 pixels -->
-              <span class="logo-mini"><b>SS</b></span>
+              <span class="logo-mini" style = "background: -webkit-linear-gradient(#02e097, #06619B);font-weight: bold;background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><b><i class = "fas fa-crown"></i></b></span>
               <!-- logo for regular state and mobile devices -->
               <span class="logo-lg" style = "background: -webkit-linear-gradient(#02e097, #06619B);font-weight: bold;background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><i class = "fas fa-crown"></i> SlingShot</span>
           </a>
@@ -89,7 +89,7 @@
               <ul class="sidebar-menu">
                   <li class="header">Main Pages</li>
                   <% _.forEach(games, (game) => { %>
-                    <li id = "Gname"><a href="/tournaments/<%= game.name %>"><i class="fas fa-gamepad"></i> <span style = "color: #D3D3D3;font-weight: bolder;"><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
+                    <li id = "Gname"><a href="/tournaments/<%= game.name %>"><i class="fas fa-gamepad" style = "background: -webkit-linear-gradient(#02e097, #06619B);font-weight: bold;background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span style = "color: #D3D3D3;font-weight: bolder;"><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
                   <% }) %>
                   <li class="header">Everything Else</li>
                   <!-- <li class="treeview">
