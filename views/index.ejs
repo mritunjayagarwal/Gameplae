@@ -46,16 +46,23 @@
                 <ul class = "list-inline active pb-2">
                   <li class = "list-inline-item">
                       <div class="dropdown dropleft">
-                        <span style = "font-size: 30px;" id="dropdownMenu" data-toggle="dropdown"><i class = "fas fa-wallet" id = "wallet"></i> <strong style = "color: #fff" id = "wallet">₹<%= user.wallet %></strong></strong>
+                        <span style = "font-size: 30px;" id="dropdownMenu" data-toggle="dropdown"><i class = "fas fa-wallet" id = "wallet"></i> <strong style = "color: #fff" id = "wallet">₹<%= user.wallet %></strong>
                           <% if(user.wallet < 100){ %>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                               <a class="dropdown-item" href="/profile/<%= user._id %>">You dont have enough Money</a>
                             </div>
                           <% }else{ %>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                              <a class="dropdown-item" href="/profile/<%= user._id %>">Need to Verify Your profile</a>
-                              <a class="dropdown-item btn btn-primary" href="/logout">Verify</a>
-                            </div>
+                                <% if(user.verified){ %>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                    <a class="dropdown-item" href="/profile/<%= user._id %>">Choose a method to Get Money</a>
+                                    <a class="dropdown-item btn btn-primary" href="/logout">Verify</a>
+                                  </div>
+                                <% }else{ %>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                    <a class="dropdown-item" href="/profile/<%= user._id %>">Need to Verify Your profile</a>
+                                    <a class="dropdown-item btn btn-primary" href="/logout">Verify</a>
+                                  </div>
+                                <% } %>
                           <% } %>
                         </div>
                     </li>  

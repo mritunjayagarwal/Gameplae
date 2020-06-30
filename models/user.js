@@ -7,6 +7,7 @@ const userSchema = new Schema({
     email: { type: String, unique: true},
     password: { type: String, required: true},
     phone: { type: Number, required: true},
+    verified: { type: Boolean, default: false},
     tournament: [{
         tour: { type: Schema.Types.ObjectId, ref: 'Tournament'},
         joined: { type: Date, default: Date.now}   
