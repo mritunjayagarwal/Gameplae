@@ -31,22 +31,34 @@
               <!-- mini logo for sidebar mini 50x50 pixels -->
               <span class="logo-mini" style = "background: -webkit-linear-gradient(#02e097, #06619B);font-weight: bold;background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><b><i class = "fas fa-crown"></i></b></span>
               <!-- logo for regular state and mobile devices -->
-              <span class="logo-lg" style = "background: -webkit-linear-gradient(#02e097, #06619B);font-weight: bold;background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><i class = "fas fa-crown"></i> SlingShot</span>
+              <span class="logo-lg" id = "wallet"><i class = "fas fa-crown"></i> SlingShot</span>
           </a>
           <!-- Header Navbar: style can be found in header.less -->
           <nav class="navbar navbar-static-top" style = "height: 49px;background: #101010;">
               <!-- Sidebar toggle button-->
-              <a href="#" class = "sidebar-toggle pt-2" data-toggle="offcanvas" role="button">
+              <a href="#" class = "sidebar-toggle pt-3" data-toggle="offcanvas" role="button">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </a>
               <% if(user){ %>
-                <ul class = "list-inline active">
+                <ul class = "list-inline active pb-2">
                   <li class = "list-inline-item">
-                    <span style = "font-size: 30px;"><i class = "fas fa-wallet" id = "wallet"></i> <strong style = "color: #fff" id = "wallet">₹<%= user.wallet %></strong></strong>
-                  </li>  
+                      <div class="dropdown dropleft">
+                        <span style = "font-size: 30px;" id="dropdownMenu" data-toggle="dropdown"><i class = "fas fa-wallet" id = "wallet"></i> <strong style = "color: #fff" id = "wallet">₹<%= user.wallet %></strong></strong>
+                          <% if(user.wallet < 100){ %>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                              <a class="dropdown-item" href="/profile/<%= user._id %>">You dont have enough Money</a>
+                            </div>
+                          <% }else{ %>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                              <a class="dropdown-item" href="/profile/<%= user._id %>">Need to Verify Your profile</a>
+                              <a class="dropdown-item btn btn-primary" href="/logout">Verify</a>
+                            </div>
+                          <% } %>
+                        </div>
+                    </li>  
                   <li class="list-inline-item">
                       <div class="dropdown dropleft">
                                 <img src="/img/avatar.png" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 40px;height:auto;">
@@ -87,7 +99,7 @@
               <!-- /.search form -->
               <!-- sidebar menu: : style can be found in sidebar.less -->
               <ul class="sidebar-menu">
-                  <li class="header">Main Pages</li>
+                  <li class="header">Tournaments</li>
                   <% _.forEach(games, (game) => { %>
                     <li id = "Gname"><a href="/tournaments/<%= game.name %>"><i class="fas fa-gamepad" style = "background: -webkit-linear-gradient(#02e097, #06619B);font-weight: bold;background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span style = "color: #D3D3D3;font-weight: bolder;"><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
                   <% }) %>
