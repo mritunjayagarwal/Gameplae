@@ -48,3 +48,10 @@ margin-bottom: 55px;
   font-size:18px;
   transition:0.3s;
 }
+
+#wallet{
+  background: -webkit-linear-gradient(#02e097, #06619B);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -11,6 +11,7 @@
   <!-- Latest compiled and minified CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-black.css">
   <script src = "https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.css">
@@ -30,7 +31,7 @@
               <!-- mini logo for sidebar mini 50x50 pixels -->
               <span class="logo-mini"><b>SS</b></span>
               <!-- logo for regular state and mobile devices -->
-              <span class="logo-lg">SlingShot</span>
+              <span class="logo-lg" style = "background: -webkit-linear-gradient(#02e097, #06619B);font-weight: bold;background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;">❤ SlingShot</span>
           </a>
           <!-- Header Navbar: style can be found in header.less -->
           <nav class="navbar navbar-static-top" style = "height: 49px;background: #101010;">
@@ -43,18 +44,18 @@
               </a>
               <% if(user){ %>
                 <ul class = "list-inline active">
-                    <li class="list-inline-item">
+                  <li class = "list-inline-item">
+                    <span style = "font-size: 30px;"><i class = "fas fa-wallet" id = "wallet"></i> <strong style = "color: #fff" id = "wallet">₹<%= user.wallet %></strong></strong>
+                  </li>  
+                  <li class="list-inline-item">
                       <div class="dropdown dropleft">
-                                <img src="/img/avatar.png" class="rounded-circle" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 40px;height:auto;">
+                                <img src="/img/avatar.png" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 40px;height:auto;">
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile</a>
                             <a class="dropdown-item" href="/logout">Logout</a>
                           </div>
                         </div>
                   </li>
-                    <li class = "list-inline-item">
-                      
-                   </li>
                   </ul>
               <% }else{ %>
                     <ul class="nav navbar-nav ml-auto">
@@ -88,18 +89,18 @@
               <ul class="sidebar-menu">
                   <li class="header">Main Pages</li>
                   <% _.forEach(games, (game) => { %>
-                    <li id = "Gname"><a href="/tournaments/<%= game.name %>"><i class="fa fa-gamepad"></i> <span style = "color: #D3D3D3;font-weight: bolder;"><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
+                    <li id = "Gname"><a href="/tournaments/<%= game.name %>"><i class="fas fa-gamepad"></i> <span style = "color: #D3D3D3;font-weight: bolder;"><%= game.name %></span><span class = "badge badge-primary badge-pill pull-right"><%= game.tournaments.length %></span></a></li>
                   <% }) %>
                   <li class="header">Everything Else</li>
-                  <li class="treeview">
-                      <a href="#"><i class="fa fa-file-text-o fa-fw"></i>
+                  <!-- <li class="treeview">
+                      <a href="#"><i class="fas fa-file-text-o fa-fw"></i>
                           <span>Individual Pages</span>
                           <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                       </a>
                       <ul class="treeview-menu">
                           <li><a href="#"><i class="fa fa-user-circle"></i> <span>Foo</span></a></li>
                       </ul>
-                  </li>
+                  </li> -->
               </ul>
           </section>
           <!-- /.sidebar -->
