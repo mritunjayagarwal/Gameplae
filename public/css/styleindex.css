@@ -132,6 +132,8 @@ margin-bottom: 55px;
 }
 
 .line-1{
+  position: relative;
+  left:33%;
   border-right: 2px solid rgba(255,255,255,.75);
   white-space: nowrap;
   overflow: hidden;
@@ -141,14 +143,21 @@ margin-bottom: 55px;
 
 /* Animation */
 .anim-typewriter{
-animation: typewriter 0.8s steps(18) 0.5s 1 normal both,
+animation: typewriter 0.8s steps(18) 0.1s 1 normal both,
            blinkTextCursor 500ms steps(44) infinite normal;
 }
 @keyframes typewriter{
 from{width: 0;}
-to{width: 4.5em;}
+to{width: 5.5em;}
 }
 @keyframes blinkTextCursor{
 from{border-right-color: rgba(255,255,255,.75);}
 to{border-right-color: transparent;}
+}
+
+@media screen and (max-width: 600px) {
+  .line-1{
+    position: relative;
+    left:30%;
+  }
 }
