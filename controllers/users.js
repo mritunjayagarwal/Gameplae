@@ -20,17 +20,12 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.post('/login', Validate.LogInValidation, this.getInside);
         },
         indexPage: function(req, res){
-
-            if(req.user){
                 var game = Game.find({})
                 .sort('-name')
                 .populate('tournaments')
                 .exec((err, game) => {
                     res.render('index', { games: game, user: req.user, moment: moment, user: req.user});
                 });
-            }else{
-                res.redirect('/login');
-            }
         },
         new: function(req, res){
 

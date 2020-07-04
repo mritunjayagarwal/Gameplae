@@ -76,14 +76,18 @@
                   </li>
                   </ul>
               <% }else{ %>
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item active">
-                          <a class="nav-link" href="/signup"><i class = "fa fa-user"></i> Signup</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/login">Login</a>
-                        </li>
-                      </ul>
+                <ul class = "list-inline active pb-2">
+                  <li class = "list-inline-item">
+                      <div class="dropdown dropleft">
+                        <span style = "font-size: 25px;" id="dropdownMenu" data-toggle="dropdown"><strong style = "color: #fff" id = "wallet">Login</strong>
+                        </div>
+                    </li>  
+                    <li class = "list-inline-item">
+                      <div class="dropdown dropleft">
+                        <span style = "font-size: 25px;" id="dropdownMenu" data-toggle="dropdown"><strong style = "color: #fff" id = "wallet">Signup</strong>
+                        </div>
+                    </li> 
+                  </ul>
                   <% } %>
           </nav>
       </header>
@@ -151,29 +155,55 @@
                                 <ul class="glide__slides">
                                   <% _.forEach(game.tournaments, (tournament) => { %>
                                     <% if(tournament.starts >= new Date()){ %>
-                                      <a href = "/tournament/<%= tournament._id %>" style = "text-decoration: none;">
-                                        <li class="glide__slide">
-                                            <div class="card" style="max-width: 540px;background:#252525">
-                                                <div class="row no-gutters">
-                                                  <div class="col-md-4">
-                                                    <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
-                                                  </div>
-                                                  <div class="col-md-8">
-                                                    <div class="card-body" style = "margin-top: -10px;">
-                                                      <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
-                                                      <div class="row">
-                                                        <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
-                                                        <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
-                                                        <div class="w-100"></div>
-                                                        <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
-                                                        <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
+                                      <% if(user){ %>
+                                        <a href = "/tournament/<%= tournament._id %>" style = "text-decoration: none;">
+                                          <li class="glide__slide">
+                                              <div class="card" style="max-width: 540px;background:#252525">
+                                                  <div class="row no-gutters">
+                                                    <div class="col-md-4">
+                                                      <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                      <div class="card-body" style = "margin-top: -10px;">
+                                                        <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
+                                                        <div class="row">
+                                                          <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
+                                                          <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
+                                                          <div class="w-100"></div>
+                                                          <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
+                                                          <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
+                                                        </div>
                                                       </div>
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </div>
-                                          </li>
-                                        </a> 
+                                            </li>
+                                          </a> 
+                                      <% }else{ %>
+                                        <a style = "text-decoration: none;" data-toggle="modal" data-target="#myModal">
+                                          <li class="glide__slide">
+                                              <div class="card" style="max-width: 540px;background:#252525">
+                                                  <div class="row no-gutters">
+                                                    <div class="col-md-4">
+                                                      <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                      <div class="card-body" style = "margin-top: -10px;">
+                                                        <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
+                                                        <div class="row">
+                                                          <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
+                                                          <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
+                                                          <div class="w-100"></div>
+                                                          <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
+                                                          <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </li>
+                                          </a> 
+                                      <% } %>
                                     <% } %>
                                   <% }) %>
                                 </ul>
@@ -184,6 +214,30 @@
                     <% }) %>
                 </div>
               </div>
+              <% if(!user){ %>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" style = "background: #151515">
+                      <div class="modal-header py-1" style = "border: 0;">
+                      <h4 class = "h3 mt-3" style = "color: #d3d3d3;"><i class = "fa fa-sign-in"></i>Login First</h4><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                      </div>
+                      <div class="modal-body py-2" style = "border: 0;">
+                        <form action="/login" method = "POST">
+                            <div class="input-group">
+                              <input type="text" name = "email" id = "username" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="input-group mt-2">
+                              <input type="password" name = "password" id = "username" class="form-control" placeholder="Password" required>
+                            </div>
+                            <div class="input-group mt-3 mb-2">
+                                  <button type = "submit" class = "btn btn-primary btn-block">Login</button>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
           </section>
           <!-- /.content -->
       </div>
