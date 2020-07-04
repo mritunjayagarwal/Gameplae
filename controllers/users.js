@@ -7,7 +7,6 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.all('/signup' , this.signup);
             router.get('/logout', this.logout);
             router.get('/home', this.home);
-            router.get('/login', this.login);
             router.get('/success/:id', this.success);
             router.get('/profile/:id', this.user);
 
@@ -24,7 +23,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                 .sort('-name')
                 .populate('tournaments')
                 .exec((err, game) => {
-                    res.render('index', { games: game, user: req.user, moment: moment, user: req.user});
+                    var errors = req.flash('error')
+                    res.render('index', { games: game, user: req.user, moment: moment, user: req.user, messages: errors, hasErrors: errors.length > 0});
                 });
         },
         new: function(req, res){
@@ -76,13 +76,13 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
 
             Extract();
         },
-        login: function(req, res){
-            var errors = req.flash('error')
-            return res.render('login', { messages: errors, hasErrors: errors.length > 0});
-        },
+        // login: function(req, res){
+        //     var errors = req.flash('error')
+        //     return res.render('login', { messages: errors, hasErrors: errors.length > 0});
+        // },
         getInside: passport.authenticate('local.login', {
             successRedirect: '/',
-            failureRedirect: '/login',
+            failureRedirect: '/',
             failureFlash: true
         }),
         payment: function(req, res){
