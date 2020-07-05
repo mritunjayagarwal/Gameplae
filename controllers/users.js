@@ -52,7 +52,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             newGame.save(function(err){
                 if(err) console.log(err);
                 console.log("New Game Insertion Success!");
-                res.redirect('/gettournament')
+                res.redirect('/gettournament');
             })
         },
         signup: function(req, res){
@@ -61,7 +61,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         },
         createAccount: passport.authenticate('local.signup', {
             successRedirect: '/',
-            failureRedirect: '/signup',
+            failureRedirect: '/',
             failureFlash: true
         }),
         logout: function(req, res){
