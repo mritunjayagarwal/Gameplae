@@ -152,9 +152,51 @@ from{border-right-color: rgba(255,255,255,.75);}
 to{border-right-color: transparent;}
 }
 
+.blackBack{
+  width: 210px !important;
+}
+
 @media screen and (max-width: 600px) {
   .line-1{
     position: relative;
     left:30%;
   }
+
+  #amount{
+    display: none;
+  }
+
+  .blackBack{
+    width:40px !important;
+  }
+}
+
+#modalWithdraw small {
+  font-size: 15px !important;
+  display: flex;
+  justify-content: center !important
+}
+
+#modalWithdraw button {
+  font-size: calc(12px + (13 - 12) * ((100vw - 360px) / (1600 - 320))) !important;
+  ;
+  padding: calc(6px + 5 * ((100vw - 320px) / 780)) !important;
+}
+
+#modalWithdraw button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0
+}
+
+#modalWithdraw .btn-icon {
+  border: 1px solid #ccc;
+  background-color: transparent;
+  border-radius: 0;
+  letter-spacing: 1px
+}
+
+#modalWithdraw .btn-icon:hover {
+  border: 1px solid #ccc
 }
