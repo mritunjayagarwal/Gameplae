@@ -47,16 +47,26 @@
                 <ul class = "list-inline active pb-2">
                   <li class = "list-inline-item">
                       <div class="dropdown dropleft">
-                        <span style = "font-size: 30px;" id="dropdownMenu" data-toggle="dropdown"><i class = "fas fa-wallet"></i> <strong style = "color: #fff">₹<%= user.wallet %></strong>
+                        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span style = "font-size: 30px;" id="dropdownMenu" data-toggle="dropdown"><i class = "fas fa-wallet"></i> <strong style = "color: #fff">₹<%= user.wallet %></strong>
+                          </a>
                           <% if(user.wallet < 100){ %>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                              <a class="dropdown-item" href="/profile/<%= user._id %>">You dont have enough Money</a>
-                            </div>
+                            <div class="dropdown-menu p-3">
+                              <form class="form-horizontal" method="post" accept-charset="UTF-8">
+                                  <input class="form-control login" type="text" name="username2" placeholder="Username">
+                                  <input class="form-control login" type="text" name="password2" placeholder="Password">
+                                  <input class="btn btn-primary" type="button" name="submit" value="Login">
+                              </form>
+                          </div>
                           <% }else{ %>
                                 <% if(user.verified){ %>
-                                  <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <a class="dropdown-item" href="/profile/<%= user._id %>">Choose a method to Get Money</a>
-                                  </div>
+                                  <div class="dropdown-menu p-3">
+                                    <form class="form-horizontal" method="post" accept-charset="UTF-8">
+                                        <input class="form-control login" type="text" name="username2" placeholder="Username">
+                                        <input class="form-control login" type="text" name="password2" placeholder="Password">
+                                        <input class="btn btn-primary" type="button" name="submit" value="Login">
+                                    </form>
+                                </div>
                                 <% }else{ %>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                                     
@@ -65,6 +75,7 @@
                           <% } %>
                         </div>
                     </li>  
+                    
                   <li class="list-inline-item">
                       <div class="dropdown dropleft">
                                 <img src="/img/avatar.png" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 40px;height:auto;">
@@ -144,7 +155,7 @@
 
                     <ul id="tabsJustified" class="nav nav-tabs nav-fill mt-3 mb-0">
                         <li class="nav-item" style = "background: #0E0E10"><a href="" data-target="#upcoming" data-toggle="tab" class="nav-link small text-uppercase active btn btn-dark">Upcoming</a></li>
-                        <li class="nav-item" style = "background: #0E0E10"><a href="" data-target="#messages1" data-toggle="tab" class="nav-link small text-uppercase btn btn-dark">Recent</a></li>
+                        <li class="nav-item" style = "background: #0E0E10"><a href="" data-target="#messages1" data-toggle="tab" class="nav-link small text-uppercase btn btn-dark">Joined</a></li>
                     </ul>
                     <br>
                     <div id="tabsJustifiedContent" class="tab-content">
@@ -218,8 +229,75 @@
                                 <% }) %>
                             </div>
                         </div>
-                        <div id="messages1" class="tab-pane fade">
-                          Hiu  
+                        <div id="messages1" class="tab-pane fade active">
+                              <div class = "jumbotron mt-0 pt-0">
+                                <% _.forEach(games, (game) => { %>
+                                  <div class = "py-3 my-3" >
+                                    <h3 class = "h3" id = "gameHead"><%= game.name %></h3>
+                                    <div class = "row">
+                                      <div class="glide">
+                                          <div class="glide__track" data-glide-el="track">
+                                            <ul class="glide__slides">
+                                              <% _.forEach(game.tournaments, (tournament) => { %>
+                                                <% if(tournament.starts >= new Date()){ %>
+                                                  <% if(user){ %>
+                                                    <a href = "/tournament/<%= tournament._id %>" style = "text-decoration: none;">
+                                                      <li class="glide__slide">
+                                                          <div class="card" style="max-width: 540px;background:#252525">
+                                                              <div class="row no-gutters">
+                                                                <div class="col-md-4">
+                                                                  <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                  <div class="card-body" style = "margin-top: -10px;">
+                                                                    <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
+                                                                    <div class="row">
+                                                                      <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
+                                                                      <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
+                                                                      <div class="w-100"></div>
+                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
+                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                        </li>
+                                                      </a> 
+                                                  <% }else{ %>
+                                                    <a style = "text-decoration: none;" data-toggle="modal" data-target="#myModal">
+                                                      <li class="glide__slide">
+                                                          <div class="card" style="max-width: 540px;background:#252525">
+                                                              <div class="row no-gutters">
+                                                                <div class="col-md-4">
+                                                                  <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                  <div class="card-body" style = "margin-top: -10px;">
+                                                                    <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
+                                                                    <div class="row">
+                                                                      <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
+                                                                      <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
+                                                                      <div class="w-100"></div>
+                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
+                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                        </li>
+                                                      </a> 
+                                                  <% } %>
+                                                <% } %>
+                                              <% }) %>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                <% }) %>
+                            </div>
                         </div>
                     </div>
                 </div>                    
