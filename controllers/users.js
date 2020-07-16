@@ -194,7 +194,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                         players: { user: req.user._id, username: req.body.username}
                     }
                 }, (err) => {
-                    console.log("Tournament Set To fuck GamingMonK");
+                    console.log("Tournament Set To fuck Every Fucking Company");
                 });
 
                 res.send({"status": "success"})

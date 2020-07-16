@@ -171,12 +171,6 @@ to{border-right-color: transparent;}
   }
 }
 
-#modalWithdraw small {
-  font-size: 15px !important;
-  display: flex;
-  justify-content: center !important
-}
-
 #modalWithdraw button {
   font-size: calc(12px + (13 - 12) * ((100vw - 360px) / (1600 - 320))) !important;
   ;

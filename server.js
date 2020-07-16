@@ -15,7 +15,7 @@ const container = require('./container');
 const paypal = require('paypal-rest-sdk');
 require('dotenv').config();
 
-container.resolve(function(users, tournament, _){
+container.resolve(function(users, tournament, wallet, _){
 
     // paypal.configure({
     //     'mode': 'sandbox', //sandbox or live
@@ -42,6 +42,7 @@ container.resolve(function(users, tournament, _){
 
         const router = require('express-promise-router')();
         users.SetRouting(router);
+        wallet.SetRouting(router);
         tournament.SetRouting(router);
 
         app.use(router);

@@ -5,6 +5,7 @@ const myModules = [
     ['_', 'lodash'],
     ['Game', './models/game'],
     ['User', './models/user'],
+    ['Wallet', './models/wallet'],
     ['Tournament', './models/tournament'],
     ['async', 'async'],
     ['passport', 'passport'],

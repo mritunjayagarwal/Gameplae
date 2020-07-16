@@ -354,16 +354,18 @@
                                                           <p class="mb-2"><b>Withdraw Money Through UPI</b></p>
                                                       </div>
                                                   </div>
-                                                  <div class="row justify-content-center mb-5">
-                                                      <div class="col-sm-9 mt-2"><select class = "btn btn-block btn-icon">
-                                                        <option value="paytm" class = "btn btn-block"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Paytm</option>
-                                                        <option value="phonepe"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>PhonePe</option>
-                                                        <option value="google"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Google Pay</option>
-                                                      </select></div>
-                                                      <div class="col-sm-9 mt-2"><input type="number" class="btn btn-icon btn-block text-left" placeholder = "UPI NUMBER"></div>
-                                                      <div class="col-sm-9 mt-2"><input type="number" class="btn btn-icon btn-block text-left" placeholder = "Enter Amount"></div>
-                                                      <div class="col-sm-9 mt-2"><button type="button" class="btn btn-primary btn-block">Submit Request</button></div>
-                                                    </div>
+                                                  <form action="/wrsubmit" method = "post">
+                                                      <div class="row justify-content-center mb-5">
+                                                          <div class="col-sm-9 mt-2"><select class = "btn btn-block btn-icon" name = "upi">
+                                                            <option value="paytm" class = "btn btn-block"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Paytm</option>
+                                                            <option value="phonepe"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>PhonePe</option>
+                                                            <option value="google"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Google Pay</option>
+                                                          </select></div>
+                                                          <div class="col-sm-9 mt-2"><input type="number" class="btn btn-icon btn-block text-left" placeholder = "UPI PHONE NUMBER"></div>
+                                                          <div class="col-sm-9 mt-2"><input type="number" class="btn btn-icon btn-block text-left" placeholder = "Enter Amount"></div>
+                                                          <div class="col-sm-9 mt-2"><button type="button" class="btn btn-primary btn-block">Submit Request</button></div>
+                                                        </div>
+                                                  </form>
                                                   <div class="row mt-auto pt-auto text-center">
                                                       <div class="col mt-auto pt-auto">
                                                           <p class="brand">&copy; Gameplae gaming</p>
