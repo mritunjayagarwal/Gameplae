@@ -363,36 +363,34 @@
                                                       </div>
                                                   </div>
                                                   <% if(pay){ %>
-                                                  <form action="/wrsubmit" method = "post">
-                                                      <div class="row justify-content-center mb-5">
-                                                        
-                                                          <div class="col-sm-9 mt-3">
-                                                              <span class = "pull-right">Add Another UPI</span>
+                                                  <form action="" method = "post" id = "rUpi">
+                                                      <div class="row justify-content-center">
+                                                          <div class="col-sm-10 mt-3">
+                                                              <span id = "dUpi" class = "badge badge-info p-1 pull-right">Use Another UPI</span>
                                                             </div>  
-
                                                           <div class="col-sm-9 mt-2 p-3" id = "preUpi">
-                                                              <img src = "/img/wallet/phone-pe.png" style = "margin-top: -5px;" class = "float-left img-fluid img-rounded mr-2" width = "25" height = "25">
-                                                              <label for="upi"><p id = "upiHolder" style = "display: none;" class = "text-uppercase">VijayaShankara Devaprakashan Nikumbh JAIN</p><span id = "upiNum">+91 <%= pay.upi.rnum %></span></label>
+                                                              <img src = "/img/wallet/paytm.png" style = "margin-top: -5px;" class = "float-left img-fluid img-rounded mr-2" width = "25" height = "25">
+                                                              <label for="upi"><p id = "upiHolder" style = "display: none;" class = "text-uppercase">Mritunjay Agarwal</p><span id = "upiNum">+91 <%= pay.upi.rnum %></span></label>
                                                               <input type="checkbox" class = "pull-right" id="upi">
                                                             </div>
-                                                          <div class="col-sm-9 mt-2"><button type="submit" class="btn btn-primary btn-block">Submit Request</button></div>
+                                                          <div class="col-sm-10 mt-2"><button type="submit" id = "sbtn" class="btn btn-primary btn-block mt-1">Submit Request</button></div>
                                                         </div>
                                                   </form>  
                                                   <% } %>
                                                   <form action="/wrsubmit" method = "post" id = "newUpi">
-                                                    <div class="row justify-content-center mb-5">
-                                                          <div class="col-sm-9 mt-2"><select class = "btn btn-block btn-icon" name = "payThrough" name = "upi">
+                                                    <div class="row justify-content-center">
+                                                          <div class="col-sm-10 mt-2"><select class = "btn btn-block btn-icon" name = "payThrough" name = "upi">
                                                             <option value="paytm"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Paytm</option>
                                                               <option value="phonepe"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>PhonePe</option>
                                                             <option value="google"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Google Pay</option>
                                                           </select></div>
-                                                          <div class="col-sm-9 mt-2"><input type="tel" name = "upiNum" class="btn btn-icon btn-block text-left" placeholder = "UPI PHONE NUMBER"></div>
-                                                          <div class="col-sm-9 mt-2"><input type="text" name = "holdername" class="btn btn-icon btn-block text-left" placeholder = "UPI HOLDER NAME"></div>
-                                                          <div class="col-sm-9 mt-2"><input type="number" name = "wammount" class="btn btn-icon btn-block text-left" placeholder = "Enter Amount"></div>
-                                                          <div class="col-sm-9 mt-2"><button type="submit" class="btn btn-primary btn-block">Submit Request</button></div>
+                                                          <div class="col-sm-10 mt-2"><input type="tel" name = "upiNum" class="btn btn-icon btn-block text-left" placeholder = "UPI PHONE NUMBER"></div>
+                                                          <div class="col-sm-10 mt-2"><input type="text" name = "holdername" class="btn btn-icon btn-block text-left" placeholder = "UPI HOLDER NAME"></div>
+                                                          <div class="col-sm-10 mt-2"><input type="number" name = "wammount" class="btn btn-icon btn-block text-left" placeholder = "Enter Amount"></div>
+                                                          <div class="col-sm-10 mt-2"><button type="submit" class="btn btn-primary btn-block">Submit Request</button></div>
                                                         </div>
                                                   </form>
-                                                  <div class="row mt-auto pt-auto text-center">
+                                                  <div class="row mt-3 pt-auto text-center">
                                                       <div class="col mt-auto pt-auto">
                                                           <p class="brand">&copy; Gameplae gaming</p>
                                                       </div>
