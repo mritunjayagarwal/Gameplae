@@ -21,7 +21,7 @@ body, html {
   color: #fff;
   font-size: 12px;
 }
-.jumbotron{
+.jumbotron{ 
   background: #0E0E10;
 }
 
@@ -192,5 +192,24 @@ to{border-right-color: transparent;}
 }
 
 #modalWithdraw .btn-icon:hover {
-  border: 1px solid #ccc
+  border: 1px solid #ccc;
+}
+
+#preUpi{
+  border: 1px solid #ccc;
+}
+
+.checkBox{
+  border: 1px solid #ccc;
+  background: #1E90FF;
+  opacity: 0.8;
+  color: #fff;
+  transition: 0.1s;
+}
+
+#upiHolder{
+  width: 14em; 
+  overflow: hidden; 
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
 }

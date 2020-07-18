@@ -18,14 +18,20 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.post('/create', Validate.SignupValidation, this.createAccount);
             router.post('/login', Validate.LogInValidation, this.getInside);
         },
-        indexPage: function(req, res){
-                var game = Game.find({})
+        indexPage: async function(req, res){
+                var games = await Game.find({})
                 .sort('-name')
                 .populate('tournaments')
-                .exec((err, game) => {
-                    var errors = req.flash('error')
-                    res.render('index', { games: game, user: req.user, moment: moment, user: req.user, messages: errors, hasErrors: errors.length > 0});
-                });
+                .exec();
+                if(req.user){
+                    var user = await User.findOne({ _id: req.user._id}).populate({ path: 'pay', model: 'Wallet'}).exec();
+                }else{
+                    var user = ''
+                }
+                var errors = req.flash('error');
+                var success = req.flash('success');
+                res.render('index', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success});
+
         },
         new: function(req, res){
 
@@ -205,9 +211,6 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         },
         razorPay: function(req, res){
             if(req.user){
-
-                console.log(req.params.uname);
-
                 Tournament.findOne({  _id: req.params.id, 'players.username': { '$ne': req.params.uname} }, (err, tour) => {
                        if(tour){
 

@@ -37,7 +37,7 @@ container.resolve(function(users, tournament, wallet, _){
 
         server.listen(process.env.PORT || port, function(err){
             if(err) console.log(err);
-            console.log("SlingShot is Up and Running");
+            console.log("Gameplae! Lets Plae");
         });
 
         const router = require('express-promise-router')();

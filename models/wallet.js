@@ -5,6 +5,7 @@ const WalletSchema = new Schema({
     owner: { type: String, unique: true, uppercase: true},
     upi: {
       name: String,
+      holder: String,
       rnum: Number
     },
     bank: {
@@ -17,7 +18,8 @@ const WalletSchema = new Schema({
     pan: {
         pnum: String,
         hname: String
-    }
+    },
+    processing: { type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Wallet', WalletSchema);

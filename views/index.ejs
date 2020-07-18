@@ -133,10 +133,18 @@
           <section class="content">
                   <div>
                       <% if(hasErrors){ %>
-                        <% _.forEach(messages, (error) => { %>
+                        <% _.forEach(errors, (error) => { %>
                           <div class = "alert alert-danger text-center">
                               <a href = "#" class = "close" data-dismiss = "alert" aria-label="close">&times;</a>
                           <%= error %>
+                          </div>
+                        <% }) %>
+                      <% } %>
+                      <% if(successMsg){ %>
+                        <% _.forEach(success, (successful) => { %>
+                          <div class = "alert alert-success text-center">
+                              <a href = "#" class = "close" data-dismiss = "alert" aria-label="close">&times;</a>
+                          <%= successful %>
                           </div>
                         <% }) %>
                       <% } %>
@@ -354,16 +362,34 @@
                                                           <p class="mb-2"><b>Withdraw Money Through UPI</b></p>
                                                       </div>
                                                   </div>
+                                                  <% if(pay){ %>
                                                   <form action="/wrsubmit" method = "post">
                                                       <div class="row justify-content-center mb-5">
-                                                          <div class="col-sm-9 mt-2"><select class = "btn btn-block btn-icon" name = "upi">
-                                                            <option value="paytm" class = "btn btn-block"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Paytm</option>
-                                                            <option value="phonepe"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>PhonePe</option>
+                                                        
+                                                          <div class="col-sm-9 mt-3">
+                                                              <span class = "pull-right">Add Another UPI</span>
+                                                            </div>  
+
+                                                          <div class="col-sm-9 mt-2 p-3" id = "preUpi">
+                                                              <img src = "/img/wallet/phone-pe.png" style = "margin-top: -5px;" class = "float-left img-fluid img-rounded mr-2" width = "25" height = "25">
+                                                              <label for="upi"><p id = "upiHolder" style = "display: none;" class = "text-uppercase">VijayaShankara Devaprakashan Nikumbh JAIN</p><span id = "upiNum">+91 <%= pay.upi.rnum %></span></label>
+                                                              <input type="checkbox" class = "pull-right" id="upi">
+                                                            </div>
+                                                          <div class="col-sm-9 mt-2"><button type="submit" class="btn btn-primary btn-block">Submit Request</button></div>
+                                                        </div>
+                                                  </form>  
+                                                  <% } %>
+                                                  <form action="/wrsubmit" method = "post" id = "newUpi">
+                                                    <div class="row justify-content-center mb-5">
+                                                          <div class="col-sm-9 mt-2"><select class = "btn btn-block btn-icon" name = "payThrough" name = "upi">
+                                                            <option value="paytm"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Paytm</option>
+                                                              <option value="phonepe"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>PhonePe</option>
                                                             <option value="google"><span><img src="https://i.imgur.com/URmkevm.png" class="img-fluid mr-1" width="25"></span>Google Pay</option>
                                                           </select></div>
-                                                          <div class="col-sm-9 mt-2"><input type="number" class="btn btn-icon btn-block text-left" placeholder = "UPI PHONE NUMBER"></div>
-                                                          <div class="col-sm-9 mt-2"><input type="number" class="btn btn-icon btn-block text-left" placeholder = "Enter Amount"></div>
-                                                          <div class="col-sm-9 mt-2"><button type="button" class="btn btn-primary btn-block">Submit Request</button></div>
+                                                          <div class="col-sm-9 mt-2"><input type="tel" name = "upiNum" class="btn btn-icon btn-block text-left" placeholder = "UPI PHONE NUMBER"></div>
+                                                          <div class="col-sm-9 mt-2"><input type="text" name = "holdername" class="btn btn-icon btn-block text-left" placeholder = "UPI HOLDER NAME"></div>
+                                                          <div class="col-sm-9 mt-2"><input type="number" name = "wammount" class="btn btn-icon btn-block text-left" placeholder = "Enter Amount"></div>
+                                                          <div class="col-sm-9 mt-2"><button type="submit" class="btn btn-primary btn-block">Submit Request</button></div>
                                                         </div>
                                                   </form>
                                                   <div class="row mt-auto pt-auto text-center">
@@ -504,5 +530,11 @@
     }
     new Glide(".gliderr", newConfig).mount();
   </script>
+  <% if(pay){ %>
+    <script>
+      $('#newUpi').hide();  
+    </script>
+  <% } %>
+  <script src = "/js/index.js"></script>
 </body>
 </html>
