@@ -163,7 +163,7 @@ to{border-right-color: transparent;}
   }
 
   #amount{
-    display: none;
+    margin-right: -15px;
   }
 
   .blackBack{

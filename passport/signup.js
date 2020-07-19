@@ -25,7 +25,7 @@ passport.use('local.signup', new LocalStrategy({
         }
 
         if(user){
-            return done(null, false, req.flash('error', 'Password is Incorrect'));
+            return done(null, false, req.flash('error', 'User already exists'));
         }
            
         const newUser = new User();
@@ -35,7 +35,7 @@ passport.use('local.signup', new LocalStrategy({
         newUser.password = newUser.encryptPassword(req.body.password);
         newUser.save(function(err){
             if(err) console.log(err);
-            done(null, newUser);
+            return done(null, newUser);
         })
     })
 }));
