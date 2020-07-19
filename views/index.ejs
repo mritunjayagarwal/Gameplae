@@ -234,74 +234,15 @@
                             </div>
                         </div>
                         <div id="messages1" class="tab-pane fade active">
-                              <div class = "jumbotron mt-0 pt-0">
-                                <% _.forEach(games, (game) => { %>
-                                  <div class = "py-3 my-3" >
-                                    <h3 class = "h3" id = "gameHead"><%= game.name %></h3>
-                                    <div class = "row">
-                                      <div class="glide">
-                                          <div class="glide__track" data-glide-el="track">
-                                            <ul class="glide__slides">
-                                              <% _.forEach(game.tournaments, (tournament) => { %>
-                                                <% if(tournament.starts >= new Date()){ %>
-                                                  <% if(user){ %>
-                                                    <a href = "/tournament/<%= tournament._id %>" style = "text-decoration: none;">
-                                                      <li class="glide__slide">
-                                                          <div class="card" style="max-width: 540px;background:#252525">
-                                                              <div class="row no-gutters">
-                                                                <div class="col-md-4">
-                                                                  <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                  <div class="card-body" style = "margin-top: -10px;">
-                                                                    <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
-                                                                    <div class="row">
-                                                                      <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
-                                                                      <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
-                                                                      <div class="w-100"></div>
-                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
-                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
-                                                                    </div>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </li>
-                                                      </a> 
-                                                  <% }else{ %>
-                                                    <a style = "text-decoration: none;" data-toggle="modal" data-target="#myModal">
-                                                      <li class="glide__slide">
-                                                          <div class="card" style="max-width: 540px;background:#252525">
-                                                              <div class="row no-gutters">
-                                                                <div class="col-md-4">
-                                                                  <img src="/img/<%= game.face %>" class="card-img" id = "face" style = "width:100%;height:auto;">
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                  <div class="card-body" style = "margin-top: -10px;">
-                                                                    <h5 class="card-title" style = "color:#d3d3d3"><%= tournament.name %></h5>
-                                                                    <div class="row">
-                                                                      <div class="col"><p class="card-text mb-2" id = "con"><i class="fa fa-calendar" style = "color:gold;font-size:12px;margin-bottom: 10px;"></i> &nbsp; <%= moment(tournament.starts).format('l'); %></p></div>
-                                                                      <div class="col"><p class="card-text" id = "con"><i class="fa fa-trophy" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎1000 </p></div>
-                                                                      <div class="w-100"></div>
-                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-money" style = "color:gold;font-size:15px;"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
-                                                                      <div class="col"><p class="card-text" id = "con"><i class="	fa fa-users" style = "color:gold;font-size:15px;"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
-                                                                    </div>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </li>
-                                                      </a> 
-                                                  <% } %>
-                                                <% } %>
-                                              <% }) %>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                                <% }) %>
-                            </div>
+                              <% if(user){ %>
+                                <div class = "jumbotron">
+                                  <h3 class = "h3 mt-3 text-center" style = "opacity: 0.8;font-family:arial;color: #252525">Your joined Tournaments will be shown here</h3>
+                                </div>
+                              <% }else{ %>
+                                <div class = "jumbotron">
+                                  <h3 class = "h3 mt-3 text-center" style = "opacity: 0.8;font-family:arial;color: #252525">Login to join Tournaments</h3>
+                                </div>
+                              <% } %>
                         </div>
                     </div>
                 </div>                    
