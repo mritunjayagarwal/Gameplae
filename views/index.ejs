@@ -366,11 +366,11 @@
                                                   <form action="" method = "post" id = "rUpi">
                                                       <div class="row justify-content-center">
                                                           <div class="col-sm-10 mt-3">
-                                                              <span id = "dUpi" class = "badge badge-info p-1 pull-right">Use Another UPI</span>
+                                                              <span id = "dUpi" class = "badge badge-info p-1 pull-right">Update UPI</span>
                                                             </div>  
                                                           <div class="col-sm-9 mt-2 p-3" id = "preUpi">
-                                                              <img src = "/img/wallet/paytm.png" style = "margin-top: -5px;" class = "float-left img-fluid img-rounded mr-2" width = "25" height = "25">
-                                                              <label for="upi"><p id = "upiHolder" style = "display: none;" class = "text-uppercase">Mritunjay Agarwal</p><span id = "upiNum">+91 <%= pay.upi.rnum %></span></label>
+                                                              <img src = "/img/wallet/<%= pay.upi.name %>.png" style = "margin-top: -5px;" class = "float-left img-fluid img-rounded mr-2" width = "25" height = "25">
+                                                              <label for="upi"><p id = "upiHolder" style = "display: none;" class = "text-uppercase"><%= pay.upi.holder %></p><span id = "upiNum">+91 <%= pay.upi.rnum %></span></label>
                                                               <input type="checkbox" class = "pull-right" id="upi">
                                                             </div>
                                                           <div class="col-sm-10 mt-2"><button type="submit" id = "sbtn" class="btn btn-primary btn-block mt-1">Submit Request</button></div>
