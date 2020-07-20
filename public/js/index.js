@@ -10,7 +10,6 @@ $("#dUpi").on("click", function(){
   $('#sbtn').toggle();
   $('#dUpi').toggleClass('mb-0');
   $(this).text($('#dUpi').text() == 'Update UPI' ? 'Use a registered UPI' : 'Update UPI');
-  
 })
 
   
