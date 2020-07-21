@@ -229,3 +229,13 @@ to{border-right-color: transparent;}
 .dropdown-toggle::after {
   display:none !important;
 }
+
+.hidden{
+  visibility: hidden;
+}
+
+#validation-fa{
+  position: absolute;
+  top: 5px;
+  right: -15px;
+}
