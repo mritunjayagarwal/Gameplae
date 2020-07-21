@@ -11,7 +11,7 @@ module.exports = function(Wallet, User, async){
             }else{
                 Wallet.findOne({ owner: req.user._id}, ( err, wallet) => {
                     if(wallet){
-                        Wallet.update({
+                        Wallet.updateOne({
                             owner: req.user._id
                         }, {
                             $set: {

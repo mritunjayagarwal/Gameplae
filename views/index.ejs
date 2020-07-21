@@ -393,7 +393,7 @@
                                                           <div class="col-10 col-md-9 col-lg-9 mt-2"><input type="tel" name = "upiNum" class="btn btn-icon btn-block text-left phVal" placeholder = "UPI PHONE NUMBER" required><span class = "pVal hidden badge badge-danger" id = "validation-fa"><i class = "fa fa-times"></i></span></div>
                                                           <div class="col-10 col-md-9 col-lg-9 mt-2"><input type="text" name = "holdername" class="btn btn-icon btn-block text-left hoVal" placeholder = "UPI HOLDER NAME" required><span class = "hVal hidden badge badge-danger" id = "validation-fa"><i class = "fa fa-times"></i></span></div>
                                                           <div class="col-10 col-md-9 col-lg-9 mt-2"><input type="number" name = "wammount" class="btn btn-icon btn-block text-left amVal" placeholder = "Enter Amount" required><span class = "aVal hidden badge badge-danger" id = "validation-fa"><i class = "fa fa-times"></i></span></div>
-                                                          <div class="col-10 col-md-9 col-lg-9 mt-2"><button type="submit" class="btn btn-primary btn-block">Submit Request</button></div>
+                                                          <div class="col-10 col-md-9 col-lg-9 mt-2"><button type="submit" class="btn btn-primary btn-block" id = "upiSubmit" disabled>Submit Request</button></div>
                                                         </div>
                                                   </form>
                                                   <div class="row mt-3 pt-auto text-center">
@@ -553,21 +553,71 @@
         document.querySelector(".loader").style.transition = "3s"; 
         document.querySelector("body").style.visibility = "visible"; 
     } 
-
+  };
   $(document).ready(function(){
-    $('.amVal').on('keypress keydown keyup',function(){
-             if (parseInt("<%= user.wallet %>") < $('.amVal').val()) {
-              // there is a mismatch, hence show the error message
-                 $('.aVal').removeClass('hidden');
-                 $('.aVal').show();
-             }
-           else{
-                // else, do not display message
-                $('.aVal').addClass('hidden');
+
+  function validateUpi(pVal, hVal, aVal){
+      if(pVal && hVal && aVal){
+            $('#upiSubmit').removeAttr("disabled");
+            $('#upiSubmit').html("Submit Request")
+            $('#upiSubmit').removeClass('btn-danger');
+            $('#upiSubmit').addClass('btn-primary');
+        }else{
+          $('#upiSubmit').attr("disabled", "true");
+          $('#upiSubmit').html("Fix All the errors");
+          $('#upiSubmit').removeClass('btn-primary');
+            $('#upiSubmit').addClass('btn-danger');
+        }
+  }
+    
+  var $regexname=/^([0-9]{10})$/;
+  var pVal = false;
+  var hVal = false;
+  var aVal = false;
+  $('.phVal').on('keypress keydown keyup',function(){
+           if (!$(this).val().match($regexname)) {
+               $('.pVal').removeClass('hidden');
+               $('.pVal').show();
+               pVal = false;
+               validateUpi(pVal, hVal, aVal);
+           }
+         else{
+              $('.pVal').addClass('hidden');
+              pVal = true;
+              validateUpi(pVal, hVal, aVal);
                }
-         });
-  })  
-}; 
+             });
+
+  $('.hoVal').on('keypress keydown keyup',function(){
+      if (!$(this).val().match(/^([a-z A-Z]{2,100})$/)) {
+          $('.hVal').removeClass('hidden');
+          $('.hVal').show();
+          hVal = false;
+          validateUpi(pVal, hVal, aVal)
+      }
+    else{
+          $('.hVal').addClass('hidden');
+          hVal = true;
+          validateUpi(pVal, hVal, aVal)
+          }
+        });
+          
+  $('.amVal').on('keypress keydown keyup',function(){
+            if (parseInt("<%= user.wallet %>") < $('.amVal').val()) {
+
+                $('.aVal').removeClass('hidden');
+                $('.aVal').show();
+                aVal = false;
+                validateUpi(pVal, hVal, aVal)
+            }
+          else{
+              $('.aVal').addClass('hidden');
+              aVal = true;
+              validateUpi(pVal, hVal, aVal)
+
+            }
+        });
+    });
   </script>
   <script src = "/js/wallet.js"></script>
 </body>
