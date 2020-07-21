@@ -554,71 +554,74 @@
         document.querySelector("body").style.visibility = "visible"; 
     } 
   };
-  $(document).ready(function(){
-
-  function validateUpi(pVal, hVal, aVal){
-      if(pVal && hVal && aVal){
-            $('#upiSubmit').removeAttr("disabled");
-            $('#upiSubmit').html("Submit Request")
-            $('#upiSubmit').removeClass('btn-danger');
-            $('#upiSubmit').addClass('btn-primary');
-        }else{
-          $('#upiSubmit').attr("disabled", "true");
-          $('#upiSubmit').html("Fix All the errors");
-          $('#upiSubmit').removeClass('btn-primary');
-            $('#upiSubmit').addClass('btn-danger');
-        }
-  }
-    
-  var $regexname=/^([0-9]{10})$/;
-  var pVal = false;
-  var hVal = false;
-  var aVal = false;
-  $('.phVal').on('keypress keydown keyup',function(){
-           if (!$(this).val().match($regexname)) {
-               $('.pVal').removeClass('hidden');
-               $('.pVal').show();
-               pVal = false;
-               validateUpi(pVal, hVal, aVal);
-           }
-         else{
-              $('.pVal').addClass('hidden');
-              pVal = true;
-              validateUpi(pVal, hVal, aVal);
-               }
-             });
-
-  $('.hoVal').on('keypress keydown keyup',function(){
-      if (!$(this).val().match(/^([a-z A-Z]{2,100})$/)) {
-          $('.hVal').removeClass('hidden');
-          $('.hVal').show();
-          hVal = false;
-          validateUpi(pVal, hVal, aVal)
-      }
-    else{
-          $('.hVal').addClass('hidden');
-          hVal = true;
-          validateUpi(pVal, hVal, aVal)
-          }
-        });
-          
-  $('.amVal').on('keypress keydown keyup',function(){
-            if (parseInt("<%= user.wallet %>") < $('.amVal').val()) {
-
-                $('.aVal').removeClass('hidden');
-                $('.aVal').show();
-                aVal = false;
-                validateUpi(pVal, hVal, aVal)
-            }
-          else{
-              $('.aVal').addClass('hidden');
-              aVal = true;
-              validateUpi(pVal, hVal, aVal)
-
-            }
-        });
-    });
   </script>
+  <% if(pay){ %>
+    <script>
+      $(document).ready(function(){
+      function validateUpi(pVal, hVal, aVal){
+          if(pVal && hVal && aVal){
+                $('#upiSubmit').removeAttr("disabled");
+                $('#upiSubmit').html("Submit Request")
+                $('#upiSubmit').removeClass('btn-danger');
+                $('#upiSubmit').addClass('btn-primary');
+            }else{
+              $('#upiSubmit').attr("disabled", "true");
+              $('#upiSubmit').html("Fix All the errors");
+              $('#upiSubmit').removeClass('btn-primary');
+                $('#upiSubmit').addClass('btn-danger');
+            }
+      }
+        
+      var $regexname=/^([0-9]{10})$/;
+      var pVal = false;
+      var hVal = false;
+      var aVal = false;
+      $('.phVal').on('keypress keydown keyup',function(){
+              if (!$(this).val().match($regexname)) {
+                  $('.pVal').removeClass('hidden');
+                  $('.pVal').show();
+                  pVal = false;
+                  validateUpi(pVal, hVal, aVal);
+              }
+            else{
+                  $('.pVal').addClass('hidden');
+                  pVal = true;
+                  validateUpi(pVal, hVal, aVal);
+                  }
+                });
+
+      $('.hoVal').on('keypress keydown keyup',function(){
+          if (!$(this).val().match(/^([a-z A-Z]{2,100})$/)) {
+              $('.hVal').removeClass('hidden');
+              $('.hVal').show();
+              hVal = false;
+              validateUpi(pVal, hVal, aVal)
+          }
+        else{
+              $('.hVal').addClass('hidden');
+              hVal = true;
+              validateUpi(pVal, hVal, aVal)
+              }
+            });
+              
+      $('.amVal').on('keypress keydown keyup',function(){
+                if (parseInt("<%= user.wallet %>") < $('.amVal').val()) {
+
+                    $('.aVal').removeClass('hidden');
+                    $('.aVal').show();
+                    aVal = false;
+                    validateUpi(pVal, hVal, aVal)
+                }
+              else{
+                  $('.aVal').addClass('hidden');
+                  aVal = true;
+                  validateUpi(pVal, hVal, aVal)
+
+                }
+            });
+        });
+    </script>  
+  <% } %>
   <script src = "/js/wallet.js"></script>
 </body>
 </html>
