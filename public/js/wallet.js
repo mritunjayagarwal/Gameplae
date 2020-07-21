@@ -9,7 +9,7 @@ $("#dUpi").on("click", function(){
   $('#preUpi').toggle();
   $('#sbtn').toggle();
   $('#dUpi').toggleClass('mb-0');
-  $(this).text($('#dUpi').text() == 'Update UPI' ? 'Use a registered UPI' : 'Update UPI');
+  $(this).text($('#dUpi').text() == 'Withraw using another UPI' ? 'Use a registered UPI' : 'Withraw using another UPI');
 })
 
   
