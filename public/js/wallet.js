@@ -1,3 +1,10 @@
+$('#gameSearch').focus(function(){
+  $("#gameSearch").removeClass("bg-dark")
+});
+
+$('#gameSearch').focusout(function(){
+  $("#gameSearch").addClass("bg-dark")
+})
 
 $("#upi").on("change", function() {
     $('#preUpi').toggleClass("checkBox", this.checked);
