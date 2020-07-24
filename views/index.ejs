@@ -46,7 +46,7 @@
                   <span class="icon-bar"></span>
               </a>
               <div class="d-flex flex-grow-1 mainSearch" style = "margin-top: -10px;">
-                <form class="mr-2 my-3 w-100 d-inline-block order-1" style = "margin-top: -30px;">
+                <form class="mr-2 my-2 w-100 d-inline-block order-1" style = "margin-top: -30px;">
                     <div class="input-group">
                         <input type="text" id = "gameSearch" class="form-control border border-0 bg-dark" placeholder="Search...">
                         <span class="input-group-append">
@@ -88,7 +88,7 @@
                     
                   <li class="list-inline-item">
                       <div class="dropdown dropleft">
-                                <img src="/img/avatar.png" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 40px;height:auto;">
+                                <img src="/img/avatar.png" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 30px;height:auto;">
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile</a>
                             <a class="dropdown-item" href="/logout">Logout</a>
@@ -98,7 +98,7 @@
                   </ul>
               <% }else{ %>
                 <ul class = "list-inline active pb-2">
-                  <li class = "list-inline-item">
+                  <li class = "list-inline-item" style = "margin-left: 5px;">
                       <div class="dropdown dropleft">
                         <span style = "font-size: 25px;" id="dropdownMenu"  data-toggle="modal" data-target="#myModal"><strong style = "color: #fff" id = "wallet">Login</strong>
                         </div>
