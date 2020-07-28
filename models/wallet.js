@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const WalletSchema = new Schema({
-    owner: { type: String, unique: true, uppercase: true},
+    owner: { type: Schema.Types.ObjectId, ref: 'User'},
     upi: {
       name: String,
       holder: String,
