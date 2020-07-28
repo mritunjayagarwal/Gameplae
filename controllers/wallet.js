@@ -2,6 +2,7 @@ module.exports = function(Wallet, User, async){
     return {
         SetRouting: function(router){
             router.post('/wrsubmit', this.wrSubmit);
+            router.post('/rwsubmit', this.rwSubmit);
         },
         wrSubmit: async function(req, res){
             var user = await User.findOne({ _id: req.user._id}).exec();
@@ -53,6 +54,30 @@ module.exports = function(Wallet, User, async){
                      });
                      req.flash('success', 'Withdraw request submitted successfully')
                      res.redirect('/');
+                    }
+                })
+            }
+        },
+        rwSubmit: async function(req, res){
+            var user = await User.findOne({ _id: req.user._id}).exec();
+            if(req.body.rwammount > user.wallet){
+                req.flash("error", "Sorry! You can not withdraw more than ₹" + user.wallet);
+                res.redirect('/');
+            }else{
+                Wallet.findOne({ owner: req.user._id, 'upi.rnum': req.body.rUpiNum}, (err, wallet) => {
+                    if(wallet){
+                        console.log("Wallet Found! Congrats");
+                        Wallet.updateOne({
+                            owner: req.user._id, 
+                            'upi.rnum': req.body.rUpiNum
+                        }, {
+                            $push: {
+                                
+                            }
+                        })
+                    }else{
+                        console.log("Ooops! Diagnose this shit");
+                        res.redirect('/');
                     }
                 })
             }

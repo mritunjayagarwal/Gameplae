@@ -19,18 +19,23 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             router.post('/login', Validate.LogInValidation, this.getInside);
         },
         indexPage: async function(req, res){
-                var games = await Game.find({})
-                .sort('-name')
-                .populate('tournaments')
-                .exec();
+                var games = await Game.find({}).sort('-name').populate('tournaments').exec();
+                var ip = req.ip;
                 if(req.user){
+                    User.updateOne({
+                        _id: req.user._id
+                    }, {
+                        $set: {
+                            lastlogin: ip
+                        }
+                    });
                     var user = await User.findOne({ _id: req.user._id}).populate({ path: 'pay', model: 'Wallet'}).exec();
                 }else{
                     var user = ''
                 }
                 var errors = req.flash('error');
                 var success = req.flash('success');
-                res.render('index', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success});
+                res.render('index', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success, ip: ip});
 
         },
         new: function(req, res){

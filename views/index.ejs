@@ -196,6 +196,10 @@
                             </div>
                         <% }) %>
                       <% } %>
+                      <div class = "alert alert-success text-center">
+                          <a href = "#" class = "close" data-dismiss = "alert" aria-label="close">&times;</a>
+                      <%= ip %>
+                      </div>
                     <div class="gliderr">
                       <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides">
@@ -382,16 +386,17 @@
                                                       </div>
                                                   </div>
                                                   <% if(pay){ %>
-                                                  <form action="" method = "post" id = "rUpi">
+                                                  <form action="/rwsubmit" method = "post" id = "rUpi">
                                                       <div class="row justify-content-center">
                                                           <div class="col-sm-9 mt-3">
                                                               <span id = "dUpi" class = "badge badge-info p-1 pull-right">Withraw using another UPI</span>
                                                             </div>  
                                                           <div class="col-sm-8 mt-2 p-3" id = "preUpi">
                                                               <img src = "/img/wallet/<%= pay.upi.name %>.png" style = "margin-top: -5px;" class = "float-left img-fluid img-rounded mr-2" width = "25" height = "25">
-                                                              <label for="upi"><p id = "upiHolder" style = "display: none;" class = "text-uppercase"><%= pay.upi.holder %></p><span id = "upiNum">+91 <%= pay.upi.rnum %></span></label>
-                                                              <input type="checkbox" class = "pull-right" id="upi">
+                                                              <label><p id = "upiHolder" style = "display: none;" class = "text-uppercase"><%= pay.upi.holder %></p><span id = "upiNum">+91 <%= pay.upi.rnum %></span></label>
+                                                              <input type="checkbox" name = "rUpiNum" class = "pull-right" id="upi" value = "<%= pay.upi.rnum %>" required>
                                                             </div>
+                                                            <div class="col-sm-9 mt-2"><input type="number" id = "rwammount" name = "rwammount" class="btn btn-icon btn-block text-left amVal" placeholder = "Enter Amount" required><span class = "aVal hidden badge badge-danger" id = "validation-fa"><i class = "fa fa-times"></i></span></div>
                                                           <div class="col-sm-9 mt-2"><button type="submit" id = "sbtn" class="btn btn-primary btn-block mt-1">Submit Request</button></div>
                                                         </div>
                                                   </form>  

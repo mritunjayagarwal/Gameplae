@@ -15,6 +15,13 @@ const WalletSchema = new Schema({
         branch: String,
         ifsc: String,
     },
+    history: [
+        {
+            amount: Number,
+            date: { type: Date, default: Date.Now},
+            through: String
+        }
+    ],
     pan: {
         pnum: String,
         hname: String
