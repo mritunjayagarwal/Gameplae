@@ -4,8 +4,8 @@ module.exports = function(User, Wallet){
             router.get('/payoutAdmin', this.payoutAdmin);
         },
         payoutAdmin: async function(req, res){
-            const users = await Wallet.find({processing: false}).populate({ path: 'owner', model: 'User'}).exec();
-            console.log(users);
+            const users = await Wallet.find({"history.processing": true}).exec();
+            console.log(users)
             res.render('payout', { users: users})
         }
     }

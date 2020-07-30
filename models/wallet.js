@@ -28,8 +28,7 @@ const WalletSchema = new Schema({
     pan: {
         pnum: String,
         hname: String
-    },
-    processing: { type: Boolean, default: false}
+    }
 });
 
 module.exports = mongoose.model('Wallet', WalletSchema);
