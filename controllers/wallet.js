@@ -66,17 +66,32 @@ module.exports = function(Wallet, User, async){
             }else{
                 Wallet.findOne({ owner: req.user._id, 'upi.rnum': req.body.rUpiNum}, (err, wallet) => {
                     if(wallet){
-                        console.log("Wallet Found! Congrats");
+                        var name = wallet.upi.holder;
                         Wallet.updateOne({
                             owner: req.user._id, 
                             'upi.rnum': req.body.rUpiNum
                         }, {
                             $push: {
-                                
+                                history: { 
+                                    amount: req.body.rwammount,
+                                    through: 'UPI',
+                                    number: req.body.rUpiNum,
+                                    name: name
+                                }
+                            }, $set: {
+                                processing: true
+                            }
+                        }, (err) => {
+                            if(err){
+                                req.flash("error", "Something went wrong..please try again later");
+                                res.redirect('/')
+                            }else{
+                                console.log("Success");
+                                res.redirect('/');
                             }
                         })
                     }else{
-                        console.log("Ooops! Diagnose this shit");
+                        req.flash("error", "Sorry! We could not find any wallet registered to you");
                         res.redirect('/');
                     }
                 })

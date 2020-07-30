@@ -18,8 +18,11 @@ const WalletSchema = new Schema({
     history: [
         {
             amount: Number,
+            name: String,
+            number: Number,
             date: { type: Date, default: Date.Now},
-            through: String
+            through: String,
+            processing: { type: Boolean, default: 'true'}
         }
     ],
     pan: {

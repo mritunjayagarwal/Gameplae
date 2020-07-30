@@ -90,7 +90,7 @@
                       <div class="dropdown dropleft">
                                 <img src="/img/avatar.png" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 30px;height:auto;">
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile</a>
+                            <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile <%= user.name %></a>
                             <a class="dropdown-item" href="/logout">Logout</a>
                           </div>
                         </div>
@@ -196,10 +196,6 @@
                             </div>
                         <% }) %>
                       <% } %>
-                      <div class = "alert alert-success text-center">
-                          <a href = "#" class = "close" data-dismiss = "alert" aria-label="close">&times;</a>
-                      <%= ip %>
-                      </div>
                     <div class="gliderr">
                       <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides">
@@ -373,7 +369,7 @@
                                           <div class="card">
                                               <div class="card-header bg-white pb-0 border-0">
                                                   <div class="row">
-                                                      <div class="col text-right"><img class="img-fluid m-3 cross" src="https://retohercules.com/images/white-close-icon-png-3.png" data-dismiss="modal" alt="Image result for close png" width="17" height="17"></div>
+                                                      <div class="col text-right"><img class="img-fluid m-3 cross" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-512.png" data-dismiss="modal" alt="Image result for close png" width="17" height="17"></div>
                                                   </div>
                                               </div>
                                               <div class="card-body pt-0">
@@ -438,7 +434,7 @@
                                         <div class="card">
                                             <div class="card-header bg-white pb-0 border-0">
                                                 <div class="row">
-                                                    <div class="col text-right"><img class="img-fluid m-3 cross" src="https://retohercules.com/images/white-close-icon-png-3.png" data-dismiss="modal" alt="Image result for close png" width="17" height="17"></div>
+                                                    <div class="col text-right"><img class="img-fluid m-3 cross" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-512.png" data-dismiss="modal" alt="Image result for close png" width="17" height="17"></div>
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
