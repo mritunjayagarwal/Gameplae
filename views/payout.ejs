@@ -33,18 +33,18 @@
                   </tr>
                 </thead>
                 <tbody>
-    <% _.forEach(users, (user) => { %>
-        <% _.forEach(user.history, (withdraw) => { %>
+    <% _.forEach(wallets, (wallet) => { %>
+        <% _.forEach(wallet.history, (withdraw) => { %>
             <% if(withdraw.processing === true) { %>
                         <tr>
-                        <th scope="row"><%= user.owner._id %></th>
-                        <!-- <td><%= user._id %></td> -->
-                        <td><%= user.owner.name %></td>
+                        <th scope="row"><%= wallet.owner._id %></th>
+                        <!-- <td><%= wallet._id %></td> -->
+                        <td><%= wallet.owner.name %></td>
                         <td><%= withdraw.upi %></td>
                         <td><%= withdraw.name %></td>
                         <td><%= withdraw.number %></td>
                         <td><%= withdraw.amount %></td>
-                        <td><button class = "btn btn-success btn-block">Done</button></td>
+                        <td><a href = "/check/<%= wallet.owner._id %>/process/<%= wallet._id %>/<%= withdraw._id %>" class = "btn btn-success btn-block">Done</a></td>
                         </tr>
             <% } %>                      
         <% }) %>
