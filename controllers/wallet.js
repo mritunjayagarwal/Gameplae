@@ -67,6 +67,7 @@ module.exports = function(Wallet, User, async){
                 Wallet.findOne({ owner: req.user._id, 'upi.rnum': req.body.rUpiNum}, (err, wallet) => {
                     if(wallet){
                         var name = wallet.upi.holder;
+                        var upi = wallet.upi.name;
                         Wallet.updateOne({
                             owner: req.user._id, 
                             'upi.rnum': req.body.rUpiNum
@@ -76,7 +77,8 @@ module.exports = function(Wallet, User, async){
                                     amount: req.body.rwammount,
                                     through: 'UPI',
                                     number: req.body.rUpiNum,
-                                    name: name
+                                    name: name,
+                                    upi: upi
                                 }
                             }, $set: {
                                 processing: true
@@ -86,7 +88,6 @@ module.exports = function(Wallet, User, async){
                                 req.flash("error", "Something went wrong..please try again later");
                                 res.redirect('/')
                             }else{
-                                console.log("Success");
                                 res.redirect('/');
                             }
                         })

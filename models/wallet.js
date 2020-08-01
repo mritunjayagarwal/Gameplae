@@ -20,7 +20,8 @@ const WalletSchema = new Schema({
             amount: Number,
             name: String,
             number: Number,
-            date: { type: Date, default: Date.Now},
+            upi: String,
+            submitted: { type: Date, default: Date.now},
             through: String,
             processing: { type: Boolean, default: 'true'}
         }
