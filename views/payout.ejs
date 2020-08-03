@@ -44,7 +44,7 @@
                         <td><%= withdraw.name %></td>
                         <td><%= withdraw.number %></td>
                         <td><%= withdraw.amount %></td>
-                        <td><a href = "/check/<%= wallet.owner._id %>/process/<%= wallet._id %>/<%= withdraw._id %>" class = "btn btn-success btn-block">Done</a></td>
+                        <td><a href = "/check/<%= wallet.owner._id %>/process/<%= wallet._id %>/<%= withdraw.amount %>/<%= withdraw._id %>" class = "btn btn-success btn-block">Done</a></td>
                         </tr>
             <% } %>                      
         <% }) %>

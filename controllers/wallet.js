@@ -5,9 +5,9 @@ module.exports = function(Wallet, User, async){
             router.post('/rwsubmit', this.rwSubmit);
         },
         wrSubmit: async function(req, res){
-            var user = await User.findOne({ _id: req.user._id}).exec();
-            if(req.body.wammount > user.wallet){
-                req.flash("error", "Sorry! You can not withdraw more than ₹" + user.wallet);
+            var user = await User.findOne({ _id: req.user._id}).populate({ path: 'pay', model: 'Wallet'}).exec();
+            if(req.body.wammount > user.pay.balance){
+                req.flash("error", "Sorry! You can not withdraw more than ₹" + user.pay.balance);
                 res.redirect('/');
             }else{
                 Wallet.findOne({ owner: req.user._id}, ( err, wallet) => {
@@ -59,9 +59,9 @@ module.exports = function(Wallet, User, async){
             }
         },
         rwSubmit: async function(req, res){
-            var user = await User.findOne({ _id: req.user._id}).exec();
-            if(req.body.rwammount > user.wallet){
-                req.flash("error", "Sorry! You can not withdraw more than ₹" + user.wallet);
+            var user = await User.findOne({ _id: req.user._id}).populate({ path: 'pay', model: 'Wallet'}).exec();
+            if(req.body.rwammount > user.pay.balance){
+                req.flash("error", "Sorry! You can not withdraw more than ₹" + user.pay.balance);
                 res.redirect('/');
             }else{
                 Wallet.findOne({ owner: req.user._id, 'upi.rnum': req.body.rUpiNum}, (err, wallet) => {

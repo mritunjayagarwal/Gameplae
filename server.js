@@ -37,7 +37,7 @@ container.resolve(function(users, tournament, wallet, payouts, _){
 
         server.listen(process.env.PORT || port, function(err){
             if(err) console.log(err);
-            console.log("Gameplae! Lets Plae");
+            console.log("Gameplae! Lets Plae ");
         });
 
         const router = require('express-promise-router')();

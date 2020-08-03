@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const WalletSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User'},
+    balance: { type: Number, default: 0},
     upi: {
       name: String,
       holder: String,
@@ -23,7 +24,8 @@ const WalletSchema = new Schema({
             upi: String,
             submitted: { type: Date, default: Date.now},
             through: String,
-            processing: { type: Boolean, default: 'true'}
+            processing: { type: Boolean, default: 'true'},
+            processed: { type: Date}
         }
     ],
     pan: {
