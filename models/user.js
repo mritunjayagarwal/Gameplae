@@ -13,9 +13,8 @@ const userSchema = new Schema({
         joined: { type: Date, default: Date.now}   
     }],
     joined: { type: Date, default: Date.Now},
-    wallet: { type: Number, default: 0},
     pay: { type: Schema.Types.ObjectId, ref: 'Wallet'},
-    lastlogin: String
+    lastlogin: { type: Date, default: Date.now}
 });
 
 userSchema.methods.encryptPassword = function(password){

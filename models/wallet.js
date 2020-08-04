@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 
 const WalletSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User'},
+    holder: String,
+    phone: Number,
     balance: { type: Number, default: 0},
     upi: {
       name: String,
@@ -31,7 +33,8 @@ const WalletSchema = new Schema({
     pan: {
         pnum: String,
         hname: String
-    }
+    },
+    generated: { type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Wallet', WalletSchema);

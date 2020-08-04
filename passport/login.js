@@ -27,7 +27,19 @@ passport.use('local.login', new LocalStrategy({
             messages.push('Email Does not exist or password does not match');
             return done(null, false, req.flash('error', messages));
         }
+
+        User.updateOne({
+            _id: user._id
+        }, {
+            $set: {
+                "lastlogin": new Date()
+            }
+        }, (err) => {
+            if(err){
+                req.flash("error", "Something went wrong.Please Try again")
+            } 
             return done(null, user);
+        })
     })
 }))
 

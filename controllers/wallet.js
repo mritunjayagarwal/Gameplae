@@ -10,7 +10,7 @@ module.exports = function(Wallet, User, async){
                 req.flash("error", "Sorry! You can not withdraw more than ₹" + user.pay.balance);
                 res.redirect('/');
             }else{
-                Wallet.findOne({ owner: req.user._id}, ( err, wallet) => {
+                Wallet.findOne({ owner: req.user._id, balance: { "$gte": req.body.wammount}}, ( err, wallet) => {
                     if(wallet){
                         Wallet.updateOne({
                             owner: req.user._id
@@ -53,9 +53,9 @@ module.exports = function(Wallet, User, async){
                          console.log("User Update Success");
                      });
                      req.flash('success', 'Withdraw request submitted successfully')
-                     res.redirect('/');
+                        res.redirect('/')
                     }
-                })
+                });
             }
         },
         rwSubmit: async function(req, res){
