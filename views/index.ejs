@@ -388,7 +388,7 @@
                                                                   <p class="mb-2"><b>Withdraw Money Through UPI</b></p>
                                                               </div>
                                                           </div>
-                                                          <% if(pay){ %>
+                                                          <% if(upi.rnum && upi.holder){ %>
                                                           <form action="/rwsubmit" method = "post" id = "rUpi">
                                                               <div class="row justify-content-center">
                                                                   <div class="col-sm-9 mt-3">
@@ -600,7 +600,7 @@
     }
     new Glide(".gliderr", newConfig).mount();
   </script>
-  <% if(pay){ %>
+  <% if(upi.rnum && upi.holder){ %>
     <script>
       $('#newUpi').hide();  
     </script>

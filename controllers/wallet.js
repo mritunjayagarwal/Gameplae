@@ -13,8 +13,18 @@ module.exports = function(Wallet, User, async){
                 Wallet.findOne({ owner: req.user._id, balance: { "$gte": req.body.wammount}}, ( err, wallet) => {
                     if(wallet){
                         Wallet.updateOne({
-                            owner: req.user._id
+                            owner: req.user._id,
+                            balance: { "$gte": req.body.wammount}
                         }, {
+                            $push: {
+                                history: { 
+                                    amount: req.body.wammount,
+                                    through: 'UPI',
+                                    number: wallet.upi.rnum,
+                                    name: wallet.upi.holder,
+                                    upi: wallet.upi.name
+                                }
+                            },
                             $set: {
                                 upi: {
                                  name: req.body.payThrough,
@@ -52,8 +62,23 @@ module.exports = function(Wallet, User, async){
                      }, (err) => {
                          console.log("User Update Success");
                      });
-                     req.flash('success', 'Withdraw request submitted successfully')
-                        res.redirect('/')
+
+                    Wallet.updateOne({
+                        _id: newWallet._id,
+                        owner: req.user._id
+                    }, {
+                        $push: {
+                            history: { 
+                                amount: req.body.wammount,
+                                through: 'UPI',
+                                number: req.body.upiNum,
+                                name: req.body.holdername,
+                                upi: req.body.payThrough
+                            }
+                        }
+                    })
+                    req.flash('success', 'Withdraw request submitted successfully')
+                    res.redirect('/')
                     }
                 });
             }
@@ -64,7 +89,7 @@ module.exports = function(Wallet, User, async){
                 req.flash("error", "Sorry! You can not withdraw more than ₹" + user.pay.balance);
                 res.redirect('/');
             }else{
-                Wallet.findOne({ owner: req.user._id, 'upi.rnum': req.body.rUpiNum}, (err, wallet) => {
+                Wallet.findOne({ owner: req.user._id, 'upi.rnum': req.body.rUpiNum, balance: { "$gte": req.body.rwammount}}, (err, wallet) => {
                     if(wallet){
                         var name = wallet.upi.holder;
                         var upi = wallet.upi.name;

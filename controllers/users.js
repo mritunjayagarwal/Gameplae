@@ -22,13 +22,14 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
                 var games = await Game.find({}).sort('-name').populate('tournaments').exec();
                 if(req.user){
                     var user = await User.findOne({ _id: req.user._id}).populate({ path: 'pay', model: 'Wallet'}).exec();
+                    var upi = user.pay.upi
                 }else{
-                    var user = ''
+                    var user = '';
+                    var upi = ''
                 }
                 var errors = req.flash('error');
                 var success = req.flash('success');
-                res.render('index', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success});
-
+                res.render('index', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success, upi: upi});
         },
         new: function(req, res){
 
