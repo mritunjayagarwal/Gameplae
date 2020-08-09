@@ -20,9 +20,9 @@ module.exports = function(Wallet, User, async){
                                 history: { 
                                     amount: req.body.wammount,
                                     through: 'UPI',
-                                    number: wallet.upi.rnum,
-                                    name: wallet.upi.holder,
-                                    upi: wallet.upi.name
+                                    number: req.body.upiNum,
+                                    name: req.body.holdername,
+                                    upi: req.body.payThrough
                                 }
                             },
                             $set: {
