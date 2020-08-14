@@ -245,14 +245,18 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             response={"status":"success"}
             res.send(response);
         },
-        user: function(req, res){
-            async function Extract(callback){
-                const games = await Game.find({}).exec();
-                const user = await User.findOne({ _id: req.params.id}).populate({path: 'tournament.tour', model: 'Tournament'}).exec();
-                res.render('user', {user: user, tournaments: user.tournament, games: games});
+        user: async function(req, res){
+            var games = await Game.find({}).sort('-name').populate('tournaments').exec();
+            if(req.user){
+                var user = await User.findOne({ _id: req.params.id}).populate({ path: 'pay', model: 'Wallet'}).exec();
+                var upi = user.pay.upi
+            }else{
+                var user = '';
+                var upi = ''
             }
-
-            Extract();
+            var errors = req.flash('error');
+            var success = req.flash('success');
+            res.render('user', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success, upi: upi});
         }
     }    
 }

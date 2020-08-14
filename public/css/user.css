@@ -1,120 +1,17 @@
-body, html {
-    height:100%;
-    background: #0E0E10;
-  }
-
-#sidebar{
-  z-index: 1;
-  top: 0;
-  overflow-y: hidden;
-  background: #151515;
+.coverBackground{
+	background: linear-gradient(90deg, #005ea1, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
 }
-  
-@media screen and (max-width: 1000px) {
 
-    .row-offcanvas {
-      position: relative;
-      -webkit-transition: all 0.25s ease-out;
-      -moz-transition: all 0.25s ease-out;
-      transition: all 0.25s ease-out;
-    }
-  
-    .row-offcanvas-left
-    .sidebar-offcanvas {
-      left: -33%;
-    }
-  
-    .row-offcanvas-left.active {
-      left: 33%;
-      margin-left: -6px;
-    }
-  
-    .sidebar-offcanvas {
-      position: absolute;
-      top: 0;
-      width: 33%;
-      height: 100%;
-      overflow: auto;
-    }
-  }
-
-  @media screen and (max-width: 34em) {
-    .row-offcanvas-left
-    .sidebar-offcanvas {
-      left: -45%;
-    }
-  
-    .row-offcanvas-left.active {
-      left: 45%;
-      margin-left: -6px;
-    }
-    
-    .sidebar-offcanvas {
-      position: absolute;
-      top: 0;
-      width: 45%;
-      height: 100%;
-      overflow: auto;
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
 	}
-}
-
-#gameHead{
-	color: #d3d3d3;
-  }
-
-#gameLink{
-    color: #d3d3d3;
-    font-weight: bold;
-}
-
-.card-counter{
-  margin: 5px;
-  padding: 20px 10px;
-  background-color: #fff;
-  height: 100px;
-  border-radius: 5px;
-}
-
-.card-counter.primary{
-  background-color: #007bff;
-  color: #FFF;
-}
-
-.card-counter.danger{
-  background-color: #ef5350;
-  color: #FFF;
-}  
-
-.card-counter.success{
-  background-color: #66bb6a;
-  color: #FFF;
-}  
-
-.card-counter.info{
-  background-color: #26c6da;
-  color: #FFF;
-}  
-
-.card-counter i{
-  font-size: 5em;
-  opacity: 0.2;
-}
-
-.card-counter .count-numbers{
-  position: absolute;
-  right: 35px;
-  top: 20px;
-  font-size: 32px;
-  display: block;
-}
-
-.card-counter .count-name{
-  position: absolute;
-  right: 35px;
-  top: 65px;
-  font-style: italic;
-  text-transform: capitalize;
-  opacity: 0.5;
-  display: block;
-  font-size: 18px;
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

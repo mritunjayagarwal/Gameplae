@@ -1,0 +1,90 @@
+<header class="main-header">
+    <!-- Logo -->
+    <a href="/" class="logo pt-1" style = "background: #007bff;color: #fff">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b><i class = "fas fa-crown"></i></b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><i class = "fas fa-crown"></i> GamePlae</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" style = "height: 49px;background: #101010;">
+        <!-- Sidebar toggle button-->
+        <a href="#" class = "sidebar-toggle pt-2" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="d-flex flex-grow-1 mainSearch" style = "margin-top: -10px;">
+          <form class="mr-2 my-2 w-100 d-inline-block order-1" style = "margin-top: -30px;">
+              <div class="input-group">
+                  <input type="text" id = "gameSearch" class="form-control border border-0 bg-dark" placeholder="Search...">
+                  <span class="input-group-append">
+                      <button class="btn btn-outline-light border border-0 bg-primary" type="button">
+                          <i class="fa fa-search"></i>
+                      </button>
+                  </span>
+              </div>
+          </form>
+      </div>
+        <% if(user){ %>
+          <ul class = "list-inline active pb-2">
+            <li class = "list-inline-item">
+                <div class="dropdown">
+                  
+                    <% if(pay){ %>
+                      <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span style = "font-size: 30px;"><i class = "fas fa-wallet"></i> <strong style = "color: #fff" id = "amount">₹<%= pay.balance %></strong></span>
+                      </a>
+                      <% if(pay.balance < 100){ %>
+                        <div class="dropdown-menu p-3">
+                          <h5 class = "h5 text-center" style = "color: green;font-weight: bolder">Denied!</h5>
+                          <hr>
+                          <p class = "h6">Balace should be more than 100 to withdraw</p>
+                        </div>  
+                      <% }else{ %>
+                              <div class="dropdown-menu p-3 blackBack">
+                                <span class = "ml-3 h5">Withdraw Money</span>
+                                <button class = "btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#modalWithdraw">UPI</button>
+                                  <button class = "btn btn-primary btn-block" data-toggle="modal" data-target="#modalWithdrawB">Bank</button>
+                            </div>
+                      <% } %>
+                    <% }else{ %>
+                      <a class="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span style = "font-size: 30px;"><i class = "fas fa-wallet"></i> <strong style = "color: #fff" id = "amount">₹0</strong></span>
+                      </a>
+                      <div class="dropdown-menu p-3 blackBack">
+                        <span class = "ml-3 h5">Insert UPI</span>
+                        <button class = "btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#modalCreate">UPI</button>
+                          <!-- <button class = "btn btn-primary btn-block" data-toggle="modal" data-target="#modalWithdrawB">Bank</button> -->
+                      </div>    
+                    <% } %>
+                  </div>
+              </li>  
+              
+            <li class="list-inline-item">
+                <div class="dropdown dropleft">
+                          <img src="/img/avatar.png" alt="avatar" id="dropdownMenuButton" data-toggle="dropdown" style = "width: 30px;height:auto;">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/profile/<%= user._id %>">Your Profile <%= user.name %></a>
+                      <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                  </div>
+            </li>
+            </ul>
+        <% }else{ %>
+          <ul class = "list-inline active pb-2">
+            <li class = "list-inline-item" style = "margin-left: 5px;">
+                <div class="dropdown dropleft">
+                  <span style = "font-size: 25px;" id="dropdownMenu"  data-toggle="modal" data-target="#myModal"><strong style = "color: #fff" id = "wallet">Login</strong>
+                  </div>
+              </li>  
+              <li class = "list-inline-item">
+                <div class="dropdown dropleft">
+                  <span style = "font-size: 25px;" id="dropdownMenu" data-toggle="modal" data-target="#SignupModal"><strong style = "color: #fff" id = "wallet">Signup</strong>
+                  </div>
+              </li> 
+            </ul>
+            <% } %>
+    </nav>
+</header>

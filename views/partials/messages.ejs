@@ -1,0 +1,52 @@
+<% if(hasErrors){ %>
+    <% _.forEach(errors, (error) => { %>
+      <div class = "alert alert-danger text-center">
+          <a href = "#" class = "close" data-dismiss = "alert" aria-label="close">&times;</a>
+      <%= error %>
+      </div>
+    <% }) %>
+  <% } %>
+  <% if(successMsg){ %>
+    <% _.forEach(success, (successful) => { %>
+          <div class="container d-flex justify-content-center">
+            <div id="successModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered justify-content-center " role="document">
+                    <div class="modal-content border-0 mx-3">
+                        <div class="modal-body p-0">
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <div class="card">
+                                        <div class="card-header bg-white pb-0 border-0">
+                                            <div class="row">
+                                                <div class="col text-right"><img class="img-fluid m-3 cross" src="https://retohercules.com/images/white-close-icon-png-3.png" data-dismiss="modal" alt="Image result for close png" width="17" height="17"></div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="row justify-content-center text-center mb-3">
+                                                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_gcwCZ3.json"  background="transparent"  speed="1"  style="width: 120px; height: 120px;" autoplay></lottie-player>
+                                            </div>
+                                            <div class="row justify-content-center text-center">
+                                                <div class="col">
+                                                    <p class="mb-2"><b>Withdraw Request Success</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center mb-5">
+                                                <div class="col-sm-9 mt-2"><p class = "h3 text-center"><%= successful %></p></div>
+                                
+                                              </div>
+                                            <div class="row mt-auto pt-auto text-center">
+                                                <div class="col mt-auto pt-auto">
+                                                    <p class="brand">&copy; Gameplae gaming</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+  <% } %>

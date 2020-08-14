@@ -19,7 +19,6 @@
 
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/user.css">
 </head>
 <body class="hold-transition sidebar-mini">
   <!-- Site wrapper -->
@@ -52,43 +51,10 @@
       <div class="content-wrapper" style = "background: #0E0E10">
           <div class = "loader"></div>
           <section class="content">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3 coverBackground">
-                            <div class="row">
-                                <div class="col-12">
-                                    <a class="position-absolute ml-3 mt-3 text-white" href="setting.html" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Edit cover images"><i class="fas fa-cog"></i></a>
-                                    <div class="row">
-                                        <div class="col-md-6 ml-auto mr-auto">
-                                        <div class="profiles p-3 my-4 rounded text-center">
-                                                <div class="avatars">
-                                                    <a href="setting.html">
-                                                        <img src="https://demo.bootstrap.news/bootnews/assets/img/avatar/avatar1.png" alt="Circle Image" class="avatar-lg rounded-circle img-fluid" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Edit avatar images">
-                                                    </a>
-                                                </div>
-                                                <div class="names">
-                                                    <h3 class="title text-light mt-2 text-capitalize"><%= user.name %></h3>
-                                                    <!-- <a href="#" class="btn btn-link btn-facebook"><i class="fab fa-facebook"></i></a>
-                                                    <a href="#" class="btn btn-link btn-twitter"><i class="fab fa-twitter"></i></a>
-                                                    <a href="#" class="btn btn-link btn-gplus"><i class="fab fa-google-plus"></i></a>
-                                                    <a href="#" class="btn btn-link btn-instagram"><i class="fab fa-instagram"></i></a>
-                                                    <a href="#" class="btn btn-link btn-youtube"><i class="fab fa-youtube"></i></a> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul id="tabsJustified" class="nav nav-tabs nav-fill mt-3 mb-0">
-                                        <li class="nav-item" style = "background: #0E0E10"><a href="" data-target="#upcoming" data-toggle="tab" class="nav-link small text-uppercase active btn btn-dark">Upcoming</a></li>
-                                        <li class="nav-item" style = "background: #0E0E10"><a href="" data-target="#messages1" data-toggle="tab" class="nav-link small text-uppercase btn btn-dark">Joined</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-          </section>
-          <%- include("./partials/modals.ejs") %>                
-      </div>
+                  
+              </section>
+              <%- include("./partials/modals.ejs") %>                
+            </div>
   <% if(upi.rnum && upi.holder){ %>
     <script>
       $('#newUpi').hide();  
