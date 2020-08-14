@@ -247,8 +247,9 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         },
         user: async function(req, res){
             var games = await Game.find({}).sort('-name').populate('tournaments').exec();
+            var vUser = await User.findOne({ _id: req.params.id}).exec();
             if(req.user){
-                var user = await User.findOne({ _id: req.params.id}).populate({ path: 'pay', model: 'Wallet'}).exec();
+                var user = await User.findOne({ _id: req.user._id}).populate({ path: 'pay', model: 'Wallet'}).exec();
                 var upi = user.pay.upi
             }else{
                 var user = '';
@@ -256,7 +257,7 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
             }
             var errors = req.flash('error');
             var success = req.flash('success');
-            res.render('user', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success, upi: upi});
+            res.render('user', { games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success, upi: upi, vUser: vUser});
         }
     }    
 }
