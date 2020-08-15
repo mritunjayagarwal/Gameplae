@@ -12,9 +12,14 @@ const userSchema = new Schema({
         tour: { type: Schema.Types.ObjectId, ref: 'Tournament'},
         joined: { type: Date, default: Date.now}   
     }],
-    joined: { type: Date, default: Date.Now},
+    level: { type: Number, default: 0},
+    joined: { type: Date, default: Date.now},
     pay: { type: Schema.Types.ObjectId, ref: 'Wallet'},
     lastlogin: { type: Date, default: Date.now}
+});
+
+userSchema.path('level').get(function(value) {
+      return Math.floor(this.tournament.length * 0.3);
 });
 
 userSchema.methods.encryptPassword = function(password){
