@@ -15,7 +15,18 @@ const TournamentSchema = new Schema({
             username: { type: String, required: true}
         }
     ],
+    winners: [
+        {
+            user: { type: Schema.Types.ObjectId, ref: 'User'},
+            name: String,
+            processed: { type: Date, default: Date.now},
+            username: { type: String, required: true, unique: true},
+            position: Number,
+            won: Number
+        }
+    ],
     created: { type: Date, default: Date.now},
+    eclosing: Date,
     starts: Date,
     ends: Date
 });

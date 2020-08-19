@@ -71,10 +71,18 @@
                                 <div class="col-7"><p class="card-text" id = "con"><i class="fa fa-money" id = "ticon"></i> &nbsp;  ₹‎<%= tournament.price %>/kill</p></div>
                                 <div class="col-5"><p class="card-text" id = "con"><i class="fa fa-users" id = "ticon"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
                             </div>
-                        <% if(user){ %>
-                          <button class = "btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Join</button>
+                        <% if(user){ %> 
+                          <% if(!(tournament.ends)){ %>
+                            <% if(moment().format() < moment(tournament.eclosing).format()){ %>
+                              <button class = "btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Join</button>
+                            <% }else{ %>
+                              <button class = "btn btn-primary btn-block" disabled>Registration has been closed</button>
+                            <% } %>
+                          <% }else{ %>
+                            <button class = "btn btn-primary btn-block" disabled>Tournament Has Ended</button>
+                          <% } %> %>
                         <% }else{ %>
-                          <button class = "btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" disabled>Login to join</button>
+                          <button class = "btn btn-primary btn-block" disabled>Login to join</button>
                         <% } %>
                         <div class = "row py-2">
                             <p style = "color: #fff;font-weight: bolder; font-size: 20px;"><span class = "badge badge-success badge-pill ml-3" style = "font-size: 30px;letter-spacing: 2px;">₹<%= tournament.price %></span>/entry</p>
@@ -84,42 +92,72 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul id="tabsJustified" class="nav nav-tabs nav-fill">
-                                <li class="nav-item"><a href="" data-target="#home1" data-toggle="tab" class="nav-link small text-uppercase">Home</a></li>
-                                <li class="nav-item"><a href="" data-target="#profile1" data-toggle="tab" class="nav-link small text-uppercase">Profile</a></li>
-                                <li class="nav-item"><a href="" data-target="#messages1" data-toggle="tab" class="nav-link small text-uppercase active">Messages</a></li>
+                                <li class="nav-item"><a href="" data-target="#description" data-toggle="tab" class="nav-link small text-uppercase">Home</a></li>
+                                <li class="nav-item"><a href="" data-target="#players" data-toggle="tab" class="nav-link small text-uppercase active">Players</a></li>
+                                <li class="nav-item"><a href="" data-target="#winners" data-toggle="tab" class="nav-link small text-uppercase">Winners</a></li>
                             </ul>
                             <br>
                             <div id="tabsJustifiedContent" class="tab-content">
-                                <div id="home1" class="tab-pane fade">
-                                    <p style="white-space: pre-line;white-space: pre-wrap;color: #d3d3d3"><%= tournament.desc %></p>
+                                <div id="description" class="tab-pane fade">
+                                    <% if(tournament.desc){ %>
+                                      <p style="white-space: pre-line;white-space: pre-wrap;color: #d3d3d3"><%= tournament.desc %></p>
+                                    <% } %>
                                 </div>
-                                <div id="profile1" class="tab-pane fade">
-                                    <div class="row pb-2">
-                                        <div class = "col-md-12">
-                                        </div>
+                                <div id="players" class="tab-pane fade active show">
+                                  <% if(tournament.players.length == 0){ %>
+                                    <div class = "jumbotron pt-4">
+                                      <h3 class = "h3 text-center" style = "opacity: 0.8;font-family:arial;color: #252525">Hey Champ! Be the first to join this tournament</h3>
                                     </div>
+                                  <% }else{ %>
+                                    <table id = "playersTable" class="table table-dark">
+                                      <thead>
+                                          <tr>
+                                          <th scope="col">#</th>
+                                          <th scope="col">First</th>
+                                          <th scope="col">Last</th>
+                                          <th scope="col">Handle</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                            <% _.forEach(tournament.players, (player) => { %>
+                                              <tr>
+                                                  <th scope="row">1</th>
+                                                  <td><%= player.user.name %></td>
+                                                  <td><%= player.username %></td>
+                                                  <td>@mdo</td>
+                                              </tr>
+                                            <% }) %>  
+                                          </tbody>
+                                      </table> 
+                                  <% } %>  
                                 </div>
-                                <div id="messages1" class="tab-pane fade active show">
-                                  <table id = "playersTable" class="table table-dark">
-                                    <thead>
-                                        <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                          <% _.forEach(players, (player) => { %>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td><%= player.user.name %></td>
-                                                <td><%= player.username %></td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                          <% }) %>  
-                                        </tbody>
-                                    </table>   
+                                <div id="winners" class="tab-pane fade">
+                                  <% if(tournament.ends){ %>
+                                    <table id = "playersTable" class="table table-dark">
+                                      <thead>
+                                          <tr>
+                                          <th scope="col">POSITION</th>
+                                          <th scope="col">NAME</th>
+                                          <th scope="col">USERNAME</th>
+                                          <th scope="col">WON</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                            <% _.forEach(tournament.winners, (winner) => { %>
+                                              <tr>
+                                                  <th scope="row"><%= winner.position %></th>
+                                                  <td><%= winner.user.name %></td>
+                                                  <td><%= winner.username %></td>
+                                                  <td><%= winner.won %></td>
+                                              </tr>
+                                            <% }) %>  
+                                          </tbody>
+                                      </table>   
+                                  <% }else{ %>
+                                    <div class = "jumbotron p-4">
+                                      <h3 class = "h3 text-center" style = "opacity: 0.8;font-family:arial;color: #252525">Winners will be declared after the tournament ends</h3>
+                                    </div>
+                                  <% } %>
                                 </div>
                             </div>
                         </div>
@@ -158,92 +196,96 @@
           </div>
       </div>
 <% if(user){ %>
-  <script>
-      $( "#rzp-button" ).click(function() {
-      $.ajax({
-          type: 'POST',
-          url: '/pay/<%= tournament._id %>/' + document.getElementById('username').value,
-          dataType: 'json',
-          encode: true
-        }).done(function(data){
-           if(data.status === "success"){
-            $('#LModal').modal('hide');
-            var order_id = data.sub.id;
-  
-            var options = {
-              "key": "rzp_test_O1PrDYl7c0Fbi2",
-              "currency": "INR",
-              "name": "Gameplae",
-              "description": "Lets plae",
-              "image": "https://previews.123rf.com/images/subhanbaghirov/subhanbaghirov1605/subhanbaghirov160500087/56875269-vector-light-bulb-icon-with-concept-of-idea-brainstorming-idea-illustration-.jpg",
-              "order_id": order_id,
-              "handler": function (response){
-  
-                var params = {
-                  razorpay_order_id:  response.razorpay_order_id,  
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_signature:  response.razorpay_signature
-                  }
-  
-                  $.ajax({
-                    type: 'POST',
-                    url: '/api/payment/verify',
-                    data: params, 
-                    dataType: 'json',
-                    encode: true
-                    }).done(function(data){
-                      if(data.status === "success"){
-  
-                        $('#LModal').modal('show');
-  
-                        var params = {
-                        username: document.getElementById('username').value,
-                        tournament: '<%= tournament._id %>',
-                        user: '<%= user._id %>'
-                        }
-  
-                        $.ajax({
-                          type: 'POST',
-                          url: '/join/tournament',
-                          data: params,
-                          dataType: 'json',
-                          encode: true
-                        }).done(function(data){
-                          $('#LModal').modal('hide');
-                          if(data.status === "success"){
-                            location.reload(true);
+  <% if(!(tournament.ends)){ %>
+    <% if(moment().format() < moment(tournament.eclosing).format()){ %>
+      <script>
+        $( "#rzp-button" ).click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/pay/<%= tournament._id %>/' + document.getElementById('username').value,
+            dataType: 'json',
+            encode: true
+          }).done(function(data){
+             if(data.status === "success"){
+              $('#LModal').modal('hide');
+              var order_id = data.sub.id;
+    
+              var options = {
+                "key": "rzp_test_O1PrDYl7c0Fbi2",
+                "currency": "INR",
+                "name": "Gameplae",
+                "description": "Lets plae",
+                "image": "https://previews.123rf.com/images/subhanbaghirov/subhanbaghirov1605/subhanbaghirov160500087/56875269-vector-light-bulb-icon-with-concept-of-idea-brainstorming-idea-illustration-.jpg",
+                "order_id": order_id,
+                "handler": function (response){
+    
+                  var params = {
+                    razorpay_order_id:  response.razorpay_order_id,  
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature:  response.razorpay_signature
+                    }
+    
+                    $.ajax({
+                      type: 'POST',
+                      url: '/api/payment/verify',
+                      data: params, 
+                      dataType: 'json',
+                      encode: true
+                      }).done(function(data){
+                        if(data.status === "success"){
+    
+                          $('#LModal').modal('show');
+    
+                          var params = {
+                          username: document.getElementById('username').value,
+                          tournament: '<%= tournament._id %>',
+                          user: '<%= user._id %>'
                           }
-                        }).error(function(err){
-                          $('#LModal').modal('hide');
-                          alert("Tournament Join Failed");
-                        })
-                      }
-                    }).error(function(errorData){
-                      $('#LModal').modal('hide');
-                      alert("Fuck");
-                    });;
-              },
-              "prefill": {
-                  "name": "<%= user.name %>",
-                  "email": "<%= user.email %>",
-                  "contact": "<%= user.phone %>"
-              },
-              "theme": {
-                  "color": "#227254"
-              }
-            };
-              var rzp1 = new Razorpay(options);
-              rzp1.open();
-         }else{
-            $('#LModal').modal('hide');
-            alert("This username is already registered");
-         }
-      }).error(function(errorData){
-        $('#LModal').modal('hide');
-        alert("Fucked");
-      });;
-    });
-      </script>
+    
+                          $.ajax({
+                            type: 'POST',
+                            url: '/join/tournament',
+                            data: params,
+                            dataType: 'json',
+                            encode: true
+                          }).done(function(data){
+                            $('#LModal').modal('hide');
+                            if(data.status === "success"){
+                              location.reload(true);
+                            }
+                          }).error(function(err){
+                            $('#LModal').modal('hide');
+                            alert("Tournament Join Failed");
+                          })
+                        }
+                      }).error(function(errorData){
+                        $('#LModal').modal('hide');
+                        alert("Fuck");
+                      });;
+                },
+                "prefill": {
+                    "name": "<%= user.name %>",
+                    "email": "<%= user.email %>",
+                    "contact": "<%= user.phone %>"
+                },
+                "theme": {
+                    "color": "#227254"
+                }
+              };
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+           }else{
+              $('#LModal').modal('hide');
+              alert("This username is already registered");
+           }
+        }).error(function(errorData){
+          $('#LModal').modal('hide');
+          alert("Fucked");
+        });;
+      });
+        </script>
+    <% } %>
+  <% } %>
 <% } %>
 </body>
 </html>

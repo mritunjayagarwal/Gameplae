@@ -15,7 +15,7 @@ const container = require('./container');
 const paypal = require('paypal-rest-sdk');
 require('dotenv').config();
 
-container.resolve(function(users, tournament, wallet, payouts, _){
+container.resolve(function(users, tournament, wallet, payouts,winners, _){
 
     // paypal.configure({
     //     'mode': 'sandbox', //sandbox or live
@@ -45,6 +45,7 @@ container.resolve(function(users, tournament, wallet, payouts, _){
         wallet.SetRouting(router);
         tournament.SetRouting(router);
         payouts.SetRouting(router);
+        winners.SetRouting(router);
 
         app.use(router);
 

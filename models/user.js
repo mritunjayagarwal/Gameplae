@@ -12,6 +12,10 @@ const userSchema = new Schema({
         tour: { type: Schema.Types.ObjectId, ref: 'Tournament'},
         joined: { type: Date, default: Date.now}   
     }],
+    won: [{
+        tour: { type: Schema.Types.ObjectId, ref: 'Tournament'},
+        at: { type: Date, default: Date.now}   
+    }],
     level: { type: Number, default: 0},
     joined: { type: Date, default: Date.now},
     pay: { type: Schema.Types.ObjectId, ref: 'Wallet'},

@@ -42,6 +42,7 @@ module.exports = function(_, Tournament, async, Game, User, moment){
                         newTournament.price = req.body.price;
                         newTournament.participants = req.body.participants;
                         newTournament.starts = req.body.starts;
+                        newTournament.eclosing = req.body.eclosing;
                         newTournament.ends = req.body.ends;
                         newTournament.save(function(err){
                             // if(err) console.log(err);
@@ -68,12 +69,10 @@ module.exports = function(_, Tournament, async, Game, User, moment){
         },
         tournamentInfo: function(req, res){
             async function Extract(callback){
-                const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'game', model: 'Game'}).exec();
-                const trt = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'players.user', model: 'User'}).exec();
+                const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'game', model: 'Game'}).populate({ path: 'players.user', model: 'User'}).populate({ path: 'winners.user', model: 'User'}).exec();
                 const games = await Game.find({}).exec();
-                const players = trt.players;
                 const uInvalid = req.flash('userInvalid');
-                res.render('tournament', { tournament: tournament, games: games, user: req.user, moment: moment, players: players, messages: uInvalid, isPre: uInvalid.length > 0});
+                res.render('tournament', { tournament: tournament, games: games, user: req.user, moment: moment,messages: uInvalid, isPre: uInvalid.length > 0});
             }
 
             Extract();
