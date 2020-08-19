@@ -62,20 +62,25 @@ module.exports = function(_, Tournament, async, Game, User, moment){
                         })
                     }
                 ])
-            }else{
+            }else{ 
                 console.log('User login is required to create a tournament!');
                 res.render('login');
             }
         },
-        tournamentInfo: function(req, res){
-            async function Extract(callback){
+        tournamentInfo: async function(req, res){
+                const games = await Game.find({}).sort('-name').populate('tournaments').exec();
                 const tournament = await Tournament.findOne({ _id: req.params.id}).populate({ path: 'game', model: 'Game'}).populate({ path: 'players.user', model: 'User'}).populate({ path: 'winners.user', model: 'User'}).exec();
-                const games = await Game.find({}).exec();
+                if(req.user){
+                    var user = await User.findOne({ _id: req.user._id}).populate({ path: 'pay', model: 'Wallet'}).exec();
+                    var upi = user.pay.upi
+                }else{
+                    var user = '';
+                    var upi = ''
+                }
+                const errors = req.flash('error');
+                const success = req.flash('success');
                 const uInvalid = req.flash('userInvalid');
-                res.render('tournament', { tournament: tournament, games: games, user: req.user, moment: moment,messages: uInvalid, isPre: uInvalid.length > 0});
-            }
-
-            Extract();
+                res.render('tournament', { tournament: tournament, games: games, user: user, moment: moment, user: req.user, errors: errors, hasErrors: errors.length > 0, pay: user.pay, successMsg: success.length > 0, success: success, upi: upi, messages: uInvalid, isPre: uInvalid.length > 0});
         },
         showTournament: function(req, res){
             console.log(req.params.id);

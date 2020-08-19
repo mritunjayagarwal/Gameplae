@@ -18,8 +18,8 @@ passport.use('local.signup', new LocalStrategy({
     usernameField: 'name',
     passwordField: 'password',
     passReqToCallback: true
-}, (req, name, password, done) => {
-    User.findOne({'name': name}, (err, user) => {
+}, (req, email, password, done) => {
+    User.findOne({'email': email}, (err, user) => {
         if(err){
             console.log(err);
             return done(null, false, req.flash('error', 'Weak Connectivity'));

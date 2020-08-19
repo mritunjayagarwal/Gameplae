@@ -85,3 +85,19 @@ body, html {
   font-size:25px;
   margin-bottom: 10px;
 }
+
+.dataTables_length {
+  color: #fff !important;
+  }
+  
+.dataTables_filter {
+color: #fff !important;
+}
+
+.dataTables_info {
+  color: #fff !important;
+}
+
+.dataTables_paginate {
+  color: #fff !important;
+}
