@@ -85,8 +85,8 @@ module.exports = function(_, Game, User, passport, Tournament, paypal, moment, r
         //     return res.render('login', { messages: errors, hasErrors: errors.length > 0});
         // },
         getInside: passport.authenticate('local.login', {
-            successRedirect: '/',
-            failureRedirect: '/',
+            successRedirect: 'back',
+            failureRedirect: 'back',
             failureFlash: true
         }),
         payment: function(req, res){
