@@ -1,7 +1,18 @@
 #con{
   color: #fff;
-  font-size: 12px;
+  font-size: 17px;
 }
+
+#coni{
+  color:gold;
+  font-size:17px;
+}
+
+#tourHeading{
+  color:#d3d3d3;
+  font-size: 20px;
+}
+
 .jumbotron{ 
   background: #0E0E10;
 }
@@ -28,4 +39,68 @@ margin-bottom: 55px;
   font-size:18px;
   transition:0.3s;
 }
+
+@media screen and (max-width: 1300px){
+  #con{
+    font-size: 15px;
+  }
+  
+  #coni{
+    font-size: 15px;
+  }
+  
+  #tourHeading{
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  #con{
+    font-size: 12px;
+  }
+  
+  #coni{
+    font-size: 12px;
+  }
+  
+  #tourHeading{
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  #con{
+    font-size: 12px;
+  }
+  
+  #coni{
+    font-size: 12px;
+  }
+  
+  #tourHeading{
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 770px){
+  #con{
+    font-size: 15px;
+  }
+  
+  #coni{
+    font-size: 15px;
+  }
+  
+  #tourHeading{
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  #tourHeading{
+    font-size: 20px;
+  }
+}
+
+
 
