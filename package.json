@@ -1,5 +1,5 @@
 {
-  "name": "slingshot",
+  "name": "gameplae",
   "version": "1.0.0",
   "description": "A Gaming Network",
   "main": "server.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mritunjayagarwal/SlingShot.git"
+    "url": "git+https://github.com/mritunjayagarwal/ganeplae.git"
   },
-  "author": "SlingShot LLC.",
+  "author": "Gameplae LLC.",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mritunjayagarwal/SlingShot/issues"
+    "url": "https://github.com/mritunjayagarwal/gameplae/issues"
   },
-  "homepage": "https://github.com/mritunjayagarwal/SlingShot#readme",
+  "homepage": "https://github.com/mritunjayagarwal/gameplae#readme",
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
     "async": "^3.2.0",
