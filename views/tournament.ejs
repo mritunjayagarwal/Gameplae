@@ -87,7 +87,7 @@
                                         <div class="col-5"><p class="card-text" id = "con"><i class="fa fa-users" id = "ticon"></i> &nbsp;  <%= tournament.players.length %>/<%= tournament.participants %></p></div>
                                     </div>
                                 <% if(user){ %> 
-                                  <% if(!(tournament.ends)){ %>
+                                  <% if(moment().format() < moment(tournament.ends).format()){ %>
                                     <% if(moment().format() < moment(tournament.eclosing).format()){ %>
                                       <button class = "btn btn-primary btn-block" data-toggle="modal" data-target="#usernameModal">Join</button>
                                     <% }else{ %>
